@@ -1,37 +1,0 @@
-10
-
-dir
-7
-https://delpoeclipseworkspace.googlecode.com/svn/Facturacion/trunk/Facturacion/src
-https://delpoeclipseworkspace.googlecode.com/svn
-
-
-
-2013-02-18T10:48:54.528445Z
-7
-carlosdc360@gmail.com
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-935f40bb-f30c-b70f-62de-6451e29b0db1
-
-facturacion
-dir
-
-interfaz
-dir
-
-terminal
-dir
-
