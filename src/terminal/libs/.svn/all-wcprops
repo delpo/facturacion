@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/12/Facturacion/trunk/Facturacion/src/terminal/libs
+END
+mail.jar
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/12/Facturacion/trunk/Facturacion/src/terminal/libs/mail.jar
+END
+generadorNombres.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/13/Facturacion/trunk/Facturacion/src/terminal/libs/generadorNombres.jar
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/!svn/ver/13/Facturacion/trunk/Facturacion/src/terminal/libs/.project
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/13/Facturacion/trunk/Facturacion/src/terminal/libs/.classpath
+END

@@ -1,0 +1,26 @@
+package facturacion;
+
+public class Particular extends Cliente {
+
+	String apellidos;
+	public static final double IVA = 0.21;
+	
+	public Particular(String nombre, String apellidos, NIF nif, Direccion direccion, Email email, Tarifa tarifa){
+		this.setNombre(nombre);
+		this.setNif(nif);
+		this.setDireccion(direccion);
+		this.setEmail(email);
+		this.setTarifa(tarifa);
+		this.apellidos = apellidos;
+	}
+	
+	public void obtenerDatos(NIF nif) {
+		// TODO Auto-generated method stub
+
+	}
+
+	public void obtenerDatos(String nombre) {
+		// TODO Auto-generated method stub
+
+	}
+}
