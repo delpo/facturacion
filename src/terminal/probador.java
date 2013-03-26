@@ -55,7 +55,8 @@ public class probador {
 					break;
 				case OPCION8:
 					//Mostrar factura de cliente
-					vodafone.obtenerFactura(ManejoInputs.pedirCodigoFactura()).mostrarenTerminal();
+					CodigoFactura codigo = ManejoInputs.pedirCodigoFactura();
+					vodafone.obtenerFactura(codigo).mostrarenTerminal();
 					System.out.println("Tarea completada.");
 					break;
 				case OPCION9:

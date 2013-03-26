@@ -93,6 +93,7 @@ public class Operador_telefonia {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
 				if(factura.getKey().equals(codigo_factura)){
 					encontrado = true;
+					System.out.println("Factura encontrada.");
 					return factura.getValue();
 				}
 				if(encontrado) break;
