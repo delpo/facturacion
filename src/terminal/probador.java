@@ -68,8 +68,11 @@ public class probador {
 					System.out.println("Tarea completada.");
 					break;
 				case OPCION11:
+					//Incidencias de un cliente entre dos fechas
 				case OPCION12:
+					//Todas las incidencias de un cliente
 				case OPCION13:	
+					//Borrar una incidencia de un cliente
 			}
 			if(!salir){
 				vodafone.hashCode();
