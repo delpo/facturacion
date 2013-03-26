@@ -74,8 +74,64 @@ public class Operador_telefonia {
 		return valida;
 	}
 	
-	public void obtenerFactura(CodigoFactura codigo_factura){
-		
+	public Factura obtenerFactura(CodigoFactura codigo_factura){
+		boolean encontrado = false;
+		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
+				if(factura.getKey().equals(codigo_factura)){
+					encontrado = true;
+					return factura.getValue();
+				}
+				if(encontrado) break;
+			}
+			if(encontrado) break;
+		}
+		if(!encontrado){
+			//lanzar excepción
+		}
+		return null;
+	}
+	
+	public void emitirFactura(NIF nif, Factura factura){
+		boolean ok = false;
+		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+			if(entry.getKey().toString().equals(nif.toString())){
+				ok = true;
+				entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
+			}
+		}
+		if(!ok) System.out.println("Cliente no encontrado.");
+	}
+
+	public void borrarFactura(CodigoFactura codigo_factura) {
+		boolean encontrado = false;
+		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
+				if(factura.getKey().equals(codigo_factura)){
+					encontrado = true;
+					cliente.getValue().facturas.entrySet().remove(factura);
+				}
+				if(encontrado) break;
+			}
+			if(encontrado) break;
+		}
+		if(!encontrado){
+			//lanzar excepción
+		}
+	}
+	
+	public void listarFacturasCliente(NIF nif){
+		boolean encontrado = false;
+		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
+				factura.getValue().mostrarenTerminal();
+				System.out.println("=====================");
+			}
+			if(encontrado) break;
+		}
+		if(!encontrado){
+			//lanzar excepción
+		}
 	}
 
 }

@@ -48,9 +48,25 @@ public class probador {
 					System.out.println("Tarea completada.");
 					break;
 				case OPCION7:
+					//Emitir factura de un cliente
+					vodafone.emitirFactura(ManejoInputs.pedirNIF(), ManejoInputs.pedirFactura());
+					System.out.println("Tarea completada.");
+					break;
 				case OPCION8:
+					//Mostrar factura de cliente
+					vodafone.obtenerFactura(ManejoInputs.pedirCodigoFactura()).mostrarenTerminal();
+					System.out.println("Tarea completada.");
+					break;
 				case OPCION9:
+					//Borrar factura
+					vodafone.borrarFactura(ManejoInputs.pedirCodigoFactura());
+					System.out.println("Tarea completada.");
+					break;
 				case OPCION10:
+					//Mostrar todas las facturas de un cliente
+					vodafone.listarFacturasCliente(ManejoInputs.pedirNIF());
+					System.out.println("Tarea completada.");
+					break;
 				case OPCION11:
 				case OPCION12:
 				case OPCION13:	

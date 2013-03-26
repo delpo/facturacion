@@ -1,18 +1,23 @@
 package terminal;
 
+import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import terminal.MenuTarifa.OpcionesTarifa;
 
 import facturacion.Cliente;
+import facturacion.CodigoFactura;
 import facturacion.Direccion;
 import facturacion.Email;
 import facturacion.Empresa;
 import facturacion.ExcepcionEmailNoValido;
 import facturacion.ExcepcionNIFnoValido;
+import facturacion.Factura;
+import facturacion.Fecha;
 import facturacion.NIF;
 import facturacion.Particular;
+import facturacion.Periodo_facturacion;
 import facturacion.Tarifa;
 import facturacion.Tarifa_manana;
 import facturacion.Tarifa_reducida;
@@ -222,5 +227,76 @@ public class ManejoInputs {
 			}
 		}while(!ok);
 		return cp;
+	}
+	
+	@SuppressWarnings("null")
+	public static CodigoFactura pedirCodigoFactura() {
+		CodigoFactura cod = null;
+		Scanner scanner = new Scanner(System.in);
+		boolean ok = false;
+		do{
+			try {
+				System.out.print("Introduce código de factura: ");
+				String elcod = scanner.nextLine();
+				cod.setCodigo(elcod);
+				ok = true;
+			} catch (InputMismatchException e) {
+				System.out.println("CÓDIGO DE FACTURA NO VÁLIDO.");
+			}
+		}while(!ok);
+		return cod;
+	}
+	
+	public static Fecha pedirFecha() {
+		Fecha fecha = null;
+		int dia = 0, mes = 0, anyo = 0;
+		Scanner scanner = new Scanner(System.in);
+		boolean ok = false;
+		do{
+			try {
+				System.out.print("Introduce día: ");
+				int eldia = scanner.nextInt();
+				dia = eldia;
+				System.out.print("Introduce mes: ");
+				int elmes = scanner.nextInt();
+				mes = elmes;
+				System.out.print("Introduce año: ");
+				int elanyo = scanner.nextInt();
+				anyo = elanyo;
+				ok = true;
+			} catch (InputMismatchException e) {
+				System.out.println("FECHA NO VÁLIDA.");
+			}
+		}while(!ok);
+		fecha = new Fecha(dia, mes, anyo);
+		return fecha;
+	}
+	
+	@SuppressWarnings("null")
+	public static Factura pedirFactura() {
+		Factura factura = null;
+		Fecha fecha_emision = new Fecha(Calendar.DAY_OF_MONTH, Calendar.MONTH, Calendar.YEAR);
+		
+		int segundos = 0;
+		Tarifa tarifa = null;
+		Periodo_facturacion periodo = null;
+		
+		Scanner scanner = new Scanner(System.in);
+		boolean ok = false;
+		do{
+			try {
+				System.out.print("Introduce segundos: ");
+				int seg = scanner.nextInt();
+				segundos = seg;
+				tarifa = pedirTarifa();
+				periodo.setFecha_inicio(pedirFecha());
+				periodo.setFecha_fin(pedirFecha());
+				ok = true;
+			} catch (InputMismatchException e) {
+				System.out.println("DATOS DE FACTURA NO VÁLIDOS");
+			}
+		}while(!ok);
+		factura = new Factura(fecha_emision, segundos, tarifa, periodo);
+		return factura;
 	}
 }
