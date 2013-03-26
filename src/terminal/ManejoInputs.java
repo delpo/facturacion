@@ -16,6 +16,7 @@ import facturacion.ExcepcionNIFnoValido;
 import facturacion.Factura;
 import facturacion.Fecha;
 import facturacion.NIF;
+import facturacion.Operador_telefonia;
 import facturacion.Particular;
 import facturacion.Periodo_facturacion;
 import facturacion.Tarifa;
@@ -229,16 +230,20 @@ public class ManejoInputs {
 		return cp;
 	}
 	
-	@SuppressWarnings("null")
 	public static CodigoFactura pedirCodigoFactura() {
 		CodigoFactura cod = null;
 		Scanner scanner = new Scanner(System.in);
 		boolean ok = false;
+		String elcod = null;
 		do{
 			try {
-				System.out.print("Introduce código de factura: ");
-				String elcod = scanner.nextLine();
-				cod.setCodigo(elcod);
+				try{
+					System.out.print("Introduce código de factura: ");
+					elcod = scanner.nextLine();
+				}catch(java.lang.NullPointerException excp){
+					System.out.println("ERROR AL AÑADIR CÓDIGO.");
+				}
+				cod = new CodigoFactura(elcod);
 				ok = true;
 			} catch (InputMismatchException e) {
 				System.out.println("CÓDIGO DE FACTURA NO VÁLIDO.");
@@ -272,8 +277,7 @@ public class ManejoInputs {
 		return fecha;
 	}
 	
-	@SuppressWarnings("null")
-	public static Factura pedirFactura() {
+	public static Factura pedirFactura(NIF nif) {
 		Factura factura = null;
 		Fecha fecha_emision = new Fecha(Calendar.DAY_OF_MONTH, Calendar.MONTH, Calendar.YEAR);
 		
@@ -288,11 +292,15 @@ public class ManejoInputs {
 				System.out.print("Introduce segundos: ");
 				int seg = scanner.nextInt();
 				segundos = seg;
-				tarifa = pedirTarifa();
+				Cliente cliente = Operador_telefonia.obtenerCliente(nif);
+				tarifa = cliente.getTarifa();
 				System.out.println("-Fecha inicio de periodo de facturación-");
-				periodo.setFecha_inicio(pedirFecha());
+				Fecha fecha_inicio = null;
+				fecha_inicio = pedirFecha();
 				System.out.println("-Fecha fin de periodo de facturación-");
-				periodo.setFecha_fin(pedirFecha());
+				Fecha fecha_fin = null;
+				fecha_fin = pedirFecha();
+				periodo = new Periodo_facturacion(fecha_inicio, fecha_fin);
 				ok = true;
 			} catch (InputMismatchException e) {
 				System.out.println("DATOS DE FACTURA NO VÁLIDOS");

@@ -6,9 +6,9 @@ public class Fecha {
 	private int anyo;
 	
 	public Fecha(int dia, int mes, int anyo){
-		this.setDia(dia);
-		this.setMes(mes);
-		this.setAnyo(anyo);
+		this.dia = dia;
+		this.mes = mes;
+		this.anyo = anyo;
 	}
 
 	public int getDia() {

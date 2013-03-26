@@ -66,6 +66,19 @@ public class Operador_telefonia {
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");
 	}
+	
+	public static Cliente obtenerCliente(NIF nif) {
+		boolean ok = false;
+		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+			if(entry.getKey().toString().equals(nif.toString())){
+				ok = true;
+				return entry.getValue();
+			}
+		}
+		if(!ok) System.out.println("Cliente no encontrado.");
+		return null; //excepción
+	}
+	
 	public static boolean claveValida(CodigoFactura clave){
 		Boolean valida = true;
 		for(NIF nif: clientes.keySet()){
@@ -97,6 +110,7 @@ public class Operador_telefonia {
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
+				System.out.println("Emitiendo factura para: "+entry.getValue().getNombre()+" con NIF: "+entry.getValue().getNif()+".");
 				entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
 			}
 		}
@@ -124,6 +138,7 @@ public class Operador_telefonia {
 		boolean encontrado = false;
 		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
+				System.out.println("Código de factura: "+factura.getKey().getCodigo());
 				factura.getValue().mostrarenTerminal();
 				System.out.println("=====================");
 			}

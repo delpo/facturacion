@@ -2,7 +2,7 @@ package terminal;
 
 import java.util.Scanner;
 
-public class MenuTarifa {
+public class MenuTarifa{
 	public enum OpcionesTarifa {
 		//TARIFAS
 		OPCION0("Tarifa de mañana"),

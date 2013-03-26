@@ -6,7 +6,7 @@ import java.security.SecureRandom;
 
 public class CodigoFactura{
 	private String codigo;
-	CodigoFactura(String codigo){
+	public CodigoFactura(String codigo){
 		this.setCodigo(codigo);
 	}
 	public static CodigoFactura crearCodigoFactura(){

@@ -49,7 +49,8 @@ public class probador {
 					break;
 				case OPCION7:
 					//Emitir factura de un cliente
-					vodafone.emitirFactura(ManejoInputs.pedirNIF(), ManejoInputs.pedirFactura());
+					NIF nif = ManejoInputs.pedirNIF();
+					vodafone.emitirFactura(nif, ManejoInputs.pedirFactura(nif));
 					System.out.println("Tarea completada.");
 					break;
 				case OPCION8:
