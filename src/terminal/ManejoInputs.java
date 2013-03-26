@@ -249,7 +249,7 @@ public class ManejoInputs {
 	
 	public static Fecha pedirFecha() {
 		Fecha fecha = null;
-		int dia = 0, mes = 0, anyo = 0;
+		int dia = 0; int mes = 0; int anyo = 0;
 		Scanner scanner = new Scanner(System.in);
 		boolean ok = false;
 		do{
@@ -289,7 +289,9 @@ public class ManejoInputs {
 				int seg = scanner.nextInt();
 				segundos = seg;
 				tarifa = pedirTarifa();
+				System.out.println("-Fecha inicio de periodo de facturación-");
 				periodo.setFecha_inicio(pedirFecha());
+				System.out.println("-Fecha fin de periodo de facturación-");
 				periodo.setFecha_fin(pedirFecha());
 				ok = true;
 			} catch (InputMismatchException e) {
