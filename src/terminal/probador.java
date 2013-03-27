@@ -12,6 +12,23 @@ public class probador {
 		Operador_telefonia vodafone = new Operador_telefonia();
 		MenuTerminal.OpcionesMenu opcionMenu = MenuTerminal.Menu();
 		boolean salir = false;
+		//DATOS PARA PROBAR
+		Cliente cliente_test = null;
+		try {
+			cliente_test = new Particular("Ángel Carlos", "del Pozo Muela", new NIF("20905219J"),
+					new Direccion(12005, "Castellón de la Plana", "Castellón"), new Email("carlosdc360@gmail.com"), new Tarifa_manana());
+		} catch (ExcepcionNIFnoValido e) {
+			e.printStackTrace();
+		} catch (ExcepcionEmailNoValido e) {
+			e.printStackTrace();
+		}
+		vodafone.darAlta(cliente_test);
+		try {
+			vodafone.emitirFactura(new NIF("20905219J"), new Factura(new Fecha(27, 3, 2013), 160, new Tarifa_manana(), new Periodo_facturacion(new Fecha(1,1,2013), new Fecha(1,3,2013))));
+		} catch (ExcepcionNIFnoValido e) {
+			e.printStackTrace();
+		}
+		//FIN DE DATOS PARA PROBAR
 		do{
 			switch(opcionMenu) {
 				case OPCION0:
@@ -56,12 +73,20 @@ public class probador {
 				case OPCION8:
 					//Mostrar factura de cliente
 					CodigoFactura codigo = ManejoInputs.pedirCodigoFactura();
-					vodafone.obtenerFactura(codigo).mostrarenTerminal();
+					try {
+						vodafone.obtenerFactura(codigo).mostrarenTerminal();
+					} catch (ExcepcionFacturaNoEncontrada e) {
+						System.out.println("No se encontró factura. No se pudo efectuar operación.");
+					}
 					System.out.println("Tarea completada.");
 					break;
 				case OPCION9:
 					//Borrar factura
-					vodafone.borrarFactura(ManejoInputs.pedirCodigoFactura());
+					try {
+						vodafone.borrarFactura(ManejoInputs.pedirCodigoFactura());
+					} catch (ExcepcionFacturaNoEncontrada e) {
+						System.out.println("No se encontró factura. No se pudo efectuar operación.");
+					}
 					System.out.println("Tarea completada.");
 					break;
 				case OPCION10:

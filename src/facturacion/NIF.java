@@ -8,7 +8,7 @@ public class NIF {
 	
 	public NIF(String nif) throws ExcepcionNIFnoValido{
 		if(isNifNie(nif)){
-			this.NIF = nif;
+			this.NIF = nif.toUpperCase();
 		}else{
 			//lanzar excepción NIF no válido
 			throw new ExcepcionNIFnoValido();

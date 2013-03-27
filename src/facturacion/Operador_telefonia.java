@@ -87,11 +87,12 @@ public class Operador_telefonia {
 		return valida;
 	}
 	
-	public Factura obtenerFactura(CodigoFactura codigo_factura){
+	public Factura obtenerFactura(CodigoFactura codigo_factura) throws ExcepcionFacturaNoEncontrada{
+		System.out.println("Código a buscar: "+codigo_factura.getCodigo());
 		boolean encontrado = false;
 		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
-				if(factura.getKey().equals(codigo_factura)){
+				if(factura.getKey().getCodigo().equals(codigo_factura.getCodigo())){
 					encontrado = true;
 					System.out.println("Factura encontrada.");
 					return factura.getValue();
@@ -102,6 +103,7 @@ public class Operador_telefonia {
 		}
 		if(!encontrado){
 			//lanzar excepción
+			throw new ExcepcionFacturaNoEncontrada();
 		}
 		return null;
 	}
@@ -111,18 +113,17 @@ public class Operador_telefonia {
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
-				System.out.println("Emitiendo factura para: "+entry.getValue().getNombre()+" con NIF: "+entry.getValue().getNif()+".");
 				entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
 			}
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");
 	}
 
-	public void borrarFactura(CodigoFactura codigo_factura) {
+	public void borrarFactura(CodigoFactura codigo_factura) throws ExcepcionFacturaNoEncontrada {
 		boolean encontrado = false;
 		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
-				if(factura.getKey().equals(codigo_factura)){
+				if(factura.getKey().getCodigo().equals(codigo_factura.getCodigo())){
 					encontrado = true;
 					cliente.getValue().facturas.entrySet().remove(factura);
 				}
@@ -132,6 +133,7 @@ public class Operador_telefonia {
 		}
 		if(!encontrado){
 			//lanzar excepción
+			throw new ExcepcionFacturaNoEncontrada();
 		}
 	}
 	
