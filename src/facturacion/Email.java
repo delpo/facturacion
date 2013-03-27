@@ -4,7 +4,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 public class Email {
-	String email;
+	private String email;
 	
 	public Email(String email) throws ExcepcionEmailNoValido{
 		if(isValidEmailAddress(email)){
@@ -28,5 +28,9 @@ public class Email {
 		}
 	public String toString(){
 		return "Email : "+email;
+	}
+	
+	public String getEmailenString(){
+		return email;
 	}
 }

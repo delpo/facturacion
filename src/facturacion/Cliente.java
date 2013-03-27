@@ -50,6 +50,7 @@ public abstract class Cliente {
 			codigo = CodigoFactura.crearCodigoFactura();
 		}
 		facturas.put(codigo, factura);
+		new EnvioCorreo().envia(email, factura);
 	}
 	
 	public void listarCliente(){
