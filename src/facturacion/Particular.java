@@ -32,4 +32,20 @@ public class Particular extends Cliente {
 		System.out.println(this.getEmail().toString());
 		System.out.println("Tarifa: "+this.getTarifa().getNombre());	
 	}
+	
+	@Override
+	public double getIVA(){
+		return IVA;
+	}
+	
+	@Override
+	public void emitirFactura(Factura factura){
+		factura.setIVA(IVA);
+		CodigoFactura codigo = CodigoFactura.crearCodigoFactura();
+		while(!Operador_telefonia.claveValida(codigo)){
+			codigo = CodigoFactura.crearCodigoFactura();
+		}
+		facturas.put(codigo, factura);
+		new EnvioCorreo().envia(getEmail(), factura);
+	}
 }

@@ -9,7 +9,7 @@ public abstract class Cliente {
 	private Email email;
 	private Tarifa tarifa;
 	HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
-	
+		
 	//GETTERS Y SETTERS
 	public String getNombre() {
 		return nombre;
@@ -45,15 +45,14 @@ public abstract class Cliente {
 		return null;
 	}
 	public void emitirFactura(Factura factura){
-		CodigoFactura codigo = CodigoFactura.crearCodigoFactura();
-		while(!Operador_telefonia.claveValida(codigo)){
-			codigo = CodigoFactura.crearCodigoFactura();
-		}
-		facturas.put(codigo, factura);
-		new EnvioCorreo().envia(email, factura);
+		//se sobreescribe tanto en Particular como en Empresa
 	}
 	
 	public void listarCliente(){
 		//se sobreescribe tanto en Particular como en Empresa
+	}
+	public double getIVA() {
+		//se sobreescribe tanto en Particular como en Empresa
+		return 0.0;
 	}
 }

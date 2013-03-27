@@ -37,7 +37,7 @@ public class EnvioCorreo {
 	        msg.setSentDate(new Date());
 	        String texto = "Factura emitida el día: "+factura.fecha_emision+"\n"+"Tiempo facturado (en segundos):"+factura.segundos+
 	        		"\n"+"Tarifa contratada: "+factura.tarifa.getNombre()+"\n"+"Periodo de facturación: del día "+factura.periodo.getFecha_inicio()
-	        		+" al día "+factura.periodo.getFecha_fin();
+	        		+" al día "+factura.periodo.getFecha_fin()+"\n"+"Coste total (con IVA): "+factura.importe+" €";
 	        msg.setText(texto);
 	        System.out.println("Inicio de envío");
 	        Transport.send(msg);
