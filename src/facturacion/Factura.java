@@ -16,7 +16,6 @@ public class Factura {
 		this.segundos = segundos;
 		this.tarifa = tarifa;
 		this.periodo = periodo_facturacion;
-		this.importe = calcularCoste();
 	}
 	
 	public void setIVA(double iva){
@@ -26,7 +25,11 @@ public class Factura {
 	public BigDecimal calcularCoste(){
 		double coste_total_sin_iva = 0.0;
 		coste_total_sin_iva = (segundos/60) *  tarifa.getCoste();
+		System.out.println("Minutos: "+segundos/60);
+		System.out.println("Coste total sin iva: "+coste_total_sin_iva);
+		System.out.println("IVA: "+iva);
 		double coste_total = coste_total_sin_iva+(coste_total_sin_iva*iva);
+		System.out.println("Coste total con iva: "+coste_total);
 		String val = coste_total+"";
 	    BigDecimal big = new BigDecimal(val);
 	    big = big.setScale(2, RoundingMode.HALF_UP);
@@ -43,6 +46,10 @@ public class Factura {
 	
 	public BigDecimal getImporte(){
 		return importe;
+	}
+
+	public double getIVA() {
+		return iva;
 	}
 	
 }

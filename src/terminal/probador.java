@@ -10,8 +10,6 @@ public class probador {
 	public static void main(String[] args) {
 		System.out.println("Bienvenido al programa de gestión de clientela de Vodafone.");
 		Operador_telefonia vodafone = new Operador_telefonia();
-		MenuTerminal.OpcionesMenu opcionMenu = MenuTerminal.Menu();
-		boolean salir = false;
 		//DATOS PARA PROBAR
 		Cliente cliente_test = null;
 		try {
@@ -24,11 +22,13 @@ public class probador {
 		}
 		vodafone.darAlta(cliente_test);
 		try {
-			vodafone.emitirFactura(new NIF("20905219J"), new Factura(new Fecha(27, 3, 2013), 160, new Tarifa_manana(), new Periodo_facturacion(new Fecha(1,1,2013), new Fecha(1,3,2013))));
+			vodafone.emitirFactura(new NIF("20905219J"), new Factura(new Fecha(27, 3, 2013), 3000, new Tarifa_manana(), new Periodo_facturacion(new Fecha(1,1,2013), new Fecha(1,3,2013))));
 		} catch (ExcepcionNIFnoValido e) {
 			e.printStackTrace();
 		}
 		//FIN DE DATOS PARA PROBAR
+		MenuTerminal.OpcionesMenu opcionMenu = MenuTerminal.Menu();
+		boolean salir = false;
 		do{
 			switch(opcionMenu) {
 				case OPCION0:

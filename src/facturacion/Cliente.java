@@ -52,7 +52,7 @@ public abstract class Cliente {
 		//se sobreescribe tanto en Particular como en Empresa
 	}
 	public double getIVA() {
-		//se sobreescribe tanto en Particular como en Empresa
+		System.out.println("Clase Cliente.");
 		return 0.0;
 	}
 }

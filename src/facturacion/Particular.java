@@ -41,6 +41,7 @@ public class Particular extends Cliente {
 	@Override
 	public void emitirFactura(Factura factura){
 		factura.setIVA(IVA);
+		factura.importe = factura.calcularCoste();
 		CodigoFactura codigo = CodigoFactura.crearCodigoFactura();
 		while(!Operador_telefonia.claveValida(codigo)){
 			codigo = CodigoFactura.crearCodigoFactura();
