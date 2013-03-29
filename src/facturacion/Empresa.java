@@ -16,7 +16,7 @@ public class Empresa extends Cliente {
 	public void listarCliente(){
 		System.out.println("Empresa: "+this.getNombre());
 		System.out.println("NIF: "+this.getNif().toString());
-		System.out.println("Dirección: "+this.getDireccion().toString());
+		System.out.print(this.getDireccion().toString());
 		System.out.println("Email: "+this.getEmail().toString());
 		System.out.println("Tarifa: "+this.getTarifa().getNombre());		
 	}

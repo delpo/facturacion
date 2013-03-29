@@ -1,6 +1,7 @@
 package facturacion;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map.Entry;
 
 public class Operador_telefonia {
@@ -198,6 +199,27 @@ public class Operador_telefonia {
 				if(ok) break;
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");
+	}
+	
+	//Genericidad
+	
+	public void mostrarFacturasentreDosFechas(Fecha fecha1, Fecha fecha2){
+		//Ordeno fechas
+		Fecha fecha_inicio = fecha1;
+		Fecha fecha_fin = fecha2;
+		if(fecha1.compareTo(fecha2) > 0){
+			fecha_inicio = fecha2;
+			fecha_fin = fecha1;
+		}
+		//Obtengo facturas
+		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
+		//...
+		//Muestro facturas
+		for(Entry<CodigoFactura, Factura> factura: facturas.entrySet()){
+				System.out.println("Código: "+factura.getKey().getCodigo());
+				factura.getValue().mostrarenTerminal();
+		}
+		
 	}
 
 }

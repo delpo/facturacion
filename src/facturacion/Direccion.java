@@ -30,6 +30,6 @@ public class Direccion {
 		this.poblacion = poblacion;
 	}
 	public String toString(){
-		return "CP: "+codigo_postal+"\nProvincia: "+provincia+"\nPoblación: "+poblacion;
+		return "CP: "+codigo_postal+"\nProvincia: "+provincia+"\nPoblación: "+poblacion+"\n";
 	}
 }

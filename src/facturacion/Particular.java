@@ -28,7 +28,7 @@ public class Particular extends Cliente {
 		System.out.println("Nombre: "+this.getNombre());
 		System.out.println("Apellidos: "+this.getApellidos());
 		System.out.println("NIF: "+this.getNif().toString());
-		System.out.println("Dirección: "+this.getDireccion().toString());
+		System.out.print(this.getDireccion().toString());
 		System.out.println(this.getEmail().toString());
 		System.out.println("Tarifa: "+this.getTarifa().getNombre());	
 	}
