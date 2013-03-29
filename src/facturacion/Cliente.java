@@ -9,6 +9,7 @@ public abstract class Cliente {
 	private Email email;
 	private Tarifa tarifa;
 	HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
+	HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
 		
 	//GETTERS Y SETTERS
 	public String getNombre() {
@@ -52,7 +53,17 @@ public abstract class Cliente {
 		//se sobreescribe tanto en Particular como en Empresa
 	}
 	public double getIVA() {
-		System.out.println("Clase Cliente.");
+		//se sobreescribe tanto en Particular como en Empresa
 		return 0.0;
+	}
+	
+	public void reportarIncidencia(Incidencia incidencia){
+		if(incidencias.containsKey(Fecha.hoy())){ //ya hay incidencias para esa fecha
+			incidencias.get(Fecha.hoy()).put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
+		}else{ //primera incidencia de la fecha en cuestión
+			HashMap<CodigoIncidencia, Incidencia> listado_de_la_fecha = new HashMap<CodigoIncidencia, Incidencia>();
+			listado_de_la_fecha.put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
+			incidencias.put(Fecha.hoy(), listado_de_la_fecha);
+		}
 	}
 }

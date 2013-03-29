@@ -4,8 +4,10 @@ import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import terminal.MenuIncidencia.OpcionesIncidencia;
 import terminal.MenuTarifa.OpcionesTarifa;
 
+import facturacion.Averia;
 import facturacion.Cliente;
 import facturacion.CodigoFactura;
 import facturacion.Direccion;
@@ -15,10 +17,13 @@ import facturacion.ExcepcionEmailNoValido;
 import facturacion.ExcepcionNIFnoValido;
 import facturacion.Factura;
 import facturacion.Fecha;
+import facturacion.Impago;
+import facturacion.Incidencia;
 import facturacion.NIF;
 import facturacion.Operador_telefonia;
 import facturacion.Particular;
 import facturacion.Periodo_facturacion;
+import facturacion.SolicitudPortabilidad;
 import facturacion.Tarifa;
 import facturacion.Tarifa_manana;
 import facturacion.Tarifa_reducida;
@@ -308,5 +313,23 @@ public class ManejoInputs {
 		}while(!ok);
 		factura = new Factura(fecha_emision, segundos, tarifa, periodo);
 		return factura;
+	}
+	
+	
+	public static Incidencia pedirIncidencia(){
+		Incidencia incidencia = null;
+		OpcionesIncidencia opcionIncidencia = MenuIncidencia.Menu();
+		switch(opcionIncidencia) {
+			case OPCION0:
+				incidencia = new SolicitudPortabilidad();
+				break;
+			case OPCION1:
+				incidencia = new Averia();
+				break;
+			case OPCION2:
+				incidencia = new Impago();
+				break;
+		}
+		return incidencia;
 	}
 }

@@ -96,6 +96,9 @@ public class probador {
 					break;
 				case OPCION11:
 					//Incidencias de un cliente entre dos fechas
+					vodafone.darDeAltaIncidencia(ManejoInputs.pedirNIF(), ManejoInputs.pedirIncidencia());
+					System.out.println("Tarea completada.");
+					break;
 				case OPCION12:
 					//Todas las incidencias de un cliente
 				case OPCION13:	

@@ -2,17 +2,16 @@ package terminal;
 
 import java.util.Scanner;
 
-public class MenuTarifa{
-	public enum OpcionesTarifa {
+public class MenuIncidencia{
+	public enum OpcionesIncidencia {
 		//TARIFAS
-		OPCION0("Tarifa de mañana"),
-		OPCION1("Tarifa de tarde"),
-		OPCION2("Tarifa reducida"),
-		OPCION3("Tarifa superreducida");
-
+		OPCION0("Solicitud de portabilidad"),
+		OPCION1("Avería"),
+		OPCION2("Impago");
+		
 		private String descripcion;
 
-		private OpcionesTarifa(String descripcion) {
+		private OpcionesIncidencia(String descripcion) {
 			this.descripcion = descripcion;
 		}
 
@@ -21,9 +20,9 @@ public class MenuTarifa{
 		}
 
 		public static String getMenu() {
-			System.out.println("\n-Elija entre las siguientes tarifas-");
+			System.out.println("\n-Elija entre las siguientes incidencias-");
 			StringBuilder sb = new StringBuilder();
-			for(OpcionesTarifa opcion: OpcionesTarifa.values()) {
+			for(OpcionesIncidencia opcion: OpcionesIncidencia.values()) {
 				sb.append(opcion.ordinal());
 				sb.append(".- ");
 				sb.append(opcion.getDescripcion());
@@ -32,20 +31,20 @@ public class MenuTarifa{
 			return sb.toString();
 		}
 
-		public static OpcionesTarifa getOpcion(int posicion) {
+		public static OpcionesIncidencia getOpcion(int posicion) {
 			return values()[posicion];
 		}
 	}
 
-	public static OpcionesTarifa Menu(){
-		System.out.println(OpcionesTarifa.getMenu());
+	public static OpcionesIncidencia Menu(){
+		System.out.println(OpcionesIncidencia.getMenu());
 		Scanner scanner = new Scanner(System.in);
 		byte opcion = 99;
 		do{
 			System.out.print("\nElije una opción:");
 			opcion = scanner.nextByte();
-		}while(opcion>3 || opcion<0);
-		OpcionesTarifa opcionTarifa = OpcionesTarifa.getOpcion(opcion);
+		}while(opcion>2 || opcion<0);
+		OpcionesIncidencia opcionTarifa = OpcionesIncidencia.getOpcion(opcion);
 		return opcionTarifa;
 	}
 }

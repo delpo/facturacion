@@ -11,5 +11,9 @@ public abstract class Incidencia {
 		this.resuelta = resuelta;
 	}
 	
+	public void resolverIncidencia(){
+		this.resuelta = true;
+	}
+
 	
 }
