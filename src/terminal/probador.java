@@ -111,15 +111,22 @@ public class probador {
 				break;
 			case OPCION14:
 				//Mostrar facturas de un cliente emitidas entre dos fechas
+				vodafone.mostrarFacturasentreDosFechas(ManejoInputs.pedirNIF());
+				System.out.println("Tarea completada.");
 				break;
 			case OPCION15:
 				//Mostrar facturas emitidas para un mismo código postal
+				vodafone.mostrarFacturasparaCP(ManejoInputs.pedirCP());
+				System.out.println("Tarea completada.");
 				break;
 			case OPCION16:
 				//Mostrar facturas emitidas entre dos fechas
+				vodafone.mostrarFacturasentreDosFechas();
+				System.out.println("Tarea completada.");
 				break;
 			case OPCION17:
 				//Mostrar facturas emitidas entre dos fechas y para el mismo código postal
+				vodafone.mostrarFacturasparaCPentreDosFechas(ManejoInputs.pedirCP());
 				break;
 			case OPCION18:
 				//Mostrar incidencias de un cliente entre dos fechas

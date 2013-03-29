@@ -1,6 +1,5 @@
 package terminal;
 
-import java.util.Calendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -285,7 +284,8 @@ public class ManejoInputs {
 	
 	public static Factura pedirFactura(NIF nif) {
 		Factura factura = null;
-		Fecha fecha_emision = new Fecha(Calendar.DAY_OF_MONTH, Calendar.MONTH, Calendar.YEAR);
+		System.out.println("-Introduzca fecha de emisión-");
+		Fecha fecha_emision = pedirFecha();
 		
 		int segundos = 0;
 		Tarifa tarifa = null;

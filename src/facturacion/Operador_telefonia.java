@@ -1,8 +1,9 @@
 package facturacion;
 
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map.Entry;
+
+import terminal.ManejoInputs;
 
 public class Operador_telefonia {
 
@@ -203,7 +204,8 @@ public class Operador_telefonia {
 	
 	//Genericidad
 	
-	public void mostrarFacturasentreDosFechas(Fecha fecha1, Fecha fecha2){
+	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(Fecha fecha1, Fecha fecha2){
+		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
 		//Ordeno fechas
 		Fecha fecha_inicio = fecha1;
 		Fecha fecha_fin = fecha2;
@@ -211,15 +213,136 @@ public class Operador_telefonia {
 			fecha_inicio = fecha2;
 			fecha_fin = fecha1;
 		}
+		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
+				if((factura.getValue().fecha_emision.compareTo(fecha_inicio) >= 0)
+						&& (factura.getValue().fecha_emision.compareTo(fecha_fin) <= 0)){
+					datos.put(factura.getKey(), factura.getValue());
+				}
+			}
+		}
+		return datos;
+	}
+	
+	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(NIF nif, Fecha fecha1, Fecha fecha2){
+		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
+		//Ordeno fechas
+		Fecha fecha_inicio = fecha1;
+		Fecha fecha_fin = fecha2;
+		if(fecha1.compareTo(fecha2) > 0){
+			fecha_inicio = fecha2;
+			fecha_fin = fecha1;
+		}
+		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+			if(cliente_listado.getKey().NIF.equals(nif.NIF)){
+				for(Entry<CodigoFactura, Factura> factura: cliente_listado.getValue().facturas.entrySet()){
+					if((factura.getValue().fecha_emision.compareTo(fecha_inicio) >= 0)
+							&& (factura.getValue().fecha_emision.compareTo(fecha_fin) <= 0)){
+						datos.put(factura.getKey(), factura.getValue());
+					}
+				}
+				break;
+			}
+		}
+		return datos;
+	}
+	
+	public void mostrarFacturasentreDosFechas(){
+		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
+		System.out.println("-Fecha 1-");
+		Fecha fecha1 = ManejoInputs.pedirFecha();
+		System.out.println("-Fecha 2-");
+		Fecha fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo facturas
 		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
-		//...
+		facturas = facturasEntreDosFechas(fecha1, fecha2);
 		//Muestro facturas
 		for(Entry<CodigoFactura, Factura> factura: facturas.entrySet()){
 				System.out.println("Código: "+factura.getKey().getCodigo());
 				factura.getValue().mostrarenTerminal();
 		}
 		
+	}
+	
+	public void mostrarFacturasentreDosFechas(NIF nif){
+		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
+		System.out.println("-Fecha 1-");
+		Fecha fecha1 = ManejoInputs.pedirFecha();
+		System.out.println("-Fecha 2-");
+		Fecha fecha2 = ManejoInputs.pedirFecha();
+		//Obtengo facturas
+		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
+		facturas = facturasEntreDosFechas(nif, fecha1, fecha2);
+		//Muestro facturas
+		for(Entry<CodigoFactura, Factura> factura: facturas.entrySet()){
+				System.out.println("Código: "+factura.getKey().getCodigo());
+				factura.getValue().mostrarenTerminal();
+		}
+		
+	}
+	
+	public void mostrarFacturasparaCP(int cp){
+		//Obtengo facturas
+		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
+		facturas = facturasPorCP(cp);
+		//Muestro facturas
+		for(Entry<CodigoFactura, Factura> factura: facturas.entrySet()){
+				System.out.println("Código: "+factura.getKey().getCodigo());
+				factura.getValue().mostrarenTerminal();
+		}
+		
+	}
+
+	private HashMap<CodigoFactura, Factura> facturasPorCP(int cp) {
+		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
+		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
+				for(Entry<CodigoFactura, Factura> factura: cliente_listado.getValue().facturas.entrySet()){
+					datos.put(factura.getKey(), factura.getValue());
+				}
+			}
+			break;
+		}
+		return datos;
+	}
+
+	public void mostrarFacturasparaCPentreDosFechas(int cp) {
+		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
+		System.out.println("-Fecha 1-");
+		Fecha fecha1 = ManejoInputs.pedirFecha();
+		System.out.println("-Fecha 2-");
+		Fecha fecha2 = ManejoInputs.pedirFecha();
+		//Obtengo facturas
+		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
+		facturas = facturasPorCP(cp, fecha1, fecha2);
+		//Muestro facturas
+		for(Entry<CodigoFactura, Factura> factura: facturas.entrySet()){
+				System.out.println("Código: "+factura.getKey().getCodigo());
+				factura.getValue().mostrarenTerminal();
+		}
+	}
+
+	public HashMap<CodigoFactura, Factura> facturasPorCP(int cp, Fecha fecha1, Fecha fecha2) {
+		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
+		//Ordeno fechas
+		Fecha fecha_inicio = fecha1;
+		Fecha fecha_fin = fecha2;
+		if(fecha1.compareTo(fecha2) > 0){
+			fecha_inicio = fecha2;
+			fecha_fin = fecha1;
+		}
+		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
+				for(Entry<CodigoFactura, Factura> factura: cliente_listado.getValue().facturas.entrySet()){
+					if((factura.getValue().fecha_emision.compareTo(fecha_inicio) >= 0)
+							&& (factura.getValue().fecha_emision.compareTo(fecha_fin) <= 0)){
+						datos.put(factura.getKey(), factura.getValue());
+					}
+				}
+				break;
+			}
+		}
+		return datos;
 	}
 
 }
