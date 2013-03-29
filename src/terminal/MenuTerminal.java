@@ -22,7 +22,16 @@ public class MenuTerminal {
 		//OPERACIONES CON INCIDENCIAS
 		OPCION11("Dar de alta una incidencia de un cliente."),
 		OPCION12("Recuperar todas las incidencias de un cliente."),
-		OPCION13("Borrar una incidencia de un cliente.");
+		OPCION13("Borrar una incidencia de un cliente."),
+		//GENERICIDAD
+		OPCION14("Mostrar facturas de un cliente emitidas entre dos fechas"),
+		OPCION15("Mostrar facturas emitidas para un mismo código postal"),
+		OPCION16("Mostrar facturas emitidas entre dos fechas"),
+		OPCION17("Mostrar facturas emitidas entre dos fechas y para el mismo código postal"),
+		OPCION18("Mostrar incidencias de un cliente entre dos fechas"),
+		OPCION19("Mostrar incidencias para el mismo código postal"),
+		OPCION20("Mostrar incidencias entre dos fechas"),
+		OPCION21("Mostrar incidencias para el mismo código postal y entre dos fechas");
 		
 		private String descripcion;
 	    
@@ -58,7 +67,7 @@ public class MenuTerminal {
 		do{
 			System.out.print("\nElije una opción:");
 			opcion = scanner.nextByte();
-		}while(opcion>13 || opcion<0);
+		}while(opcion>21 || opcion<0);
 		OpcionesMenu opcionMenu = OpcionesMenu.getOpcion(opcion);
 		return opcionMenu;
 	}
