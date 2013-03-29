@@ -96,13 +96,19 @@ public class probador {
 					break;
 				case OPCION11:
 					//Incidencias de un cliente entre dos fechas
-					vodafone.darDeAltaIncidencia(ManejoInputs.pedirNIF(), ManejoInputs.pedirIncidencia());
+					vodafone.darDeAltaIncidencia(ManejoInputs.pedirNIF(), ManejoInputs.pedirIncidencia(), ManejoInputs.pedirFecha());
 					System.out.println("Tarea completada.");
 					break;
 				case OPCION12:
 					//Todas las incidencias de un cliente
+					vodafone.listarIncidencias(ManejoInputs.pedirNIF());
+					System.out.println("Tarea completada.");
+					break;
 				case OPCION13:	
 					//Borrar una incidencia de un cliente
+					vodafone.borrarIncidencia(ManejoInputs.pedirCodigoIncidencia());
+					System.out.println("Tarea completada.");
+					break;
 			}
 			if(!salir){
 				vodafone.hashCode();

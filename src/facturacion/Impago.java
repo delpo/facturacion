@@ -6,4 +6,8 @@ public class Impago extends Incidencia{
 		
 	}
 	
+	public String getNombreIncidencia() {
+		return "Impago";
+	}
+	
 }

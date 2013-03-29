@@ -6,4 +6,8 @@ public class Averia extends Incidencia{
 		
 	}
 	
+	@Override
+	public String getNombreIncidencia() {
+		return "Avería";
+	}
 }

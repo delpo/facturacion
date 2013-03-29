@@ -6,4 +6,8 @@ public class SolicitudPortabilidad extends Incidencia{
 		
 	}
 	
+	public String getNombreIncidencia() {
+		return "Solicitud de portabilidad";
+	}
+	
 }

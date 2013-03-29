@@ -15,5 +15,8 @@ public abstract class Incidencia {
 		this.resuelta = true;
 	}
 
-	
+	public String getNombreIncidencia() {
+		//se sobreescribe en los tipos de incidencia
+		return null;
+	}
 }

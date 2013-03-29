@@ -57,13 +57,13 @@ public abstract class Cliente {
 		return 0.0;
 	}
 	
-	public void reportarIncidencia(Incidencia incidencia){
-		if(incidencias.containsKey(Fecha.hoy())){ //ya hay incidencias para esa fecha
-			incidencias.get(Fecha.hoy()).put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
+	public void reportarIncidencia(Incidencia incidencia, Fecha fecha){
+		if(incidencias.containsKey(fecha)){ //ya hay incidencias para esa fecha
+			incidencias.get(fecha).put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
 		}else{ //primera incidencia de la fecha en cuestión
 			HashMap<CodigoIncidencia, Incidencia> listado_de_la_fecha = new HashMap<CodigoIncidencia, Incidencia>();
 			listado_de_la_fecha.put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
-			incidencias.put(Fecha.hoy(), listado_de_la_fecha);
+			incidencias.put(fecha, listado_de_la_fecha);
 		}
 	}
 }

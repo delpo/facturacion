@@ -10,6 +10,7 @@ import terminal.MenuTarifa.OpcionesTarifa;
 import facturacion.Averia;
 import facturacion.Cliente;
 import facturacion.CodigoFactura;
+import facturacion.CodigoIncidencia;
 import facturacion.Direccion;
 import facturacion.Email;
 import facturacion.Empresa;
@@ -331,5 +332,27 @@ public class ManejoInputs {
 				break;
 		}
 		return incidencia;
+	}
+
+	public static CodigoIncidencia pedirCodigoIncidencia() {
+		CodigoIncidencia cod = null;
+		Scanner scanner = new Scanner(System.in);
+		boolean ok = false;
+		String elcod = null;
+		do{
+			try {
+				try{
+					System.out.print("Introduce código de incidencia: ");
+					elcod = scanner.nextLine();
+				}catch(java.lang.NullPointerException excp){
+					System.out.println("ERROR AL AÑADIR CÓDIGO.");
+				}
+				cod = new CodigoIncidencia(elcod);
+				ok = true;
+			} catch (InputMismatchException e) {
+				System.out.println("CÓDIGO DE FACTURA NO VÁLIDO.");
+			}
+		}while(!ok);
+		return cod;
 	}
 }

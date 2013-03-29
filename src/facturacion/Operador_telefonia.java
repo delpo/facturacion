@@ -152,13 +152,50 @@ public class Operador_telefonia {
 		}
 	}
 	
-	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia){
+	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia, Fecha fecha){
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
-				entry.getValue().reportarIncidencia(incidencia); //emplea el método de la clase Cliente
+				entry.getValue().reportarIncidencia(incidencia, fecha); //emplea el método de la clase Cliente
 			}
+		}
+		if(!ok) System.out.println("Cliente no encontrado.");
+	}
+
+	public void listarIncidencias(NIF nif) {
+		boolean ok = false;
+		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+			if(entry.getKey().toString().equals(nif.toString())){
+				ok = true;
+				//recorrer incidencias en entry.getValue().incidencias
+				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> entry2 : entry.getValue().incidencias.entrySet()){
+					for(Entry<CodigoIncidencia, Incidencia> entry3 : entry2.getValue().entrySet()){
+						System.out.println("Código: "+entry3.getKey().getCodigo());
+						System.out.println("Incidencia: "+entry3.getValue().getNombreIncidencia());
+						System.out.println("\n");
+					}
+				}
+			}
+		}
+		if(!ok) System.out.println("Cliente no encontrado.");
+	}
+	
+	public void borrarIncidencia(CodigoIncidencia codigo) {
+		boolean ok = false;
+		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+				//recorrer incidencias en entry.getValue().incidencias
+				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> entry2 : entry.getValue().incidencias.entrySet()){
+					for(Entry<CodigoIncidencia, Incidencia> entry3 : entry2.getValue().entrySet()){
+						if(entry3.getKey().getCodigo().equals(codigo.getCodigo())){
+							entry2.getValue().entrySet().remove(entry3);
+							ok = true;
+						}
+						if(ok) break;
+					}
+					if(ok) break;
+				}
+				if(ok) break;
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");
 	}
