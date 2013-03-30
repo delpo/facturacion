@@ -203,6 +203,7 @@ public class Operador_telefonia {
 	}
 	
 	//Genericidad
+	//FACTURAS
 	
 	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(Fecha fecha1, Fecha fecha2){
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
@@ -345,4 +346,155 @@ public class Operador_telefonia {
 		return datos;
 	}
 
+	//INCIDENCIAS
+	public HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasEntreDosFechas(Fecha fecha1, Fecha fecha2){
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> datos = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		//Ordeno fechas
+		Fecha fecha_inicio = fecha1;
+		Fecha fecha_fin = fecha2;
+		if(fecha1.compareTo(fecha2) > 0){
+			fecha_inicio = fecha2;
+			fecha_fin = fecha1;
+		}
+		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+			for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente.getValue().incidencias.entrySet()){
+				if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
+						&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
+					datos.put(incidencia.getKey(), incidencia.getValue());
+				}
+			}
+		}
+		return datos;
+	}
+	
+	public HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasEntreDosFechas(NIF nif, Fecha fecha1, Fecha fecha2){
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> datos = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		//Ordeno fechas
+		Fecha fecha_inicio = fecha1;
+		Fecha fecha_fin = fecha2;
+		if(fecha1.compareTo(fecha2) > 0){
+			fecha_inicio = fecha2;
+			fecha_fin = fecha1;
+		}
+		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+			if(cliente_listado.getKey().NIF.equals(nif.NIF)){
+				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente_listado.getValue().incidencias.entrySet()){
+					if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
+							&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
+						datos.put(incidencia.getKey(), incidencia.getValue());
+					}
+				}
+				break;
+			}
+		}
+		return datos;
+	}
+	
+	public void mostrarIncidenciasentreDosFechas(){
+		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
+		System.out.println("-Fecha 1-");
+		Fecha fecha1 = ManejoInputs.pedirFecha();
+		System.out.println("-Fecha 2-");
+		Fecha fecha2 = ManejoInputs.pedirFecha();
+		//Obtengo incidencias
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		incidencias = incidenciasEntreDosFechas(fecha1, fecha2);
+		//Muestro incidencias
+		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
+				System.out.println("Fecha: "+incidencia.getKey().toString());
+				for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
+					System.out.println("Código: "+incidencia2.getKey());
+					System.out.println("Tipo: "+incidencia2.getValue());
+				}
+		}
+		
+	}
+	
+	public void mostrarIncidenciasentreDosFechas(NIF nif){
+		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
+		System.out.println("-Fecha 1-");
+		Fecha fecha1 = ManejoInputs.pedirFecha();
+		System.out.println("-Fecha 2-");
+		Fecha fecha2 = ManejoInputs.pedirFecha();
+		//Obtengo incidencias
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		incidencias = incidenciasEntreDosFechas(nif, fecha1, fecha2);
+		//Muestro incidencias
+		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
+			System.out.println("Fecha: "+incidencia.getKey().toString());
+			for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
+				System.out.println("Código: "+incidencia2.getKey());
+				System.out.println("Tipo: "+incidencia2.getValue());
+			}
+		}
+		
+	}
+	
+	public void mostrarIncidenciasparaCP(int cp){
+		//Obtengo incidencias
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		incidencias = incidenciasPorCP(cp);
+		//Muestro incidencias
+		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
+			System.out.println("Fecha: "+incidencia.getKey().toString());
+			for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
+				System.out.println("Código: "+incidencia2.getKey());
+				System.out.println("Tipo: "+incidencia2.getValue());
+			}
+		}
+		
+	}
+
+	private HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasPorCP(int cp) {
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
+				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
+					incidencias.put(incidencia.getKey(), incidencia.getValue());
+				}
+			}
+		}
+		return incidencias;
+	}
+
+	public void mostrarIncidenciasparaCPentreDosFechas(int cp) {
+		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
+		System.out.println("-Fecha 1-");
+		Fecha fecha1 = ManejoInputs.pedirFecha();
+		System.out.println("-Fecha 2-");
+		Fecha fecha2 = ManejoInputs.pedirFecha();
+		//Obtengo incidencias
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		incidencias = incidenciasPorCP(cp, fecha1, fecha2);
+		//Muestro incidencias
+		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
+			System.out.println("Fecha: "+incidencia.getKey().toString());
+			for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
+				System.out.println("Código: "+incidencia2.getKey());
+				System.out.println("Tipo: "+incidencia2.getValue());
+			}
+		}
+	}
+
+	public HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasPorCP(int cp, Fecha fecha1, Fecha fecha2) {
+		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> datos = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		//Ordeno fechas
+		Fecha fecha_inicio = fecha1;
+		Fecha fecha_fin = fecha2;
+		if(fecha1.compareTo(fecha2) > 0){
+			fecha_inicio = fecha2;
+			fecha_fin = fecha1;
+		}
+		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
+				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente_listado.getValue().incidencias.entrySet()){
+					if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
+							&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
+						datos.put(incidencia.getKey(), incidencia.getValue());
+					}
+				}
+			}
+		}
+		return datos;
+	}
 }

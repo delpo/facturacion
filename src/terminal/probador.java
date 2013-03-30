@@ -130,15 +130,19 @@ public class probador {
 				break;
 			case OPCION18:
 				//Mostrar incidencias de un cliente entre dos fechas
+				vodafone.mostrarIncidenciasentreDosFechas(ManejoInputs.pedirNIF());
 				break;
 			case OPCION19:
 				//Mostrar incidencias para el mismo código postal
+				vodafone.mostrarIncidenciasparaCP(ManejoInputs.pedirCP());
 				break;
 			case OPCION20:
 				//Mostrar incidencias entre dos fechas
+				vodafone.mostrarIncidenciasentreDosFechas();
 				break;
 			case OPCION21:
 				//Mostrar incidencias para el mismo código postal y entre dos fechas
+				vodafone.mostrarIncidenciasparaCPentreDosFechas(ManejoInputs.pedirCP());
 				break;
 			}
 			if(!salir){
