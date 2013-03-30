@@ -1,7 +1,13 @@
 package facturacion;
 
-public class Empresa extends Cliente {
+import java.io.Serializable;
 
+public class Empresa extends Cliente implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final double IVA = 0.16;
 
 	public Empresa(String nombre, NIF nif, Direccion direccion, Email email, Tarifa tarifa){
@@ -17,7 +23,7 @@ public class Empresa extends Cliente {
 		System.out.println("Empresa: "+this.getNombre());
 		System.out.println("NIF: "+this.getNif().toString());
 		System.out.print(this.getDireccion().toString());
-		System.out.println("Email: "+this.getEmail().toString());
+		System.out.println(this.getEmail().toString());
 		System.out.println("Tarifa: "+this.getTarifa().getNombre());		
 	}
 	

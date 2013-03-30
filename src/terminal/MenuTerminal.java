@@ -1,8 +1,14 @@
 package terminal;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class MenuTerminal {
+public class MenuTerminal implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public enum OpcionesMenu{
 		//opciones
 		//SALIR

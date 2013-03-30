@@ -1,8 +1,13 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public abstract class Cliente {
+public abstract class Cliente implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String nombre;
 	private NIF nif;
 	private Direccion direccion;

@@ -1,8 +1,14 @@
 package terminal;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class MenuIncidencia{
+public class MenuIncidencia implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public enum OpcionesIncidencia {
 		//TARIFAS
 		OPCION0("Solicitud de portabilidad"),

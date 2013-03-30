@@ -1,6 +1,12 @@
 package facturacion;
 
-public abstract class Incidencia {
+import java.io.Serializable;
+
+public abstract class Incidencia implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean resuelta;
 
 	public boolean estaResuelta() {

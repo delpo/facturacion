@@ -1,10 +1,15 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
 
-public class CodigoFactura{
+public class CodigoFactura implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	public CodigoFactura(String codigo){
 		this.setCodigo(codigo);

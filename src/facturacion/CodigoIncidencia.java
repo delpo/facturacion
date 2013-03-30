@@ -1,10 +1,15 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
 
-public class CodigoIncidencia{
+public class CodigoIncidencia implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	public CodigoIncidencia(String codigo){
 		this.setCodigo(codigo);

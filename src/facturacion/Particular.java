@@ -1,7 +1,13 @@
 package facturacion;
 
-public class Particular extends Cliente {
+import java.io.Serializable;
 
+public class Particular extends Cliente implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String apellidos;
 	public static final double IVA = 0.21;
 	

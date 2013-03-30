@@ -1,14 +1,20 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
 import terminal.ManejoInputs;
 
-public class Operador_telefonia {
+public class Operador_telefonia implements Serializable {
 
-	static HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
+	static HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
+		
 	public Operador_telefonia(){
 	}
 	

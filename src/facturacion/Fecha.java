@@ -1,6 +1,12 @@
 package facturacion;
 
-public class Fecha {
+import java.io.Serializable;
+
+public class Fecha implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int dia;
 	private int mes;
 	private int anyo;

@@ -1,5 +1,6 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Properties;
 
@@ -11,7 +12,11 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class EnvioCorreo {
+public class EnvioCorreo implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	final String username = "al151990@uji.es";
 	final String password = "a1b2c3d4";
 	

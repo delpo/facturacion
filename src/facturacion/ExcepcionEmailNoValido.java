@@ -1,6 +1,8 @@
 package facturacion;
 
-public class ExcepcionEmailNoValido extends Exception {
+import java.io.Serializable;
+
+public class ExcepcionEmailNoValido extends Exception implements Serializable{
 	/**
 	 * 
 	 */

@@ -1,6 +1,8 @@
 package facturacion;
 
-public class ExcepcionFacturaNoEncontrada extends Exception{
+import java.io.Serializable;
+
+public class ExcepcionFacturaNoEncontrada extends Exception implements Serializable{
 	/**
 	 * 
 	 */

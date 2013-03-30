@@ -1,9 +1,14 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class NIF {
+public class NIF implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String NIF;
 	
 	public NIF(String nif) throws ExcepcionNIFnoValido{

@@ -1,6 +1,8 @@
 package facturacion;
 
-public class ExcepcionNIFnoValido extends Exception {
+import java.io.Serializable;
+
+public class ExcepcionNIFnoValido extends Exception implements Serializable{
 
 	/**
 	 * 

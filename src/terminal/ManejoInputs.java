@@ -1,5 +1,6 @@
 package terminal;
 
+import java.io.Serializable;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -30,7 +31,12 @@ import facturacion.Tarifa_reducida;
 import facturacion.Tarifa_superreducida;
 import facturacion.Tarifa_tarde;
 
-public class ManejoInputs {
+public class ManejoInputs implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static Cliente inputParticular(){
 		Scanner scanner = new Scanner(System.in);

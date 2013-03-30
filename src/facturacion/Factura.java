@@ -1,9 +1,14 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Factura {
+public class Factura implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Fecha fecha_emision;
 	int segundos;
 	Tarifa tarifa;

@@ -1,6 +1,12 @@
 package facturacion;
 
-public class Tarifa_superreducida implements Tarifa {
+import java.io.Serializable;
+
+public class Tarifa_superreducida implements Tarifa, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	double coste = 0.01;
 	
 	public Tarifa_superreducida(){

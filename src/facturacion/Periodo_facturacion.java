@@ -1,6 +1,12 @@
 package facturacion;
 
-public class Periodo_facturacion {
+import java.io.Serializable;
+
+public class Periodo_facturacion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Fecha fecha_inicio;
 	private Fecha fecha_fin;
 	
