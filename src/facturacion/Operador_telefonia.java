@@ -13,49 +13,54 @@ public class Operador_telefonia implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	static HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
+	private static HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
 		
 	public Operador_telefonia(){
+		
+	}
+	
+	public Operador_telefonia(HashMap<NIF, Cliente> clientes){
+		this.setClientes(clientes);
 	}
 	
 	public void darAlta(Cliente cliente) {
-		if(clientes.containsKey(cliente.getNif())){
+		if(getClientes().containsKey(cliente.getNif())){
 			System.out.println("El cliente ya existe. No se añadirá.");
 		}else{
-			clientes.put(cliente.getNif(), cliente);
+			getClientes().put(cliente.getNif(), cliente);
 		}
 	}
 	public void borrarCliente(NIF nif) {
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
-			if(entry.getKey().toString().equals(nif.toString()) && clientes.remove(entry.getKey())!=null){
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
+			if(entry.getKey().toString().equals(nif.toString()) && getClientes().remove(entry.getKey())!=null){
 					System.out.println("Borrado completado con éxito.");
 			}
 		}
 	}
 	public void cambiarTarifa(NIF nif, Tarifa tarifa) {
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				entry.getValue().setTarifa(tarifa);
 			}
 		}
 	}
 	
-	public void listaElemento(Entry<NIF, Cliente> entry){
+	public static void listaElemento(Entry<NIF, Cliente> entry){
 		entry.getValue().listarCliente();
 	}
 	
 	public void listarClientes() {
 		System.out.println("Listado de clientes:");
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			listaElemento(entry);
 			System.out.println("=============================");
 		}
-		if(clientes.entrySet().isEmpty()) System.out.println("No hay clientes registrados.");
+		if(getClientes().entrySet().isEmpty()) System.out.println("No hay clientes registrados.");
 		
 	}
 	public void listarClientesporCP(int cp) {
 		Boolean sinclientes=true;
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			if(entry.getValue().getDireccion().getCodigo_postal()==cp){
 				listaElemento(entry);
 				sinclientes=false;
@@ -66,7 +71,7 @@ public class Operador_telefonia implements Serializable {
 	
 	public void obtenerDatos(NIF nif) {
 		boolean ok = false;
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
 				listaElemento(entry);
@@ -77,7 +82,7 @@ public class Operador_telefonia implements Serializable {
 	
 	public static Cliente obtenerCliente(NIF nif) {
 		boolean ok = false;
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
 				return entry.getValue();
@@ -89,8 +94,8 @@ public class Operador_telefonia implements Serializable {
 	
 	public static boolean claveValida(CodigoFactura clave){
 		Boolean valida = true;
-		for(NIF nif: clientes.keySet()){
-			if(clientes.get(nif).facturas.containsKey(clave.getCodigo())) valida = false;
+		for(NIF nif: getClientes().keySet()){
+			if(getClientes().get(nif).facturas.containsKey(clave.getCodigo())) valida = false;
 		}
 		return valida;
 	}
@@ -98,7 +103,7 @@ public class Operador_telefonia implements Serializable {
 	public Factura obtenerFactura(CodigoFactura codigo_factura) throws ExcepcionFacturaNoEncontrada{
 		System.out.println("Código a buscar: "+codigo_factura.getCodigo());
 		boolean encontrado = false;
-		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente : getClientes().entrySet()) {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
 				if(factura.getKey().getCodigo().equals(codigo_factura.getCodigo())){
 					encontrado = true;
@@ -118,7 +123,7 @@ public class Operador_telefonia implements Serializable {
 	
 	public void emitirFactura(NIF nif, Factura factura){
 		boolean ok = false;
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
 				entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
@@ -129,7 +134,7 @@ public class Operador_telefonia implements Serializable {
 
 	public void borrarFactura(CodigoFactura codigo_factura) throws ExcepcionFacturaNoEncontrada {
 		boolean encontrado = false;
-		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente : getClientes().entrySet()) {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
 				if(factura.getKey().getCodigo().equals(codigo_factura.getCodigo())){
 					encontrado = true;
@@ -147,7 +152,7 @@ public class Operador_telefonia implements Serializable {
 	
 	public void listarFacturasCliente(NIF nif){
 		boolean encontrado = false;
-		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente : getClientes().entrySet()) {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
 				System.out.println("Código de factura: "+factura.getKey().getCodigo());
 				factura.getValue().mostrarenTerminal();
@@ -162,7 +167,7 @@ public class Operador_telefonia implements Serializable {
 	
 	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia, Fecha fecha){
 		boolean ok = false;
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
 				entry.getValue().reportarIncidencia(incidencia, fecha); //emplea el método de la clase Cliente
@@ -173,7 +178,7 @@ public class Operador_telefonia implements Serializable {
 
 	public void listarIncidencias(NIF nif) {
 		boolean ok = false;
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
 				//recorrer incidencias en entry.getValue().incidencias
@@ -191,7 +196,7 @@ public class Operador_telefonia implements Serializable {
 	
 	public void borrarIncidencia(CodigoIncidencia codigo) {
 		boolean ok = false;
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> entry : getClientes().entrySet()) {
 				//recorrer incidencias en entry.getValue().incidencias
 				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> entry2 : entry.getValue().incidencias.entrySet()){
 					for(Entry<CodigoIncidencia, Incidencia> entry3 : entry2.getValue().entrySet()){
@@ -220,7 +225,7 @@ public class Operador_telefonia implements Serializable {
 			fecha_inicio = fecha2;
 			fecha_fin = fecha1;
 		}
-		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente : getClientes().entrySet()) {
 			for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
 				if((factura.getValue().fecha_emision.compareTo(fecha_inicio) >= 0)
 						&& (factura.getValue().fecha_emision.compareTo(fecha_fin) <= 0)){
@@ -240,7 +245,7 @@ public class Operador_telefonia implements Serializable {
 			fecha_inicio = fecha2;
 			fecha_fin = fecha1;
 		}
-		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente_listado : getClientes().entrySet()) {
 			if(cliente_listado.getKey().NIF.equals(nif.NIF)){
 				for(Entry<CodigoFactura, Factura> factura: cliente_listado.getValue().facturas.entrySet()){
 					if((factura.getValue().fecha_emision.compareTo(fecha_inicio) >= 0)
@@ -302,7 +307,7 @@ public class Operador_telefonia implements Serializable {
 
 	private HashMap<CodigoFactura, Factura> facturasPorCP(int cp) {
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
-		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente_listado : getClientes().entrySet()) {
 			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
 				for(Entry<CodigoFactura, Factura> factura: cliente_listado.getValue().facturas.entrySet()){
 					datos.put(factura.getKey(), factura.getValue());
@@ -338,7 +343,7 @@ public class Operador_telefonia implements Serializable {
 			fecha_inicio = fecha2;
 			fecha_fin = fecha1;
 		}
-		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente_listado : getClientes().entrySet()) {
 			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
 				for(Entry<CodigoFactura, Factura> factura: cliente_listado.getValue().facturas.entrySet()){
 					if((factura.getValue().fecha_emision.compareTo(fecha_inicio) >= 0)
@@ -362,7 +367,7 @@ public class Operador_telefonia implements Serializable {
 			fecha_inicio = fecha2;
 			fecha_fin = fecha1;
 		}
-		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente : getClientes().entrySet()) {
 			for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente.getValue().incidencias.entrySet()){
 				if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
 						&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
@@ -382,7 +387,7 @@ public class Operador_telefonia implements Serializable {
 			fecha_inicio = fecha2;
 			fecha_fin = fecha1;
 		}
-		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente_listado : getClientes().entrySet()) {
 			if(cliente_listado.getKey().NIF.equals(nif.NIF)){
 				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente_listado.getValue().incidencias.entrySet()){
 					if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
@@ -453,7 +458,7 @@ public class Operador_telefonia implements Serializable {
 
 	private HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasPorCP(int cp) {
 		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
-		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente_listado : getClientes().entrySet()) {
 			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
 				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
 					incidencias.put(incidencia.getKey(), incidencia.getValue());
@@ -491,7 +496,7 @@ public class Operador_telefonia implements Serializable {
 			fecha_inicio = fecha2;
 			fecha_fin = fecha1;
 		}
-		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
+		for (Entry<NIF, Cliente> cliente_listado : getClientes().entrySet()) {
 			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
 				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente_listado.getValue().incidencias.entrySet()){
 					if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
@@ -502,5 +507,13 @@ public class Operador_telefonia implements Serializable {
 			}
 		}
 		return datos;
+	}
+
+	public static HashMap<NIF, Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(HashMap<NIF, Cliente> clientes) {
+		Operador_telefonia.clientes = clientes;
 	}
 }
