@@ -8,6 +8,7 @@ public abstract class Incidencia implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private boolean resuelta;
+	private Fecha fecha;
 
 	public boolean estaResuelta() {
 		return resuelta;
@@ -24,5 +25,13 @@ public abstract class Incidencia implements Serializable{
 	public String getNombreIncidencia() {
 		//se sobreescribe en los tipos de incidencia
 		return null;
+	}
+
+	public Fecha getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Fecha fecha) {
+		this.fecha = fecha;
 	}
 }

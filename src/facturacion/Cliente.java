@@ -14,8 +14,9 @@ public abstract class Cliente implements Serializable{
 	private Email email;
 	private Tarifa tarifa;
 	HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
-	HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
-		
+	//HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+	HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();	
+	
 	//GETTERS Y SETTERS
 	public String getNombre() {
 		return nombre;
@@ -63,12 +64,6 @@ public abstract class Cliente implements Serializable{
 	}
 	
 	public void reportarIncidencia(Incidencia incidencia, Fecha fecha){
-		if(incidencias.containsKey(fecha)){ //ya hay incidencias para esa fecha
-			incidencias.get(fecha).put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
-		}else{ //primera incidencia de la fecha en cuestión
-			HashMap<CodigoIncidencia, Incidencia> listado_de_la_fecha = new HashMap<CodigoIncidencia, Incidencia>();
-			listado_de_la_fecha.put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
-			incidencias.put(fecha, listado_de_la_fecha);
-		}
+		incidencias.put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
 	}
 }

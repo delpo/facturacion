@@ -9,8 +9,8 @@ public class SolicitudPortabilidad extends Incidencia implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SolicitudPortabilidad(){
-		
+	public SolicitudPortabilidad(Fecha fecha){
+		super.setFecha(fecha);
 	}
 	
 	public String getNombreIncidencia() {

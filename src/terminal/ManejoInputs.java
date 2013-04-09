@@ -328,13 +328,13 @@ public class ManejoInputs implements Serializable{
 		OpcionesIncidencia opcionIncidencia = MenuIncidencia.Menu();
 		switch(opcionIncidencia) {
 			case OPCION0:
-				incidencia = new SolicitudPortabilidad();
+				incidencia = new SolicitudPortabilidad(pedirFecha());
 				break;
 			case OPCION1:
-				incidencia = new Averia();
+				incidencia = new Averia(pedirFecha());
 				break;
 			case OPCION2:
-				incidencia = new Impago();
+				incidencia = new Impago(pedirFecha());
 				break;
 		}
 		return incidencia;
