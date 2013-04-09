@@ -49,7 +49,8 @@ public class Particular extends Cliente implements Serializable{
 		factura.setIVA(IVA);
 		factura.importe = factura.calcularCoste();
 		CodigoFactura codigo = CodigoFactura.crearCodigoFactura();
-		while(!Operador_telefonia.claveValida(codigo)){
+		Operador_telefonia op = new Operador_telefonia();
+		while(!op.claveValida(codigo)){
 			codigo = CodigoFactura.crearCodigoFactura();
 		}
 		facturas.put(codigo, factura);

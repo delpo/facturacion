@@ -13,9 +13,10 @@ public class Operador_telefonia implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	static HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
+	HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
 		
 	public Operador_telefonia(){
+		
 	}
 	
 	public void darAlta(Cliente cliente) {
@@ -45,13 +46,15 @@ public class Operador_telefonia implements Serializable {
 	}
 	
 	public void listarClientes() {
-		System.out.println("Listado de clientes:");
-		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
-			listaElemento(entry);
-			System.out.println("=============================");
+		if(!clientes.entrySet().isEmpty()){
+			System.out.println("Listado de clientes:");
+			for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+				listaElemento(entry);
+				System.out.println("=============================");
+			}
+		}else{
+			System.out.println("No hay clientes registrados.");
 		}
-		if(clientes.entrySet().isEmpty()) System.out.println("No hay clientes registrados.");
-		
 	}
 	public void listarClientesporCP(int cp) {
 		Boolean sinclientes=true;
@@ -75,7 +78,7 @@ public class Operador_telefonia implements Serializable {
 		if(!ok) System.out.println("Cliente no encontrado.");
 	}
 	
-	public static Cliente obtenerCliente(NIF nif) {
+	public Cliente obtenerCliente(NIF nif) {
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
@@ -87,7 +90,7 @@ public class Operador_telefonia implements Serializable {
 		return null; //excepción
 	}
 	
-	public static boolean claveValida(CodigoFactura clave){
+	public boolean claveValida(CodigoFactura clave){
 		Boolean valida = true;
 		for(NIF nif: clientes.keySet()){
 			if(clientes.get(nif).facturas.containsKey(clave.getCodigo())) valida = false;

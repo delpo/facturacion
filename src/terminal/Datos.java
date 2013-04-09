@@ -15,12 +15,15 @@ public class Datos implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	public Datos(){
+		
+	}
 
-	public static void almacenarDatos(){
+	public void almacenarDatos(Operador_telefonia operador){
 		try{
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("basededatos.bin"));
-			os.writeObject(Principal.getVodafone());
-			Principal.getVodafone().listarClientes();
+			os.writeObject(operador);
 			os.close();
 			System.out.println("Se guardaron los datos correctamente.");
 			
@@ -31,12 +34,11 @@ public class Datos implements Serializable{
 		}
 	}
 	
-	public static void recuperarDatos(){
+	public void recuperarDatos(Operador_telefonia operador){
 		try{
 			ObjectInputStream fis = new ObjectInputStream(new FileInputStream("basededatos.bin"));
 			Operador_telefonia op = (Operador_telefonia) fis.readObject();
-			op.listarClientes();
-			Principal.setVodafone(op);
+			operador = op;
 			fis.close();
 			System.out.println("Se cargaron los datos correctamente.");
 		}catch (FileNotFoundException e){

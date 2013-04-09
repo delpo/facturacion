@@ -288,7 +288,7 @@ public class ManejoInputs implements Serializable{
 		return fecha;
 	}
 	
-	public static Factura pedirFactura(NIF nif) {
+	public static Factura pedirFactura(NIF nif, Operador_telefonia op) {
 		Factura factura = null;
 		System.out.println("-Introduzca fecha de emisión-");
 		Fecha fecha_emision = pedirFecha();
@@ -304,7 +304,7 @@ public class ManejoInputs implements Serializable{
 				System.out.print("Introduce segundos: ");
 				int seg = scanner.nextInt();
 				segundos = seg;
-				Cliente cliente = Operador_telefonia.obtenerCliente(nif);
+				Cliente cliente = op.obtenerCliente(nif);
 				tarifa = cliente.getTarifa();
 				System.out.println("-Fecha inicio de periodo de facturación-");
 				Fecha fecha_inicio = null;
