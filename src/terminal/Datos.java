@@ -1,4 +1,4 @@
-package terminal;
+/*package terminal;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,9 +11,9 @@ import java.io.Serializable;
 import facturacion.Operador_telefonia;
 
 public class Datos implements Serializable{
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	private static final long serialVersionUID = 1L;
 	
 	public Datos(){
@@ -50,3 +50,4 @@ public class Datos implements Serializable{
 		}
 	}
 }
+*/
