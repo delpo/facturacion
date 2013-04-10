@@ -8,6 +8,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import facturacion.Operador_telefonia;
+
 import terminal.Prompt;
 //import es.uji.www.GeneradorDatosINE;
 
@@ -16,9 +18,7 @@ public class Principal implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-<<<<<<< HEAD
-=======
-	private static Operador_telefonia vodafone = new Operador_telefonia();
+	private Operador_telefonia vodafone = new Operador_telefonia();
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		System.out.println("Bienvenido al programa de gestión de clientela de Vodafone.");
