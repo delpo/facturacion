@@ -366,7 +366,11 @@ public class Operador_telefonia implements Serializable {
 			fecha_fin = fecha1;
 		}
 		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+<<<<<<< HEAD
 			for(Entry<CodigoIncidencia, Incidencia> incidencia: cliente.getValue().incidencias.entrySet()){
+=======
+			for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente.getValue().incidencias.entrySet()){
+>>>>>>> parent of d8ef055... v24.1 final
 				if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
 						&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
 					datos.put(incidencia.getKey(), incidencia.getValue());
@@ -506,4 +510,8 @@ public class Operador_telefonia implements Serializable {
 		}
 		return datos;
 	}
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> parent of d8ef055... v24.1 final
