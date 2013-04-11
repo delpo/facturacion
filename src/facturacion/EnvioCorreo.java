@@ -18,7 +18,7 @@ public class EnvioCorreo implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	final String username = "al151990@uji.es";
-	final String password = "a1b2c3d4";
+	final String password = "uji1991uji";
 	
 	public void envia(Email destinatario, Factura factura) {
 		Properties props = new Properties();

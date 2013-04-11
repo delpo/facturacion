@@ -267,9 +267,30 @@ public class Operador_telefonia implements Serializable, Operador {
 	
 	//Genericidad
 	//FACTURAS
+
+	/*public <S,T> HashMap<S, T> entreDosFechas(Fecha fecha1, Fecha fecha2){
+		HashMap<S, T> datos = new HashMap<S, T>();
+		//Ordeno fechas
+		Fecha fecha_inicio = fecha1;
+		Fecha fecha_fin = fecha2;
+		ordenarFechas(fecha_inicio, fecha_fin);
+		if(datos.entrySet() instanceof Factura){
+			for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
+				for(Entry<CodigoFactura, Factura> factura: cliente.getValue().facturas.entrySet()){
+					if((factura.getValue().fecha_emision.compareTo(fecha_inicio) >= 0)
+							&& (factura.getValue().fecha_emision.compareTo(fecha_fin) <= 0)){
+						datos.put(factura.getKey(), factura.getValue());
+					}
+				}
+			}
+		}else if(datos.entrySet() instanceof Incidencia){
+			
+		}else{
+			//throw new ExcepcionTipoIncorrecto();
+		}
+		return datos;
+	}*/
 	
-	
-	//////ENTRE DOS FECHAS////////////////////////////////////////////////////////////////////////////////
 	/* (non-Javadoc)
 	 * @see facturacion.Operador#facturasEntreDosFechas(facturacion.Fecha, facturacion.Fecha)
 	 */
