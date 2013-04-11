@@ -179,13 +179,11 @@ public class Operador_telefonia implements Serializable {
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
-				//recorrer incidencias en entry.getValue().incidencias
 				for(Entry<CodigoIncidencia, Incidencia> entry2 : entry.getValue().incidencias.entrySet()){
-					for(Entry<CodigoIncidencia, Incidencia> entry3 : entry2.getValue().entrySet()){
-						System.out.println("Código: "+entry3.getKey().getCodigo());
-						System.out.println("Incidencia: "+entry3.getValue().getNombreIncidencia());
-						System.out.println("\n");
-					}
+					System.out.println("Código: "+entry2.getKey().getCodigo());
+					System.out.println("Fecha: "+entry2.getValue().getFecha().toString());
+					System.out.println("Incidencia: "+entry2.getValue().getNombreIncidencia());
+					System.out.println("\n");
 				}
 			}
 		}
@@ -197,16 +195,13 @@ public class Operador_telefonia implements Serializable {
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 				//recorrer incidencias en entry.getValue().incidencias
 				for(Entry<CodigoIncidencia, Incidencia> entry2 : entry.getValue().incidencias.entrySet()){
-					for(Entry<CodigoIncidencia, Incidencia> entry3 : entry2.getValue().entrySet()){
-						if(entry3.getKey().getCodigo().equals(codigo.getCodigo())){
-							entry2.getValue().entrySet().remove(entry3);
-							ok = true;
-						}
-						if(ok) break;
+					if(entry2.getKey().getCodigo().equals(codigo.getCodigo())){
+						entry.getValue().incidencias.entrySet().remove(entry2);
+						ok = true;
 					}
 					if(ok) break;
 				}
-				if(ok) break;
+			if(ok) break;
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");
 	}
@@ -356,8 +351,8 @@ public class Operador_telefonia implements Serializable {
 	}
 
 	//INCIDENCIAS
-	public HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasEntreDosFechas(Fecha fecha1, Fecha fecha2){
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> datos = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(Fecha fecha1, Fecha fecha2){
+		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
 		Fecha fecha_inicio = fecha1;
 		Fecha fecha_fin = fecha2;
@@ -366,13 +361,9 @@ public class Operador_telefonia implements Serializable {
 			fecha_fin = fecha1;
 		}
 		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
-<<<<<<< HEAD
 			for(Entry<CodigoIncidencia, Incidencia> incidencia: cliente.getValue().incidencias.entrySet()){
-=======
-			for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: cliente.getValue().incidencias.entrySet()){
->>>>>>> parent of d8ef055... v24.1 final
-				if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
-						&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
+				if((incidencia.getValue().getFecha().compareTo(fecha_inicio) >= 0)
+						&& (incidencia.getValue().getFecha().compareTo(fecha_fin) <= 0)){
 					datos.put(incidencia.getKey(), incidencia.getValue());
 				}
 			}
@@ -380,8 +371,8 @@ public class Operador_telefonia implements Serializable {
 		return datos;
 	}
 	
-	public HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasEntreDosFechas(NIF nif, Fecha fecha1, Fecha fecha2){
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> datos = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(NIF nif, Fecha fecha1, Fecha fecha2){
+		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
 		Fecha fecha_inicio = fecha1;
 		Fecha fecha_fin = fecha2;
@@ -392,8 +383,8 @@ public class Operador_telefonia implements Serializable {
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
 			if(cliente_listado.getKey().NIF.equals(nif.NIF)){
 				for(Entry<CodigoIncidencia, Incidencia> incidencia: cliente_listado.getValue().incidencias.entrySet()){
-					if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
-							&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
+					if((incidencia.getValue().getFecha().compareTo(fecha_inicio) >= 0)
+							&& (incidencia.getValue().getFecha().compareTo(fecha_fin) <= 0)){
 						datos.put(incidencia.getKey(), incidencia.getValue());
 					}
 				}
@@ -410,15 +401,14 @@ public class Operador_telefonia implements Serializable {
 		System.out.println("-Fecha 2-");
 		Fecha fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo incidencias
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		incidencias = incidenciasEntreDosFechas(fecha1, fecha2);
 		//Muestro incidencias
-		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
-				System.out.println("Fecha: "+incidencia.getKey().toString());
-				for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
-					System.out.println("Código: "+incidencia2.getKey());
-					System.out.println("Tipo: "+incidencia2.getValue());
-				}
+		for(Entry<CodigoIncidencia, Incidencia> incidencia: incidencias.entrySet()){
+					System.out.println("Código: "+incidencia.getKey().getCodigo());
+					System.out.println("Fecha: "+incidencia.getValue().getFecha().toString());
+					System.out.println("Incidencia: "+incidencia.getValue().getNombreIncidencia());
+					System.out.println("\n");
 		}
 		
 	}
@@ -430,39 +420,37 @@ public class Operador_telefonia implements Serializable {
 		System.out.println("-Fecha 2-");
 		Fecha fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo incidencias
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		incidencias = incidenciasEntreDosFechas(nif, fecha1, fecha2);
 		//Muestro incidencias
-		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
-			System.out.println("Fecha: "+incidencia.getKey().toString());
-			for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
-				System.out.println("Código: "+incidencia2.getKey());
-				System.out.println("Tipo: "+incidencia2.getValue());
-			}
+		for(Entry<CodigoIncidencia, Incidencia> incidencia: incidencias.entrySet()){
+			System.out.println("Código: "+incidencia.getKey().getCodigo());
+			System.out.println("Fecha: "+incidencia.getValue().getFecha().toString());
+			System.out.println("Incidencia: "+incidencia.getValue().getNombreIncidencia());
+			System.out.println("\n");
 		}
 		
 	}
 	
 	public void mostrarIncidenciasparaCP(int cp){
 		//Obtengo incidencias
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		incidencias = incidenciasPorCP(cp);
 		//Muestro incidencias
-		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
-			System.out.println("Fecha: "+incidencia.getKey().toString());
-			for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
-				System.out.println("Código: "+incidencia2.getKey());
-				System.out.println("Tipo: "+incidencia2.getValue());
-			}
+		for(Entry<CodigoIncidencia, Incidencia> incidencia: incidencias.entrySet()){
+			System.out.println("Código: "+incidencia.getKey().getCodigo());
+			System.out.println("Fecha: "+incidencia.getValue().getFecha().toString());
+			System.out.println("Incidencia: "+incidencia.getValue().getNombreIncidencia());
+			System.out.println("\n");
 		}
 		
 	}
 
-	private HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasPorCP(int cp) {
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+	private HashMap<CodigoIncidencia, Incidencia> incidenciasPorCP(int cp) {
+		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
 			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
-				for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
+				for(Entry<CodigoIncidencia, Incidencia> incidencia: incidencias.entrySet()){
 					incidencias.put(incidencia.getKey(), incidencia.getValue());
 				}
 			}
@@ -477,20 +465,19 @@ public class Operador_telefonia implements Serializable {
 		System.out.println("-Fecha 2-");
 		Fecha fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo incidencias
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		incidencias = incidenciasPorCP(cp, fecha1, fecha2);
 		//Muestro incidencias
-		for(Entry<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencia: incidencias.entrySet()){
-			System.out.println("Fecha: "+incidencia.getKey().toString());
-			for(Entry<CodigoIncidencia, Incidencia> incidencia2: incidencia.getValue().entrySet()){
-				System.out.println("Código: "+incidencia2.getKey());
-				System.out.println("Tipo: "+incidencia2.getValue());
-			}
+		for(Entry<CodigoIncidencia, Incidencia> incidencia: incidencias.entrySet()){
+			System.out.println("Código: "+incidencia.getKey().getCodigo());
+			System.out.println("Fecha: "+incidencia.getValue().getFecha().toString());
+			System.out.println("Incidencia: "+incidencia.getValue().getNombreIncidencia());
+			System.out.println("\n");
 		}
 	}
 
-	public HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidenciasPorCP(int cp, Fecha fecha1, Fecha fecha2) {
-		HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> datos = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
+	public HashMap<CodigoIncidencia, Incidencia> incidenciasPorCP(int cp, Fecha fecha1, Fecha fecha2) {
+		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
 		Fecha fecha_inicio = fecha1;
 		Fecha fecha_fin = fecha2;
@@ -501,8 +488,8 @@ public class Operador_telefonia implements Serializable {
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
 			if(cliente_listado.getValue().getDireccion().getCodigo_postal() == cp){
 				for(Entry<CodigoIncidencia, Incidencia> incidencia: cliente_listado.getValue().incidencias.entrySet()){
-					if((incidencia.getKey().compareTo(fecha_inicio) >= 0)
-							&& (incidencia.getKey().compareTo(fecha_fin) <= 0)){
+					if((incidencia.getValue().getFecha().compareTo(fecha_inicio) >= 0)
+							&& (incidencia.getValue().getFecha().compareTo(fecha_fin) <= 0)){
 						datos.put(incidencia.getKey(), incidencia.getValue());
 					}
 				}
@@ -510,8 +497,4 @@ public class Operador_telefonia implements Serializable {
 		}
 		return datos;
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> parent of d8ef055... v24.1 final
