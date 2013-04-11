@@ -14,7 +14,7 @@ public class Prompt {
 		Operador_telefonia operador = new Operador_telefonia();
 		System.out.println("Bienvenido al programa de gestión de clientela de operador.");
 		Datos dato = new Datos();
-		dato.recuperarDatos(operador);
+		operador = dato.recuperarDatos(operador);
 		MenuTerminal.OpcionesMenu opcionMenu = MenuTerminal.Menu();
 		boolean salir = false;
 		do{

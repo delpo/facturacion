@@ -34,13 +34,13 @@ public class Datos implements Serializable{
 		}
 	}
 	
-	public void recuperarDatos(Operador_telefonia operador){
+	public Operador_telefonia recuperarDatos(Operador_telefonia operador){
 		try{
 			ObjectInputStream fis = new ObjectInputStream(new FileInputStream("basededatos.bin"));
 			Operador_telefonia op = (Operador_telefonia) fis.readObject();
-			operador = op;
 			fis.close();
 			System.out.println("Se cargaron los datos correctamente.");
+			return op;
 		}catch (FileNotFoundException e){
 			System.out.println("No se encontró archivo de configuración.");
 		}catch (IOException e){
@@ -48,5 +48,6 @@ public class Datos implements Serializable{
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 }
