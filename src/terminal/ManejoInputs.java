@@ -21,7 +21,7 @@ import facturacion.Fecha;
 import facturacion.Impago;
 import facturacion.Incidencia;
 import facturacion.NIF;
-import facturacion.Operador_telefonia;
+import facturacion.Operador;
 import facturacion.Particular;
 import facturacion.Periodo_facturacion;
 import facturacion.SolicitudPortabilidad;
@@ -288,7 +288,7 @@ public class ManejoInputs implements Serializable{
 		return fecha;
 	}
 	
-	public static Factura pedirFactura(NIF nif, Operador_telefonia op) {
+	public static Factura pedirFactura(NIF nif, Operador op) {
 		Factura factura = null;
 		System.out.println("-Introduzca fecha de emisión-");
 		Fecha fecha_emision = pedirFecha();
