@@ -3,7 +3,6 @@ package terminal;
 import facturacion.CodigoFactura;
 import facturacion.ExcepcionFacturaNoEncontrada;
 import facturacion.NIF;
-import facturacion.Operador;
 import facturacion.Operador_telefonia;
 
 public class Prompt {
@@ -12,7 +11,7 @@ public class Prompt {
 	}
 	
 	public static void iniciarPrompt(){
-		Operador operador = new Operador_telefonia();
+		Operador_telefonia operador = new Operador_telefonia();
 		System.out.println("Bienvenido al programa de gestión de clientela de operador.");
 		Datos dato = new Datos();
 		operador = dato.recuperarDatos(operador);

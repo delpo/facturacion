@@ -4,12 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class Factura implements Serializable{
+public class Factura  extends Info implements Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Fecha fecha_emision;
 	int segundos;
 	Tarifa tarifa;
 	Periodo_facturacion periodo;
@@ -17,7 +16,7 @@ public class Factura implements Serializable{
 	double iva;
 	
 	public Factura(Fecha fecha_emision, int segundos, Tarifa tarifa, Periodo_facturacion periodo_facturacion){
-		this.fecha_emision = fecha_emision;
+		super.setFecha(fecha_emision);
 		this.segundos = segundos;
 		this.tarifa = tarifa;
 		this.periodo = periodo_facturacion;
@@ -42,7 +41,7 @@ public class Factura implements Serializable{
 	}
 	
 	public void mostrarenTerminal(){
-		System.out.println("Factura emitida el día: "+fecha_emision);
+		System.out.println("Factura emitida el día: "+super.getFecha());
 		System.out.println("Tiempo facturado (en segundos): "+segundos);
 		System.out.println("Tarifa contratada: "+tarifa.getNombre());
 		System.out.println("Periodo de facturación: del día "+periodo.getFecha_inicio()+" al día "+periodo.getFecha_fin());

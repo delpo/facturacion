@@ -14,7 +14,6 @@ public abstract class Cliente implements Serializable{
 	private Email email;
 	private Tarifa tarifa;
 	HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
-	//HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>> incidencias = new HashMap<Fecha, HashMap<CodigoIncidencia, Incidencia>>();
 	HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();	
 	
 	//GETTERS Y SETTERS
