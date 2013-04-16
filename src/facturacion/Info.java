@@ -1,6 +1,12 @@
 package facturacion;
 
-public abstract class Info {
+import java.io.Serializable;
+
+public abstract class Info implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Fecha fecha_emision;
 	
 	public Fecha getFecha() {

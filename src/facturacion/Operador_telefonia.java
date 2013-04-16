@@ -226,8 +226,7 @@ public class Operador_telefonia implements Serializable{
 		Fecha fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 		for(Entry<S, T> elemento: listado.entrySet()){
-			if((elemento.getValue().getFecha().compareTo(fecha_inicio) >= 0)
-					&& (elemento.getValue().getFecha().compareTo(fecha_fin) <= 0)){
+			if((elemento.getValue().getFecha().compareTo(fecha_inicio) >= 0) && (elemento.getValue().getFecha().compareTo(fecha_fin) <= 0)){
 				datos.put(elemento.getKey(), elemento.getValue());
 			}
 		}
