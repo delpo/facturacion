@@ -3,6 +3,7 @@ package facturacion;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.HashMap;
 
 public class Factura  extends Info implements Serializable{
 	/**
@@ -14,6 +15,7 @@ public class Factura  extends Info implements Serializable{
 	Periodo_facturacion periodo;
 	BigDecimal importe; //CON IVA de la tarifa correspondiente
 	double iva;
+	HashMap<CodigoLlamada, Llamada> llamadas = new HashMap<CodigoLlamada, Llamada>();
 	
 	public Factura(Fecha fecha_emision, int segundos, Tarifa tarifa, Periodo_facturacion periodo_facturacion){
 		super.setFecha(fecha_emision);

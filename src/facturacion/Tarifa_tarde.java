@@ -1,15 +1,11 @@
 package facturacion;
 
-import java.io.Serializable;
+public class Tarifa_tarde extends TarifaconOfertas {
 
-public class Tarifa_tarde implements Tarifa, Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	double coste = 0.04;
+	private final double coste = 0.05;
 	
-	public Tarifa_tarde(){
+	public Tarifa_tarde(Tarifa tarifa){
+		super(tarifa);
 	}
 	
 	@Override

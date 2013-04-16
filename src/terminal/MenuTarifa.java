@@ -11,10 +11,8 @@ public class MenuTarifa implements Serializable{
 
 	public enum OpcionesTarifa {
 		//TARIFAS
-		OPCION0("Tarifa de mañana"),
-		OPCION1("Tarifa de tarde"),
-		OPCION2("Tarifa reducida"),
-		OPCION3("Tarifa superreducida");
+		OPCION0("Tarifa de tarde"),
+		OPCION1("Tarifa de domingo");
 
 		private String descripcion;
 
@@ -27,6 +25,7 @@ public class MenuTarifa implements Serializable{
 		}
 
 		public static String getMenu() {
+			System.out.println("Además de la tarifa básica se pueden acoplar otras tarifas.");
 			System.out.println("\n-Elija entre las siguientes tarifas-");
 			StringBuilder sb = new StringBuilder();
 			for(OpcionesTarifa opcion: OpcionesTarifa.values()) {

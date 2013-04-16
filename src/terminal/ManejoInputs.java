@@ -26,9 +26,8 @@ import facturacion.Particular;
 import facturacion.Periodo_facturacion;
 import facturacion.SolicitudPortabilidad;
 import facturacion.Tarifa;
-import facturacion.Tarifa_manana;
-import facturacion.Tarifa_reducida;
-import facturacion.Tarifa_superreducida;
+import facturacion.Tarifa_basica;
+import facturacion.Tarifa_domingo;
 import facturacion.Tarifa_tarde;
 
 public class ManejoInputs implements Serializable{
@@ -41,7 +40,7 @@ public class ManejoInputs implements Serializable{
 	private static Cliente inputParticular(){
 		Scanner scanner = new Scanner(System.in);
 		Cliente cliente = null;
-		String nombre; String apellidos; NIF nif = null; Direccion direccion; Email email = null; Tarifa tarifa = null;
+		String nombre; String apellidos; NIF nif = null; Direccion direccion; Email email = null;
 		System.out.print("Introduce nombre: ");
 		nombre = scanner.nextLine();
 		System.out.print("Introduce apellidos: ");
@@ -83,21 +82,8 @@ public class ManejoInputs implements Serializable{
 				System.out.println("EMAIL NO VÁLIDO");
 			}
 		}while(!ok_email);
-		OpcionesTarifa opc = MenuTarifa.Menu();
-		switch(opc) {
-			case OPCION0:
-				tarifa = new Tarifa_manana();
-				break;
-			case OPCION1:
-				tarifa = new Tarifa_tarde();
-				break;
-			case OPCION2:
-				tarifa = new Tarifa_reducida();
-				break;
-			case OPCION3:
-				tarifa = new Tarifa_superreducida();
-				break;
-		}
+		Tarifa tarifa;
+		tarifa = new Tarifa_basica();
 		cliente = new Particular(nombre, apellidos, nif, direccion, email, tarifa);
 		return cliente;
 	}
@@ -145,21 +131,7 @@ public class ManejoInputs implements Serializable{
 				System.out.println("EMAIL NO VÁLIDO");
 			}
 		}while(!ok_email);
-		OpcionesTarifa opcionTarifa = MenuTarifa.Menu();
-		switch(opcionTarifa) {
-			case OPCION0:
-				tarifa = new Tarifa_manana();
-				break;
-			case OPCION1:
-				tarifa = new Tarifa_tarde();
-				break;
-			case OPCION2:
-				tarifa = new Tarifa_reducida();
-				break;
-			case OPCION3:
-				tarifa = new Tarifa_superreducida();
-				break;
-		}
+		tarifa = new Tarifa_basica();
 		cliente = new Empresa(nombre, nif, direccion, email, tarifa);
 		return cliente;
 	}
@@ -192,16 +164,10 @@ public class ManejoInputs implements Serializable{
 		OpcionesTarifa opcionTarifa = MenuTarifa.Menu();
 		switch(opcionTarifa) {
 			case OPCION0:
-				tarifa = new Tarifa_manana();
+				tarifa = new Tarifa_tarde(tarifa);
 				break;
 			case OPCION1:
-				tarifa = new Tarifa_tarde();
-				break;
-			case OPCION2:
-				tarifa = new Tarifa_reducida();
-				break;
-			case OPCION3:
-				tarifa = new Tarifa_superreducida();
+				tarifa = new Tarifa_domingo(tarifa);
 				break;
 		}
 		return tarifa;

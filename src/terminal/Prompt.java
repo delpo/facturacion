@@ -14,7 +14,7 @@ public class Prompt {
 		Operador_telefonia operador = new Operador_telefonia();
 		System.out.println("Bienvenido al programa de gestión de clientela de operador.");
 		Datos dato = new Datos();
-		operador = dato.recuperarDatos(operador);
+		operador = dato.recuperarDatos();
 		MenuTerminal.OpcionesMenu opcionMenu = MenuTerminal.Menu();
 		boolean salir = false;
 		do{
@@ -34,7 +34,7 @@ public class Prompt {
 				break;
 			case OPCION3:
 				//cambiar tarifa a un cliente
-				operador.cambiarTarifa(ManejoInputs.pedirNIF(), ManejoInputs.pedirTarifa());
+				operador.anyadirTarifa(ManejoInputs.pedirNIF(), ManejoInputs.pedirTarifa());
 				System.out.println("Tarea completada.");
 				break;
 			case OPCION4:

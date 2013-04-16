@@ -16,7 +16,7 @@ public class MenuTerminal implements Serializable{
 		//OPERACIONES CON CLIENTES
 		OPCION1("Añadir cliente."),
 		OPCION2("Borrar cliente."),
-		OPCION3("Cambiar tarifa a un cliente."),
+		OPCION3("Añadir tarifa a un cliente."),
 		OPCION4("Obtener datos de cliente sabiendo su NIF."),
 		OPCION5("Mostrar listado de todos los clientes."),
 		OPCION6("Mostrar clientes con el código postal a introducir."),
