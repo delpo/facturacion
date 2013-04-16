@@ -133,12 +133,12 @@ public class Prompt {
 				operador.mostrarIncidenciasparaCPentreDosFechas(ManejoInputs.pedirCP());
 				break;
 			}
-			dato.almacenarDatos(operador);
 			if(!salir){
 				operador.hashCode();
 				opcionMenu = MenuTerminal.Menu();
 			}
 		}while(!salir);
+		dato.almacenarDatos(operador);
 		System.out.println("¡Hasta luego!");
 	}
 }
