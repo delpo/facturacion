@@ -35,7 +35,7 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 
-	public void anyadirTarifa(NIF nif, Tarifa tarifa) {
+	public void anyadirTarifa(NIF nif, int tarifa) {
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				entry.getValue().setTarifa(tarifa);

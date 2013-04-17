@@ -41,11 +41,6 @@ public class Datos implements Serializable{
 			op = (Operador_telefonia) fis.readObject();
 			fis.close();
 			System.out.println("Se cargaron los datos correctamente.");
-			if(op == null){
-				System.out.println("nullll");
-			}
-//			System.out.println("Op: " + op);
-			op.listarClientes();
 			return op;
 		}catch (FileNotFoundException e){
 			System.out.println("No se encontró archivo de configuración.");

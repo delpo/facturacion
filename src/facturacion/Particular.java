@@ -11,7 +11,7 @@ public class Particular extends Cliente implements Serializable{
 	private String apellidos;
 	public static final double IVA = 0.21;
 	
-	public Particular(String nombre, String apellidos, NIF nif, Direccion direccion, Email email, Tarifa tarifa){
+	public Particular(String nombre, String apellidos, NIF nif, Direccion direccion, Email email, int tarifa){
 		this.setNombre(nombre);
 		this.setNif(nif);
 		this.setDireccion(direccion);

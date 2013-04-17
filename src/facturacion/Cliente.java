@@ -44,8 +44,18 @@ public abstract class Cliente implements Serializable{
 	public Tarifa getTarifa() {
 		return tarifa;
 	}
-	public void setTarifa(Tarifa tarifa) {
-		this.tarifa = tarifa;
+	public void setTarifa(int i) {
+		switch(i){
+		case -1: 
+			this.tarifa = new Tarifa_basica();
+			break;
+		case 0:
+			this.tarifa = new Tarifa_tarde(this.tarifa);
+			break;
+		case 1:
+			this.tarifa = new Tarifa_domingo(this.tarifa);
+			break;
+		}
 	}
 	public String getApellidos(){
 		return null;

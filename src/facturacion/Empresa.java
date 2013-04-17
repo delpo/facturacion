@@ -10,7 +10,7 @@ public class Empresa extends Cliente implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public static final double IVA = 0.16;
 
-	public Empresa(String nombre, NIF nif, Direccion direccion, Email email, Tarifa tarifa){
+	public Empresa(String nombre, NIF nif, Direccion direccion, Email email, int tarifa){
 		this.setNombre(nombre);
 		this.setNif(nif);
 		this.setDireccion(direccion);

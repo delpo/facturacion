@@ -10,3 +10,4 @@ public class Tarifa_basica extends Tarifa{
 		super("Tarifa básica", 0.10);
 	}
 }
+	

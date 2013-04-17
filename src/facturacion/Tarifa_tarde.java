@@ -6,7 +6,6 @@ public class Tarifa_tarde extends TarifaconOfertas {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final double coste = 0.05;
 	
 	public Tarifa_tarde(Tarifa tarifa){
 		super(tarifa);
@@ -14,11 +13,11 @@ public class Tarifa_tarde extends TarifaconOfertas {
 	
 	@Override
 	public double getCoste() {
-		return coste;
+		return 0.05;
 	}
 
 	@Override
 	public String getNombre() {
-		return "Tarifa de tarde";
+		return tarifa.getNombre() + " + Tarifa de tarde";
 	}
 }

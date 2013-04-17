@@ -49,7 +49,7 @@ public class MenuTarifa implements Serializable{
 		do{
 			System.out.print("\nElije una opción:");
 			opcion = scanner.nextByte();
-		}while(opcion>3 || opcion<0);
+		}while(opcion>1 || opcion<0);
 		OpcionesTarifa opcionTarifa = OpcionesTarifa.getOpcion(opcion);
 		return opcionTarifa;
 	}
