@@ -17,7 +17,8 @@ public class Principal implements Serializable{
 
 
 	private void ejecutar() {
-		Prompt.iniciarPrompt();
+		Prompt prompt = new Prompt();
+		prompt.iniciarPrompt();
 	}
 
 	public static void main(String[] args) {
