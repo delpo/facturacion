@@ -1,6 +1,7 @@
 package facturacion;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -176,7 +177,7 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
-	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia, Fecha fecha){
+	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia, Calendar fecha){
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
@@ -219,11 +220,11 @@ public class Operador_telefonia implements Serializable{
 	//Genericidad
 	
 	//LISTADO ENTRE DOS FECHAS DE INCIDENCIAS O FACTURAS
-	public <S,T extends Info> HashMap<S, T> entreDosFechas(HashMap<S, T> listado, Fecha fecha1, Fecha fecha2){
+	public <S,T extends Info> HashMap<S, T> entreDosFechas(HashMap<S, T> listado, Calendar fecha1, Calendar fecha2){
 		HashMap<S, T> datos = new HashMap<S, T>();
 		//Ordeno fechas
-		Fecha fecha_inicio = fecha1;
-		Fecha fecha_fin = fecha2;
+		Calendar fecha_inicio = fecha1;
+		Calendar fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 		for(Entry<S, T> elemento: listado.entrySet()){
 			if((elemento.getValue().getFecha().compareTo(fecha_inicio) >= 0) && (elemento.getValue().getFecha().compareTo(fecha_fin) <= 0)){
@@ -233,11 +234,11 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
-	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(Fecha fecha1, Fecha fecha2){
+	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
 		//Ordeno fechas
-		Fecha fecha_inicio = fecha1;
-		Fecha fecha_fin = fecha2;
+		Calendar fecha_inicio = fecha1;
+		Calendar fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
 			datos.putAll(entreDosFechas(cliente_listado.getValue().facturas, fecha1, fecha2));
@@ -245,11 +246,11 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
-	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(Fecha fecha1, Fecha fecha2){
+	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
-		Fecha fecha_inicio = fecha1;
-		Fecha fecha_fin = fecha2;
+		Calendar fecha_inicio = fecha1;
+		Calendar fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
 			datos.putAll(entreDosFechas(cliente_listado.getValue().incidencias, fecha1, fecha2));
@@ -257,11 +258,11 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
-	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(NIF nif, Fecha fecha1, Fecha fecha2){
+	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(NIF nif, Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
 		//Ordeno fechas
-		Fecha fecha_inicio = fecha1;
-		Fecha fecha_fin = fecha2;
+		Calendar fecha_inicio = fecha1;
+		Calendar fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 		
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
@@ -276,9 +277,9 @@ public class Operador_telefonia implements Serializable{
 	public void mostrarFacturasentreDosFechas(){
 		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
-		Fecha fecha1 = ManejoInputs.pedirFecha();
+		Calendar fecha1 = ManejoInputs.pedirFecha();
 		System.out.println("-Fecha 2-");
-		Fecha fecha2 = ManejoInputs.pedirFecha();
+		Calendar fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo facturas
 		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
 		facturas = facturasEntreDosFechas(fecha1, fecha2);
@@ -292,9 +293,9 @@ public class Operador_telefonia implements Serializable{
 	public void mostrarFacturasentreDosFechas(NIF nif){
 		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
-		Fecha fecha1 = ManejoInputs.pedirFecha();
+		Calendar fecha1 = ManejoInputs.pedirFecha();
 		System.out.println("-Fecha 2-");
-		Fecha fecha2 = ManejoInputs.pedirFecha();
+		Calendar fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo facturas
 		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
 		facturas = facturasEntreDosFechas(nif, fecha1, fecha2);
@@ -306,11 +307,11 @@ public class Operador_telefonia implements Serializable{
 
 	}
 	
-	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(NIF nif, Fecha fecha1, Fecha fecha2){
+	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(NIF nif, Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
-		Fecha fecha_inicio = fecha1;
-		Fecha fecha_fin = fecha2;
+		Calendar fecha_inicio = fecha1;
+		Calendar fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 		
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
@@ -325,9 +326,9 @@ public class Operador_telefonia implements Serializable{
 	public void mostrarIncidenciasentreDosFechas(NIF nif){
 		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
-		Fecha fecha1 = ManejoInputs.pedirFecha();
+		Calendar fecha1 = ManejoInputs.pedirFecha();
 		System.out.println("-Fecha 2-");
-		Fecha fecha2 = ManejoInputs.pedirFecha();
+		Calendar fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo incidencias
 		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		incidencias = incidenciasEntreDosFechas(nif, fecha1, fecha2);
@@ -339,9 +340,9 @@ public class Operador_telefonia implements Serializable{
 	public void mostrarIncidenciasentreDosFechas(){
 		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
-		Fecha fecha1 = ManejoInputs.pedirFecha();
+		Calendar fecha1 = ManejoInputs.pedirFecha();
 		System.out.println("-Fecha 2-");
-		Fecha fecha2 = ManejoInputs.pedirFecha();
+		Calendar fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo incidencias
 		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		incidencias = incidenciasEntreDosFechas(fecha1, fecha2);
@@ -400,11 +401,11 @@ public class Operador_telefonia implements Serializable{
 		return incidencias;
 	}
 	
-	public HashMap<CodigoIncidencia, Incidencia> incidenciasPorCP(int cp, Fecha fecha1, Fecha fecha2) {
+	public HashMap<CodigoIncidencia, Incidencia> incidenciasPorCP(int cp, Calendar fecha1, Calendar fecha2) {
 		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
-		Fecha fecha_inicio = fecha1;
-		Fecha fecha_fin = fecha2;
+		Calendar fecha_inicio = fecha1;
+		Calendar fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 		
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
@@ -423,9 +424,9 @@ public class Operador_telefonia implements Serializable{
 	public void mostrarFacturasparaCPentreDosFechas(int cp) {
 		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
-		Fecha fecha1 = ManejoInputs.pedirFecha();
+		Calendar fecha1 = ManejoInputs.pedirFecha();
 		System.out.println("-Fecha 2-");
-		Fecha fecha2 = ManejoInputs.pedirFecha();
+		Calendar fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo facturas
 		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
 		facturas = facturasPorCP(cp, fecha1, fecha2);
@@ -436,11 +437,11 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 
-	public HashMap<CodigoFactura, Factura> facturasPorCP(int cp, Fecha fecha1, Fecha fecha2) {
+	public HashMap<CodigoFactura, Factura> facturasPorCP(int cp, Calendar fecha1, Calendar fecha2) {
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
 		//Ordeno fechas
-		Fecha fecha_inicio = fecha1;
-		Fecha fecha_fin = fecha2;
+		Calendar fecha_inicio = fecha1;
+		Calendar fecha_fin = fecha2;
 		ordenarFechas(fecha_inicio, fecha_fin);
 				
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
@@ -462,9 +463,9 @@ public class Operador_telefonia implements Serializable{
 	public void mostrarIncidenciasparaCPentreDosFechas(int cp) {
 		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
-		Fecha fecha1 = ManejoInputs.pedirFecha();
+		Calendar fecha1 = ManejoInputs.pedirFecha();
 		System.out.println("-Fecha 2-");
-		Fecha fecha2 = ManejoInputs.pedirFecha();
+		Calendar fecha2 = ManejoInputs.pedirFecha();
 		//Obtengo incidencias
 		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		incidencias = incidenciasPorCP(cp, fecha1, fecha2);
@@ -481,10 +482,10 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 	
-	public void ordenarFechas(Fecha fecha1, Fecha fecha2){
+	public void ordenarFechas(Calendar fecha1, Calendar fecha2){
 		//Ordeno fechas
 		if(fecha1.compareTo(fecha2) > 0){
-			Fecha aux = fecha1;
+			Calendar aux = fecha1;
 			fecha1 = fecha2;
 			fecha2 = aux;
 		}

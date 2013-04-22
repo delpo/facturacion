@@ -1,6 +1,7 @@
 package facturacion;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.HashMap;
 
 public abstract class Cliente implements Serializable{
@@ -50,10 +51,10 @@ public abstract class Cliente implements Serializable{
 			this.tarifa = new Tarifa_basica();
 			break;
 		case 0:
-			this.tarifa = new Tarifa_tarde(this.tarifa);
+			this.tarifa = new Tarifa_tarde(this.tarifa, 0.05);
 			break;
 		case 1:
-			this.tarifa = new Tarifa_domingo(this.tarifa);
+			this.tarifa = new Tarifa_domingo(this.tarifa, 0);
 			break;
 		}
 	}
@@ -72,7 +73,8 @@ public abstract class Cliente implements Serializable{
 		return 0.0;
 	}
 	
-	public void reportarIncidencia(Incidencia incidencia, Fecha fecha){
+	public void reportarIncidencia(Incidencia incidencia, Calendar fecha){
+		//TODO las incidencias tienen que tener fecha????????
 		incidencias.put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
 	}
 }

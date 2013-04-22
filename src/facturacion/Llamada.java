@@ -1,8 +1,10 @@
 package facturacion;
 
+import java.util.Calendar;
+
 public class Llamada {
 	private int telefono;
-	private Fecha fecha_llamada;
+	private Calendar fecha_llamada;
 	private int duracion; //en segundos
 	private Hora hora;
 	
@@ -10,7 +12,7 @@ public class Llamada {
 		super();
 	}
 	
-	public Llamada(int telefono, Fecha fecha, int duracion, Hora hora){
+	public Llamada(int telefono, Calendar fecha, int duracion, Hora hora){
 		this.telefono = telefono;
 		this.fecha_llamada = fecha;
 		this.duracion = duracion;
@@ -25,11 +27,11 @@ public class Llamada {
 		this.telefono = telefono;
 	}
 
-	public Fecha getFecha_llamada() {
+	public Calendar getFecha_llamada() {
 		return fecha_llamada;
 	}
 
-	public void setFecha_llamada(Fecha fecha_llamada) {
+	public void setFecha_llamada(Calendar fecha_llamada) {
 		this.fecha_llamada = fecha_llamada;
 	}
 

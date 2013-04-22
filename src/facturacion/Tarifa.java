@@ -1,6 +1,7 @@
 package facturacion;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 public abstract class Tarifa implements Serializable{
 	/**
@@ -24,7 +25,7 @@ public abstract class Tarifa implements Serializable{
 		return descripcion;
 	}
 
-	public double getCoste() {
+	public double getCoste(Calendar fecha) {
 		return coste;
 	}
 	

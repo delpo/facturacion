@@ -3,6 +3,7 @@ package facturacion;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -18,7 +19,7 @@ public class Factura  extends Info implements Serializable{
 	double iva;
 	HashMap<CodigoLlamada, Llamada> llamadas = new HashMap<CodigoLlamada, Llamada>();
 	
-	public Factura(Fecha fecha_emision, int segundos, Tarifa tarifa, Periodo_facturacion periodo_facturacion){
+	public Factura(Calendar fecha_emision, int segundos, Tarifa tarifa, Periodo_facturacion periodo_facturacion){
 		super.setFecha(fecha_emision);
 		this.segundos = segundos;
 		this.tarifa = tarifa;
@@ -50,18 +51,8 @@ public class Factura  extends Info implements Serializable{
 	private double totalCosteLlamadas() {
 		double coste_total = 0.0;
 		for(Entry<CodigoLlamada, Llamada> llamada : llamadas.entrySet()){
-			Fecha fecha = llamada.getValue().getFecha_llamada();
-			int dia_de_la_semana = fecha.diaDeLaSemana();
-			Tarifa tarifa = new Tarifa_basica();
-			if(dia_de_la_semana == 1){ //ES DOMINGO
-				tarifa = new Tarifa_domingo(tarifa);
-				coste_total += tarifa.getCoste() * ((llamada.getValue().getDuracion())/60);	
-			}else if(fecha.getHora() >= 16 && fecha.getHora() < 20){ //ES TARDE
-				tarifa = new Tarifa_tarde(tarifa);
-				coste_total += tarifa.getCoste() * ((llamada.getValue().getDuracion())/60);	
-			}else{ //ES HORARIO NORMAL
-				coste_total += tarifa.getCoste() * ((llamada.getValue().getDuracion())/60);	
-			}
+			Calendar fecha = llamada.getValue().getFecha_llamada();
+			coste_total += (llamada.getValue().getDuracion() * tarifa.getCoste(fecha));
 		}
 		return coste_total;
 	}
@@ -76,7 +67,7 @@ public class Factura  extends Info implements Serializable{
 
 	public void mostrarenTerminal(){
 		System.out.println("Factura emitida el día: "+super.getFecha());
-		System.out.println("Tiempo facturado (en segundos): "+segundos);
+		System.out.println("Tiempo facturado (en segundos): "+totalSegundosLlamadas());
 		System.out.println("Tarifa contratada: "+tarifa.getNombre());
 		System.out.println("Periodo de facturación: del día "+periodo.getFecha_inicio()+" al día "+periodo.getFecha_fin());
 		System.out.println("Coste total (con IVA): "+importe+" €");

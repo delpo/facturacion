@@ -1,6 +1,7 @@
 package facturacion;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 public class SolicitudPortabilidad extends Incidencia implements Serializable{
 	
@@ -9,7 +10,7 @@ public class SolicitudPortabilidad extends Incidencia implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public SolicitudPortabilidad(Fecha fecha){
+	public SolicitudPortabilidad(Calendar fecha){
 		super.setFecha(fecha);
 	}
 	

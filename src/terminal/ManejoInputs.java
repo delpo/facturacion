@@ -1,6 +1,8 @@
 package terminal;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -17,7 +19,6 @@ import facturacion.Empresa;
 import facturacion.ExcepcionEmailNoValido;
 import facturacion.ExcepcionNIFnoValido;
 import facturacion.Factura;
-import facturacion.Fecha;
 import facturacion.Impago;
 import facturacion.Incidencia;
 import facturacion.NIF;
@@ -222,8 +223,8 @@ public class ManejoInputs implements Serializable{
 		return cod;
 	}
 	
-	public static Fecha pedirFecha() {
-		Fecha fecha = null;
+	public static Calendar pedirFecha() {
+		Calendar fecha = GregorianCalendar.getInstance();
 		int dia = 0; int mes = 0; int anyo = 0;
 		Scanner scanner = new Scanner(System.in);
 		boolean ok = false;
@@ -243,14 +244,14 @@ public class ManejoInputs implements Serializable{
 				System.out.println("FECHA NO VÁLIDA.");
 			}
 		}while(!ok);
-		fecha = new Fecha(dia, mes, anyo);
+		fecha.set(anyo, mes, dia);
 		return fecha;
 	}
 	
 	public static Factura pedirFactura(NIF nif, Operador_telefonia op) {
 		Factura factura = null;
 		System.out.println("-Introduzca fecha de emisión-");
-		Fecha fecha_emision = pedirFecha();
+		Calendar fecha_emision = pedirFecha();
 		
 		int segundos = 0;
 		Tarifa tarifa = null;
@@ -266,10 +267,10 @@ public class ManejoInputs implements Serializable{
 				Cliente cliente = op.obtenerCliente(nif);
 				tarifa = cliente.getTarifa();
 				System.out.println("-Fecha inicio de periodo de facturación-");
-				Fecha fecha_inicio = null;
+				Calendar fecha_inicio = null;
 				fecha_inicio = pedirFecha();
 				System.out.println("-Fecha fin de periodo de facturación-");
-				Fecha fecha_fin = null;
+				Calendar fecha_fin = null;
 				fecha_fin = pedirFecha();
 				periodo = new Periodo_facturacion(fecha_inicio, fecha_fin);
 				ok = true;
