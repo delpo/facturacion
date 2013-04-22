@@ -56,7 +56,7 @@ public class Factura  extends Info implements Serializable{
 			if(dia_de_la_semana == 1){ //ES DOMINGO
 				tarifa = new Tarifa_domingo(tarifa);
 				coste_total += tarifa.getCoste() * ((llamada.getValue().getDuracion())/60);	
-			}else if(fecha.getHora() > 14 && fecha.getHora() < 20){ //ES TARDE
+			}else if(fecha.getHora() >= 16 && fecha.getHora() < 20){ //ES TARDE
 				tarifa = new Tarifa_tarde(tarifa);
 				coste_total += tarifa.getCoste() * ((llamada.getValue().getDuracion())/60);	
 			}else{ //ES HORARIO NORMAL
