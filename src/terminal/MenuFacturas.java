@@ -62,7 +62,7 @@ public class MenuFacturas implements Serializable{
 		do{
 			System.out.print("\nElije una opción:");
 			opcion = scanner.nextByte();
-		}while(opcion>4 || opcion<0);
+		}while(opcion>8 || opcion<0);
 		OpcionesMenu opcionMenu = OpcionesMenu.getOpcion(opcion);
 		return opcionMenu;
 	}
@@ -81,7 +81,7 @@ public class MenuFacturas implements Serializable{
 			case OPCION1:
 				//Emitir factura de un cliente
 				NIF nif = ManejoInputs.pedirNIF();
-				operador.emitirFactura(nif, ManejoInputs.pedirFactura(nif, operador));
+				operador.emitirFactura(nif, ManejoInputs.pedirFactura(nif, operador, ManejoInputs.pedirLlamadas()));
 				System.out.println("Tarea completada.");
 				break;
 			case OPCION2:

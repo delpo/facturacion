@@ -25,7 +25,9 @@ public abstract class Tarifa implements Serializable{
 		return descripcion;
 	}
 
-	public double getCoste(Calendar fecha) {
+	public double getCoste(Calendar fecha, int hora) {
+		System.out.println("Calculando coste en Tarifa.");
+		System.out.println("Valor a devolver: "+coste);
 		return coste;
 	}
 	

@@ -1,8 +1,15 @@
 package terminal;
 
+import java.io.Serializable;
+
 import facturacion.Operador_telefonia;
 
-public class Prompt {
+public class Prompt implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public Prompt(){
 	}

@@ -3,8 +3,11 @@ package terminal;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.InputMismatchException;
+//import java.util.Locale;
 import java.util.Scanner;
+//import java.util.TimeZone;
 
 import terminal.MenuIncidencia.OpcionesIncidencia;
 import terminal.MenuTarifa.OpcionesTarifa;
@@ -13,6 +16,7 @@ import facturacion.Averia;
 import facturacion.Cliente;
 import facturacion.CodigoFactura;
 import facturacion.CodigoIncidencia;
+import facturacion.CodigoLlamada;
 import facturacion.Direccion;
 import facturacion.Email;
 import facturacion.Empresa;
@@ -21,6 +25,7 @@ import facturacion.ExcepcionNIFnoValido;
 import facturacion.Factura;
 import facturacion.Impago;
 import facturacion.Incidencia;
+import facturacion.Llamada;
 import facturacion.NIF;
 import facturacion.Operador_telefonia;
 import facturacion.Particular;
@@ -224,7 +229,9 @@ public class ManejoInputs implements Serializable{
 	}
 	
 	public static Calendar pedirFecha() {
-		Calendar fecha = GregorianCalendar.getInstance();
+		/*TimeZone tzESP = TimeZone.getTimeZone("GMT+2"); 
+		Calendar fecha = Calendar.getInstance ( tzESP, new Locale("es_ES") );*/ 
+		Calendar fecha = new GregorianCalendar();
 		int dia = 0; int mes = 0; int anyo = 0;
 		Scanner scanner = new Scanner(System.in);
 		boolean ok = false;
@@ -248,22 +255,17 @@ public class ManejoInputs implements Serializable{
 		return fecha;
 	}
 	
-	public static Factura pedirFactura(NIF nif, Operador_telefonia op) {
+	public static Factura pedirFactura(NIF nif, Operador_telefonia op, HashMap<CodigoLlamada, Llamada> llamadas) {
 		Factura factura = null;
 		System.out.println("-Introduzca fecha de emisión-");
 		Calendar fecha_emision = pedirFecha();
 		
-		int segundos = 0;
 		Tarifa tarifa = null;
 		Periodo_facturacion periodo = null;
 		
-		Scanner scanner = new Scanner(System.in);
 		boolean ok = false;
 		do{
 			try {
-				System.out.print("Introduce segundos: ");
-				int seg = scanner.nextInt();
-				segundos = seg;
 				Cliente cliente = op.obtenerCliente(nif);
 				tarifa = cliente.getTarifa();
 				System.out.println("-Fecha inicio de periodo de facturación-");
@@ -278,7 +280,7 @@ public class ManejoInputs implements Serializable{
 				System.out.println("DATOS DE FACTURA NO VÁLIDOS");
 			}
 		}while(!ok);
-		factura = new Factura(fecha_emision, segundos, tarifa, periodo);
+		factura = new Factura(fecha_emision, tarifa, periodo, llamadas);
 		return factura;
 	}
 	
@@ -320,5 +322,97 @@ public class ManejoInputs implements Serializable{
 			}
 		}while(!ok);
 		return cod;
+	}
+	
+	public static Llamada pedirLlamada(){
+		Llamada llamada = null;
+		Scanner scanner = new Scanner(System.in);
+		boolean ok = false;
+		
+		int telefono = 0;
+		Calendar fecha_llamada;
+		int duracion = 0; //en segundos
+		
+		do{
+			try{
+				System.out.print("Introduce teléfono: ");
+				telefono = scanner.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("TELÉFONO NO VÁLIDO.");
+			}
+			ok = true;
+		}while(!ok);
+		
+		fecha_llamada = pedirFechaConHora();
+		
+		boolean ok2 = false;
+		do{
+			try{
+				System.out.print("Introduce duración (en segundos): ");
+				duracion = scanner.nextInt(); 
+			}catch(InputMismatchException e){
+				System.out.println("TELÉFONO NO VÁLIDO.");
+			}
+			ok2 = true;
+		}while(!ok2);
+		llamada = new Llamada(telefono, fecha_llamada, duracion);
+		return llamada;
+	}
+	
+	public static Calendar pedirFechaConHora() {
+		Calendar fecha = new GregorianCalendar(); 
+		int dia = 0; int mes = 0; int anyo = 0; int hora = 0; int minutos = 0;
+		Scanner scanner = new Scanner(System.in);
+		boolean ok = false;
+		do{
+			try {
+				System.out.print("Introduce día: ");
+				int eldia = scanner.nextInt();
+				dia = eldia;
+				System.out.print("Introduce mes: ");
+				int elmes = scanner.nextInt();
+				mes = elmes;
+				System.out.print("Introduce año: ");
+				int elanyo = scanner.nextInt();
+				anyo = elanyo;
+				System.out.print("Introduce hora: ");
+				int lahora = scanner.nextInt();
+				hora = lahora;
+				System.out.print("Introduce minuto: ");
+				int elminuto = scanner.nextInt();
+				minutos = elminuto;
+				ok = true;
+			} catch (InputMismatchException e) {
+				System.out.println("FECHA NO VÁLIDA.");
+			}
+		}while(!ok);
+		fecha.set(anyo, mes-1, dia, hora, minutos);
+		if(fecha.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+			System.out.println("ES UNA FECHA DE DOMINGO");
+		}else{
+			System.out.println("NO ES UNA FECHA DE DOMINGO");
+		}
+		return fecha;
+	}
+
+	public static HashMap<CodigoLlamada, Llamada> pedirLlamadas() {
+		HashMap<CodigoLlamada, Llamada> llamadas = new HashMap<CodigoLlamada, Llamada>();
+		boolean parar = false;
+		System.out.println("-Introducir llamadas para emitir factura-");
+		int contador = 1;
+		Scanner scanner = new Scanner(System.in);
+		while(!parar){
+			System.out.println("::Llamada nº"+contador+"::");
+			Llamada llamada = pedirLlamada();
+			CodigoLlamada cod = new CodigoLlamada();
+			llamadas.put(cod.crearCodigoLlamada(), llamada);
+			System.out.print("¿Introducir más llamadas? (Sí = s, No = cualquier otra tecla): ");
+			String op = scanner.next();
+			if(!op.equals("s") || !op.equals("S")){
+				parar = true;
+			}
+			contador++;
+		}
+		return llamadas;
 	}
 }

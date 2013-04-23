@@ -1,6 +1,7 @@
 package facturacion;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.ExecutionException;
@@ -11,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -50,15 +50,14 @@ public class EnvioCorreo implements Serializable{
 		 	        msg.setRecipients(Message.RecipientType.TO, destinatario.getEmailenString());
 		 	        msg.setSubject("Factura");
 		 	        msg.setSentDate(new Date());
-		 	        String texto = "Factura emitida el día: "+factura.getFecha()+"\n"+"Tiempo facturado (en segundos): "+factura.segundos+
-		 	        		"\n"+"Tarifa contratada: "+factura.tarifa.getNombre()+"\n"+"Periodo de facturación: del día "+factura.periodo.getFecha_inicio()
-		 	        		+" al día "+factura.periodo.getFecha_fin()+"\n"+"Coste total (con IVA): "+factura.importe+" €";
+		 	        String texto = "Factura emitida el día: "+factura.getFecha().get(Calendar.DAY_OF_MONTH)+"/"+factura.getFecha().get(Calendar.MONTH)+"/"+factura.getFecha().get(Calendar.YEAR)+"\n"+"Tiempo facturado (en segundos): "+factura.segundos+
+		 	        		"\n"+"Tarifa contratada: "+factura.tarifa.getNombre()+"\n"+"Periodo de facturación: del día "+factura.periodo.getFecha_inicio().get(Calendar.DAY_OF_MONTH)+"/"+factura.periodo.getFecha_inicio().get(Calendar.MONTH)+"/"+factura.periodo.getFecha_inicio().get(Calendar.YEAR)
+		 	        		+" al día "+factura.periodo.getFecha_fin().get(Calendar.DAY_OF_MONTH)+"/"+factura.periodo.getFecha_fin().get(Calendar.MONTH)+"/"+factura.periodo.getFecha_fin().get(Calendar.YEAR)+"\n"+"Coste total (con IVA): "+factura.importe+" €";
 		 	        msg.setText(texto);
 		 	        System.out.println("Inicio de envío");
 					Transport.send(msg);
 					System.out.println("ok");
-				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 		    }

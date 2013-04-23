@@ -19,11 +19,12 @@ public class Factura  extends Info implements Serializable{
 	double iva;
 	HashMap<CodigoLlamada, Llamada> llamadas = new HashMap<CodigoLlamada, Llamada>();
 	
-	public Factura(Calendar fecha_emision, int segundos, Tarifa tarifa, Periodo_facturacion periodo_facturacion){
+	public Factura(Calendar fecha_emision, Tarifa tarifa, Periodo_facturacion periodo_facturacion, HashMap<CodigoLlamada, Llamada> llamadas){
 		super.setFecha(fecha_emision);
-		this.segundos = segundos;
+		this.segundos = totalSegundosLlamadas();
 		this.tarifa = tarifa;
 		this.periodo = periodo_facturacion;
+		this.llamadas = llamadas;
 	}
 	
 	public void setIVA(double iva){
@@ -35,7 +36,11 @@ public class Factura  extends Info implements Serializable{
 		//CALCULAR COSTE TOTAL DE LAS LLAMADAS (SIN IVA)
 		coste_total_sin_iva = totalCosteLlamadas();
 		//COSTE TOTAL SIN IVA
-		System.out.println("Minutos: "+totalSegundosLlamadas()/60);
+		int min = totalSegundosLlamadas()/60;
+		if(min < 1 && totalSegundosLlamadas() > 0){
+			min = 1;
+		}
+		System.out.println("Minutos: "+min);
 		System.out.println("Coste total sin iva: "+coste_total_sin_iva);
 		System.out.println("IVA: "+iva);
 		//COSTE TOTAL CON IVA
@@ -51,8 +56,21 @@ public class Factura  extends Info implements Serializable{
 	private double totalCosteLlamadas() {
 		double coste_total = 0.0;
 		for(Entry<CodigoLlamada, Llamada> llamada : llamadas.entrySet()){
+			System.out.println("Calculando coste de la llamada: "+llamada.getKey().getCodigo());
 			Calendar fecha = llamada.getValue().getFecha_llamada();
-			coste_total += (llamada.getValue().getDuracion() * tarifa.getCoste(fecha));
+			System.out.println("Día del mes de la llamada: "+fecha.get(Calendar.DAY_OF_MONTH));
+			System.out.println("Domingo es: "+Calendar.SUNDAY);
+			System.out.println("Día de la semana de la llamada: "+fecha.get(Calendar.DAY_OF_WEEK));
+			System.out.println("hora A COMPROBAR: "+llamada.getValue().getFecha_llamada().get(Calendar.HOUR_OF_DAY)+":"+llamada.getValue().getFecha_llamada().get(Calendar.MINUTE));
+			int minutos = 0;
+			minutos = (llamada.getValue().getDuracion()) / 60;
+			if(llamada.getValue().getDuracion() > 0 && (llamada.getValue().getDuracion()/60) < 1){
+				minutos = 1;
+			}
+			double coste = tarifa.getCoste(fecha, llamada.getValue().getFecha_llamada().get(Calendar.HOUR_OF_DAY));
+			System.out.println("Coste por minuto: "+coste);
+			System.out.println("minutos: "+minutos);
+			coste_total += (minutos * coste);
 		}
 		return coste_total;
 	}
@@ -66,10 +84,12 @@ public class Factura  extends Info implements Serializable{
 	}
 
 	public void mostrarenTerminal(){
-		System.out.println("Factura emitida el día: "+super.getFecha());
+		System.out.println("Factura emitida el día: "+super.getFecha().get(Calendar.DAY_OF_MONTH)+"/"+super.getFecha().get(Calendar.MONTH)+"/"+super.getFecha().get(Calendar.YEAR));
 		System.out.println("Tiempo facturado (en segundos): "+totalSegundosLlamadas());
 		System.out.println("Tarifa contratada: "+tarifa.getNombre());
-		System.out.println("Periodo de facturación: del día "+periodo.getFecha_inicio()+" al día "+periodo.getFecha_fin());
+		System.out.println("Periodo de facturación: del día "+
+				periodo.getFecha_inicio().get(Calendar.DAY_OF_MONTH)+"/"+periodo.getFecha_inicio().get(Calendar.MONTH)+"/"+periodo.getFecha_inicio().get(Calendar.YEAR)
+				+" al día "+periodo.getFecha_fin().get(Calendar.DAY_OF_MONTH)+"/"+periodo.getFecha_fin().get(Calendar.MONTH)+"/"+periodo.getFecha_fin().get(Calendar.YEAR));
 		System.out.println("Coste total (con IVA): "+importe+" €");
 	}
 	

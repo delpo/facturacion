@@ -1,22 +1,25 @@
 package facturacion;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Llamada {
+public class Llamada implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
 	private int telefono;
 	private Calendar fecha_llamada;
-	private int duracion; //en segundos
-	private Hora hora;
-	
+	private int duracion; //en segundos	
 	public Llamada(){
 		super();
 	}
 	
-	public Llamada(int telefono, Calendar fecha, int duracion, Hora hora){
+	public Llamada(int telefono, Calendar fecha, int duracion){
 		this.telefono = telefono;
 		this.fecha_llamada = fecha;
 		this.duracion = duracion;
-		this.hora = hora;
 	}
 
 	public int getTelefono() {
@@ -41,13 +44,5 @@ public class Llamada {
 
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
-	}
-
-	public Hora getHora() {
-		return hora;
-	}
-
-	public void setHora(Hora hora) {
-		this.hora = hora;
 	}
 }

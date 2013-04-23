@@ -57,7 +57,7 @@ public class MenuIncidencias implements Serializable{
 		do{
 			System.out.print("\nElije una opción:");
 			opcion = scanner.nextByte();
-		}while(opcion>3 || opcion<0);
+		}while(opcion>7 || opcion<0);
 		OpcionesMenu opcionMenu = OpcionesMenu.getOpcion(opcion);
 		return opcionMenu;
 	}

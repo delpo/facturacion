@@ -8,20 +8,21 @@ public class Tarifa_tarde extends TarifaconOfertas {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static final double precio = 0.05;
 	
 	public Tarifa_tarde(Tarifa tarifa, double coste){
 		super(tarifa, coste);
 	}
 	
 	@Override
-	public double getCoste(Calendar fecha) {
-		//SI ES POR LA TARDE
-		if(fecha.get(Calendar.HOUR_OF_DAY) >= 16 && fecha.get(Calendar.HOUR_OF_DAY) < 20){
-			return Math.min(super.getCoste(fecha), tarifa.getCoste(fecha));		
+	public double getCoste(Calendar fecha, int hora) {		
+		//SI ES POR LA TARDE Y NO ES DOMINGO
+		if((hora >= 16) && (hora < 20) && fecha.get(Calendar.DAY_OF_WEEK) != 1){
+					return precio;
+				//si no es domingo
 		}else{ //SI NO ES POR LA TARDE
-			return tarifa.getCoste(fecha);
+					return tarifa.getCoste(fecha, hora);
 		}
-		
 	}
 
 	@Override
