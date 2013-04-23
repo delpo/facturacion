@@ -130,16 +130,18 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
-	public void emitirFactura(NIF nif, Factura factura){
+	public CodigoFactura emitirFactura(NIF nif, Factura factura){
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
-				entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
+				return entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
 			}
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");
+		return null;
 	}
+	
 
 
 	public void borrarFactura(CodigoFactura codigo_factura) throws ExcepcionFacturaNoEncontrada {

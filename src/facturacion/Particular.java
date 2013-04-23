@@ -45,7 +45,7 @@ public class Particular extends Cliente implements Serializable{
 	}
 	
 	@Override
-	public void emitirFactura(Factura factura){
+	public CodigoFactura emitirFactura(Factura factura){
 		factura.setIVA(IVA);
 		factura.importe = factura.calcularCoste();
 		CodigoFactura codigo = CodigoFactura.crearCodigoFactura();
@@ -55,5 +55,6 @@ public class Particular extends Cliente implements Serializable{
 		}
 		facturas.put(codigo, factura);
 		new EnvioCorreo().envia(getEmail(), factura);
+		return codigo;
 	}
 }

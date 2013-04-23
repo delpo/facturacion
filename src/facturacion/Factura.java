@@ -36,10 +36,7 @@ public class Factura  extends Info implements Serializable{
 		//CALCULAR COSTE TOTAL DE LAS LLAMADAS (SIN IVA)
 		coste_total_sin_iva = totalCosteLlamadas();
 		//COSTE TOTAL SIN IVA
-		int min = totalSegundosLlamadas()/60;
-		if(min < 1 && totalSegundosLlamadas() > 0){
-			min = 1;
-		}
+		double min = Math.ceil(totalSegundosLlamadas()/60.0);
 		System.out.println("Minutos: "+min);
 		System.out.println("Coste total sin iva: "+coste_total_sin_iva);
 		System.out.println("IVA: "+iva);
@@ -62,11 +59,8 @@ public class Factura  extends Info implements Serializable{
 			System.out.println("Domingo es: "+Calendar.SUNDAY);
 			System.out.println("Día de la semana de la llamada: "+fecha.get(Calendar.DAY_OF_WEEK));
 			System.out.println("hora A COMPROBAR: "+llamada.getValue().getFecha_llamada().get(Calendar.HOUR_OF_DAY)+":"+llamada.getValue().getFecha_llamada().get(Calendar.MINUTE));
-			int minutos = 0;
-			minutos = (llamada.getValue().getDuracion()) / 60;
-			if(llamada.getValue().getDuracion() > 0 && (llamada.getValue().getDuracion()/60) < 1){
-				minutos = 1;
-			}
+			double minutos = 0;
+			minutos = Math.ceil((llamada.getValue().getDuracion()) / 60.0);
 			double coste = tarifa.getCoste(fecha, llamada.getValue().getFecha_llamada().get(Calendar.HOUR_OF_DAY));
 			System.out.println("Coste por minuto: "+coste);
 			System.out.println("minutos: "+minutos);

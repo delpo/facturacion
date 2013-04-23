@@ -60,8 +60,9 @@ public abstract class Cliente implements Serializable{
 	public String getApellidos(){
 		return null;
 	}
-	public void emitirFactura(Factura factura){
+	public CodigoFactura emitirFactura(Factura factura){
 		//se sobreescribe tanto en Particular como en Empresa
+		return null;
 	}
 	
 	public void listarCliente(){
