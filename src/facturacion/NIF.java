@@ -21,7 +21,6 @@ public class NIF implements Serializable{
 	}
 	
 	public static boolean isNifNie(String nif){
-
 		//si es NIE, eliminar la x,y,z inicial para tratarlo como nif
 		if (nif.toUpperCase().startsWith("X")||nif.toUpperCase().startsWith("Y")||nif.toUpperCase().startsWith("Z"))
 			nif = nif.substring(1);

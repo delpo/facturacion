@@ -1,7 +1,6 @@
 package facturacion;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.HashMap;
 
 public abstract class Cliente implements Serializable{
@@ -73,8 +72,7 @@ public abstract class Cliente implements Serializable{
 		return 0.0;
 	}
 	
-	public void reportarIncidencia(Incidencia incidencia, Calendar fecha){
-		//TODO las incidencias tienen que tener fecha????????
+	public void reportarIncidencia(Incidencia incidencia){
 		incidencias.put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
 	}
 }

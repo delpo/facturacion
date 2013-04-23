@@ -75,7 +75,7 @@ public class MenuIncidencias implements Serializable{
 				break;
 			case OPCION1:
 				//Incidencias de un cliente entre dos fechas
-				operador.darDeAltaIncidencia(ManejoInputs.pedirNIF(), ManejoInputs.pedirIncidencia(), ManejoInputs.pedirFecha());
+				operador.darDeAltaIncidencia(ManejoInputs.pedirNIF(), ManejoInputs.pedirIncidencia());
 				System.out.println("Tarea completada.");
 				break;
 			case OPCION2:

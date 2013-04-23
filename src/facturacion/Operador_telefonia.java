@@ -177,12 +177,12 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
-	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia, Calendar fecha){
+	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia){
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
-				entry.getValue().reportarIncidencia(incidencia, fecha); //emplea el método de la clase Cliente
+				entry.getValue().reportarIncidencia(incidencia); //emplea el método de la clase Cliente
 			}
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");

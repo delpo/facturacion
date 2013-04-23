@@ -1,6 +1,7 @@
 package terminal;
 
 import java.io.Serializable;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuSecciones implements Serializable{
@@ -49,11 +50,17 @@ public class MenuSecciones implements Serializable{
 	
 	public static OpcionesMenu Menu(){
 		System.out.println(OpcionesMenu.getMenu());
-		Scanner scanner = new Scanner(System.in);
 		byte opcion = 99;
 		do{
-			System.out.print("\nElije una opción:");
-			opcion = scanner.nextByte();
+			try {
+				Scanner scanner = new Scanner(System.in);
+				System.out.print("\nElije una opción:");
+				opcion = scanner.nextByte();
+			} catch (InputMismatchException e) {
+				System.out.println("Error.");
+					opcion = -1;
+			}
+			
 		}while(opcion>3 || opcion<0);
 		OpcionesMenu opcionMenu = OpcionesMenu.getOpcion(opcion);
 		return opcionMenu;

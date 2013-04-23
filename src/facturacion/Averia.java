@@ -3,6 +3,7 @@ package facturacion;
 import java.io.Serializable;
 import java.util.Calendar;
 
+
 public class Averia extends Incidencia implements Serializable{
 
 	/**
