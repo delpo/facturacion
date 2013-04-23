@@ -47,13 +47,13 @@ public abstract class Cliente implements Serializable{
 	public void setTarifa(int i) {
 		switch(i){
 		case -1: 
-			this.tarifa = new Tarifa_basica();
+			this.tarifa = FabricaTarifas.creaTarifa(this.tarifa, -1, 0.15); //tarifa normal
 			break;
 		case 0:
-			this.tarifa = new Tarifa_tarde(this.tarifa, 0.05);
+			this.tarifa = FabricaTarifas.creaTarifa(this.tarifa, 0, 0.05); //tarifa de tarde
 			break;
 		case 1:
-			this.tarifa = new Tarifa_domingo(this.tarifa, 0);
+			this.tarifa = FabricaTarifas.creaTarifa(this.tarifa, 1, 0); //tarifa de domingo
 			break;
 		}
 	}
