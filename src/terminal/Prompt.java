@@ -2,6 +2,7 @@ package terminal;
 
 import java.io.Serializable;
 
+import facturacion.Operador;
 import facturacion.Operador_telefonia;
 
 public class Prompt implements Serializable{
@@ -15,7 +16,7 @@ public class Prompt implements Serializable{
 	}
 
 	public void iniciarPrompt(){
-		Operador_telefonia operador = new Operador_telefonia();
+		Operador operador = new Operador_telefonia();
 		System.out.println("Bienvenido al programa de gestión de clientela de operador.");
 		Datos dato = new Datos();
 		operador = dato.recuperarDatos();

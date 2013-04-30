@@ -21,6 +21,7 @@ import facturacion.ExcepcionNIFnoValido;
 import facturacion.Factura;
 import facturacion.Llamada;
 import facturacion.NIF;
+import facturacion.Operador;
 import facturacion.Operador_telefonia;
 import facturacion.Particular;
 import facturacion.Periodo_facturacion;
@@ -29,7 +30,7 @@ public class AllTests {
 	
 	@Test
 	public void testTarde() throws ExcepcionNIFnoValido, ExcepcionEmailNoValido{
-		Operador_telefonia operador = new Operador_telefonia();
+		Operador operador = new Operador_telefonia();
 		System.out.println("Bienvenido al programa de tests básico de clientela de operador.");
 		//ALTA DE CLIENTE
 		Cliente cliente = new Particular("Ángel Carlos", "del Pozo Muela", new NIF("20905219J"),

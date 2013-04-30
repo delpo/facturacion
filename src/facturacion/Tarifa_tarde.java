@@ -17,7 +17,7 @@ public class Tarifa_tarde extends TarifaconOfertas {
 	@Override
 	public double getCoste(Calendar fecha, int hora) {		
 		//SI ES POR LA TARDE Y NO ES DOMINGO
-		if((hora >= 16) && (hora < 20) && fecha.get(Calendar.DAY_OF_WEEK) != 1){
+		if((hora >= 16) && (hora < 20) && (tarifa.getCoste(fecha, hora) > precio )){
 					return precio;
 				//si no es domingo
 		}else{ //SI NO ES POR LA TARDE

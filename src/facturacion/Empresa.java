@@ -37,7 +37,7 @@ public class Empresa extends Cliente implements Serializable{
 		factura.setIVA(IVA);
 		factura.importe = factura.calcularCoste();
 		CodigoFactura codigo = CodigoFactura.crearCodigoFactura();
-		Operador_telefonia op = new Operador_telefonia();
+		Operador op = new Operador_telefonia();
 		while(!op.claveValida(codigo)){
 			codigo = CodigoFactura.crearCodigoFactura();
 		}

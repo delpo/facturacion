@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import terminal.ManejoInputs;
 
-public class Operador_telefonia implements Serializable{
+public class Operador_telefonia implements Serializable, Operador{
 
 	/**
 	 * 
@@ -20,6 +20,10 @@ public class Operador_telefonia implements Serializable{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#darAlta(facturacion.Cliente)
+	 */
+	@Override
 	public void darAlta(Cliente cliente) {
 		if(clientes.containsKey(cliente.getNif())){
 			System.out.println("El cliente ya existe. No se añadirá.");
@@ -28,6 +32,10 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#borrarCliente(facturacion.NIF)
+	 */
+	@Override
 	public void borrarCliente(NIF nif) {
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString()) && clientes.remove(entry.getKey())!=null){
@@ -36,6 +44,10 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#anyadirTarifa(facturacion.NIF, int)
+	 */
+	@Override
 	public void anyadirTarifa(NIF nif, int tarifa) {
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
@@ -45,11 +57,19 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#listaElemento(java.util.Map.Entry)
+	 */
+	@Override
 	public void listaElemento(Entry<NIF, Cliente> entry){
 		entry.getValue().listarCliente();
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#listarClientes()
+	 */
+	@Override
 	public void listarClientes() {
 		if(!clientes.entrySet().isEmpty()){
 			System.out.println("Listado de clientes:");
@@ -62,6 +82,10 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#listarClientesporCP(int)
+	 */
+	@Override
 	public void listarClientesporCP(int cp) {
 		Boolean sinclientes=true;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
@@ -74,6 +98,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#obtenerDatos(facturacion.NIF)
+	 */
+	@Override
 	public void obtenerDatos(NIF nif) {
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
@@ -86,6 +114,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#obtenerCliente(facturacion.NIF)
+	 */
+	@Override
 	public Cliente obtenerCliente(NIF nif) {
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
@@ -99,6 +131,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#claveValida(facturacion.CodigoFactura)
+	 */
+	@Override
 	public boolean claveValida(CodigoFactura clave){
 		Boolean valida = true;
 		for(NIF nif: clientes.keySet()){
@@ -108,6 +144,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#obtenerFactura(facturacion.CodigoFactura)
+	 */
+	@Override
 	public Factura obtenerFactura(CodigoFactura codigo_factura) throws ExcepcionFacturaNoEncontrada{
 		System.out.println("Código a buscar: "+codigo_factura.getCodigo());
 		boolean encontrado = false;
@@ -130,6 +170,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#emitirFactura(facturacion.NIF, facturacion.Factura)
+	 */
+	@Override
 	public CodigoFactura emitirFactura(NIF nif, Factura factura){
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
@@ -144,6 +188,10 @@ public class Operador_telefonia implements Serializable{
 	
 
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#borrarFactura(facturacion.CodigoFactura)
+	 */
+	@Override
 	public void borrarFactura(CodigoFactura codigo_factura) throws ExcepcionFacturaNoEncontrada {
 		boolean encontrado = false;
 		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
@@ -163,6 +211,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#listarFacturasCliente(facturacion.NIF)
+	 */
+	@Override
 	public void listarFacturasCliente(NIF nif){
 		boolean encontrado = false;
 		for (Entry<NIF, Cliente> cliente : clientes.entrySet()) {
@@ -179,6 +231,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#darDeAltaIncidencia(facturacion.NIF, facturacion.Incidencia)
+	 */
+	@Override
 	public void darDeAltaIncidencia(NIF nif, Incidencia incidencia){
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
@@ -191,6 +247,10 @@ public class Operador_telefonia implements Serializable{
 	}
 
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#listarIncidencias(facturacion.NIF)
+	 */
+	@Override
 	public void listarIncidencias(NIF nif) {
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
@@ -203,6 +263,10 @@ public class Operador_telefonia implements Serializable{
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#borrarIncidencia(facturacion.CodigoIncidencia)
+	 */
+	@Override
 	public void borrarIncidencia(CodigoIncidencia codigo) {
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
@@ -222,6 +286,10 @@ public class Operador_telefonia implements Serializable{
 	//Genericidad
 	
 	//LISTADO ENTRE DOS FECHAS DE INCIDENCIAS O FACTURAS
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#entreDosFechas(java.util.HashMap, java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public <S,T extends Info> HashMap<S, T> entreDosFechas(HashMap<S, T> listado, Calendar fecha1, Calendar fecha2){
 		HashMap<S, T> datos = new HashMap<S, T>();
 		//Ordeno fechas
@@ -236,6 +304,10 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#facturasEntreDosFechas(java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
 		//Ordeno fechas
@@ -248,6 +320,10 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#incidenciasEntreDosFechas(java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
@@ -260,6 +336,10 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#facturasEntreDosFechas(facturacion.NIF, java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public HashMap<CodigoFactura, Factura> facturasEntreDosFechas(NIF nif, Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
 		//Ordeno fechas
@@ -276,6 +356,10 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarFacturasentreDosFechas()
+	 */
+	@Override
 	public void mostrarFacturasentreDosFechas(){
 		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
@@ -292,6 +376,10 @@ public class Operador_telefonia implements Serializable{
 		}	
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarFacturasentreDosFechas(facturacion.NIF)
+	 */
+	@Override
 	public void mostrarFacturasentreDosFechas(NIF nif){
 		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
@@ -309,6 +397,10 @@ public class Operador_telefonia implements Serializable{
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#incidenciasEntreDosFechas(facturacion.NIF, java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public HashMap<CodigoIncidencia, Incidencia> incidenciasEntreDosFechas(NIF nif, Calendar fecha1, Calendar fecha2){
 		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
@@ -325,6 +417,10 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarIncidenciasentreDosFechas(facturacion.NIF)
+	 */
+	@Override
 	public void mostrarIncidenciasentreDosFechas(NIF nif){
 		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
@@ -339,6 +435,10 @@ public class Operador_telefonia implements Serializable{
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarIncidenciasentreDosFechas()
+	 */
+	@Override
 	public void mostrarIncidenciasentreDosFechas(){
 		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
@@ -353,6 +453,10 @@ public class Operador_telefonia implements Serializable{
 
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#listar(java.util.HashMap)
+	 */
+	@Override
 	public <S,T extends Info> HashMap<S, T> listar(HashMap<S, T> listado){
 		HashMap<S, T> datos = new HashMap<S, T>();
 		for(Entry<S, T> elemento: listado.entrySet()){
@@ -372,6 +476,10 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarFacturasparaCP(int)
+	 */
+	@Override
 	public void mostrarFacturasparaCP(int cp){
 		//Obtengo facturas
 		HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
@@ -383,6 +491,10 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarIncidenciasparaCP(int)
+	 */
+	@Override
 	public void mostrarIncidenciasparaCP(int cp){
 		//Obtengo incidencias
 		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
@@ -392,6 +504,10 @@ public class Operador_telefonia implements Serializable{
 		
 	}
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#incidenciasPorCP(int)
+	 */
+	@Override
 	public HashMap<CodigoIncidencia, Incidencia> incidenciasPorCP(int cp) {
 		HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();
 		for (Entry<NIF, Cliente> cliente_listado : clientes.entrySet()) {
@@ -403,6 +519,10 @@ public class Operador_telefonia implements Serializable{
 		return incidencias;
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#incidenciasPorCP(int, java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public HashMap<CodigoIncidencia, Incidencia> incidenciasPorCP(int cp, Calendar fecha1, Calendar fecha2) {
 		HashMap<CodigoIncidencia, Incidencia> datos = new HashMap<CodigoIncidencia, Incidencia>();
 		//Ordeno fechas
@@ -423,6 +543,10 @@ public class Operador_telefonia implements Serializable{
 		return datos;
 	}
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarFacturasparaCPentreDosFechas(int)
+	 */
+	@Override
 	public void mostrarFacturasparaCPentreDosFechas(int cp) {
 		System.out.println("Se buscarán facturas entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
@@ -439,6 +563,10 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#facturasPorCP(int, java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public HashMap<CodigoFactura, Factura> facturasPorCP(int cp, Calendar fecha1, Calendar fecha2) {
 		HashMap<CodigoFactura, Factura> datos = new HashMap<CodigoFactura, Factura>();
 		//Ordeno fechas
@@ -462,6 +590,10 @@ public class Operador_telefonia implements Serializable{
 
 	//INCIDENCIAS
 
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarIncidenciasparaCPentreDosFechas(int)
+	 */
+	@Override
 	public void mostrarIncidenciasparaCPentreDosFechas(int cp) {
 		System.out.println("Se buscarán incidencias entre la fecha 1 y fecha 2 a introducir.");
 		System.out.println("-Fecha 1-");
@@ -475,6 +607,10 @@ public class Operador_telefonia implements Serializable{
 		mostrarIncidencias(incidencias);
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#mostrarIncidencias(java.util.HashMap)
+	 */
+	@Override
 	public void mostrarIncidencias(HashMap<CodigoIncidencia, Incidencia> incidencias){
 		for(Entry<CodigoIncidencia, Incidencia> incidencia: incidencias.entrySet()){
 			System.out.println("Código: "+incidencia.getKey().getCodigo());
@@ -484,6 +620,10 @@ public class Operador_telefonia implements Serializable{
 		}
 	}
 	
+	/* (non-Javadoc)
+	 * @see facturacion.Operador#ordenarFechas(java.util.Calendar, java.util.Calendar)
+	 */
+	@Override
 	public void ordenarFechas(Calendar fecha1, Calendar fecha2){
 		//Ordeno fechas
 		if(fecha1.compareTo(fecha2) > 0){

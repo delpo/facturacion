@@ -6,6 +6,7 @@ import java.util.Scanner;
 import facturacion.CodigoFactura;
 import facturacion.ExcepcionFacturaNoEncontrada;
 import facturacion.NIF;
+import facturacion.Operador;
 
 public class MenuFacturas implements Serializable{
 
@@ -71,7 +72,7 @@ public class MenuFacturas implements Serializable{
 		super();
 	}
 
-	public void actuar(facturacion.Operador_telefonia operador, OpcionesMenu select){
+	public void actuar(Operador operador, OpcionesMenu select){
 		boolean salir = false;
 		do{
 			switch(select) {

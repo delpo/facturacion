@@ -17,13 +17,10 @@ public class Tarifa_domingo extends TarifaconOfertas{
 	public double getCoste(Calendar fecha, int hora) {
 		//si es en domingo
 		if(fecha.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
-			System.out.println("Día de la semana calculado por tarifa domingo: "+fecha.get(Calendar.DAY_OF_WEEK));
 			double coste = tarifa.getCoste(fecha, hora);
-			System.out.println("Coste de tarifa domingo: "+coste);
-			return 0;
+			return coste;
 		//si no es domingo
 		}else	
-			System.out.println("No es una tarifa de domingo.");
 			return tarifa.getCoste(fecha, hora);
 	}
 

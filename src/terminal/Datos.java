@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import facturacion.Operador;
 import facturacion.Operador_telefonia;
 
 public class Datos implements Serializable{
@@ -20,7 +21,7 @@ public class Datos implements Serializable{
 		
 	}
 
-	public void almacenarDatos(Operador_telefonia operador){
+	public void almacenarDatos(Operador operador){
 		try{
 			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("basededatos.bin"));
 			os.writeObject(operador);
@@ -34,11 +35,11 @@ public class Datos implements Serializable{
 		}
 	}
 	
-	public Operador_telefonia recuperarDatos(){
-		Operador_telefonia op = new Operador_telefonia();
+	public Operador recuperarDatos(){
+		Operador op = new Operador_telefonia();
 		try{
 			ObjectInputStream fis = new ObjectInputStream(new FileInputStream("basededatos.bin"));
-			op = (Operador_telefonia) fis.readObject();
+			op = (Operador) fis.readObject();
 			fis.close();
 			System.out.println("Se cargaron los datos correctamente.");
 			return op;

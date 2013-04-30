@@ -3,6 +3,8 @@ package terminal;
 import java.io.Serializable;
 import java.util.Scanner;
 
+import facturacion.Operador;
+
 public class MenuClientes implements Serializable{
 	
 	/**
@@ -65,7 +67,7 @@ public class MenuClientes implements Serializable{
 		super();
 	}
 	
-	public void actuar(facturacion.Operador_telefonia operador, OpcionesMenu select){
+	public void actuar(Operador operador, OpcionesMenu select){
 		boolean salir = false;
 		do{
 			switch(select) {

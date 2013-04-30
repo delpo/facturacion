@@ -5,17 +5,31 @@ import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+import facturacion.Operador;
 
 public class VistaImpl implements Vista{
-	private static final int CANVAS_HORIZONTAL_SIZE = 800;
-	private static final int CANVAS_VERTICAL_SIZE = 600;
 
 	private Canvas canvas;
 	private JFrame mainWindow;
+	private Operador operador;
 
+	
+	public VistaImpl(Operador op){
+		this.operador = op;
+	}
+	
 	@Override
 	public void crearGUI() {
 		mainWindow = new JFrame("FactuTel");
+		
+		mainWindow.setVisible(true);
+		mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		mainWindow.setResizable(false);
+		
+		@SuppressWarnings("static-access")
+		int ancho = mainWindow.WIDTH;
 
 		Container container = mainWindow.getContentPane();
 
@@ -24,7 +38,8 @@ public class VistaImpl implements Vista{
 
 		JPanel components = cargarComponentes();
 		container.add(components);
-
+		MenuSuperior menu = new MenuSuperior(operador, ancho);
+		mainWindow.add(menu.getMenu());
 		showWindow();
 	}
 
@@ -36,8 +51,10 @@ public class VistaImpl implements Vista{
 
 	@Override
 	public void crearPaneles() {
-		// TODO Auto-generated method stub
-		
+		//JTabbedPane pestanyas = new JTabbedPane();
+		//pestanyas.add("Clientes", new PanelClientes());
+		//pestanyas.add("Facturas", new PanelFacturas());
+		//pestanyas.add("Incidencias", new PanelIncidencias());
 	}
 
 	@Override
@@ -60,14 +77,13 @@ public class VistaImpl implements Vista{
 
 	@Override
 	public JPanel cargarComponentes() {
-		// TODO Auto-generated method stub
-		return null;
+		JPanel components = new JPanel();
+		return components;
 	}
 	
 	private void showWindow() {
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.pack();
-		mainWindow.setVisible(true);
 	}
 
 }

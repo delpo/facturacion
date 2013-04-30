@@ -16,12 +16,17 @@ public class Principal implements Serializable{
 	}
 
 
-	private void ejecutar() {
-		Prompt prompt = new Prompt();
-		prompt.iniciarPrompt();
+	private void ejecutar(int i) {
+		if(i == 1){//GUI
+			GraphicUserInterface gui = new GraphicUserInterface();
+			gui.iniciarGUI();
+		}else{//LÍNEA DE COMANDOS
+			Prompt prompt = new Prompt();
+			prompt.iniciarPrompt();
+		}
 	}
 
 	public static void main(String[] args) {
-		new Principal().ejecutar();
+		new Principal().ejecutar(1);
 	}
 }
