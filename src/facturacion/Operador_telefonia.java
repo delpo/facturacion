@@ -632,4 +632,8 @@ public class Operador_telefonia implements Serializable, Operador{
 			fecha2 = aux;
 		}
 	}
+	
+	public HashMap<NIF, Cliente> getClientes(){
+		return clientes;
+	}
 }

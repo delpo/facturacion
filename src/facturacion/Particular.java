@@ -25,6 +25,7 @@ public class Particular extends Cliente implements Serializable{
 		return apellidos;
 	}
 
+	@Override
 	public void setApellidos(String apellidos){
 		this.apellidos = apellidos;
 	}

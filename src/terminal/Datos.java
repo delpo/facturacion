@@ -42,6 +42,7 @@ public class Datos implements Serializable{
 			op = (Operador) fis.readObject();
 			fis.close();
 			System.out.println("Se cargaron los datos correctamente.");
+			System.out.println("Número de clientes: "+op.getClientes().size());
 			return op;
 		}catch (FileNotFoundException e){
 			System.out.println("No se encontró archivo de configuración.");

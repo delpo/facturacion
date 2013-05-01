@@ -88,5 +88,7 @@ public interface Operador {
 			HashMap<CodigoIncidencia, Incidencia> incidencias);
 
 	public abstract void ordenarFechas(Calendar fecha1, Calendar fecha2);
+	
+	public HashMap<NIF, Cliente> getClientes();
 
 }

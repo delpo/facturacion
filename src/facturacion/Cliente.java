@@ -65,6 +65,10 @@ public abstract class Cliente implements Serializable{
 		return null;
 	}
 	
+	public void setApellidos(String apellidos){
+		//se sobreescribe en Particular
+	}
+	
 	public void listarCliente(){
 		//se sobreescribe tanto en Particular como en Empresa
 	}
