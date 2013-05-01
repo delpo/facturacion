@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import facturacion.Operador;
 
@@ -48,7 +49,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
         mb.add(menu2);
         mi1_2=new JMenuItem("Acerca de");
         mi1_2.addActionListener(this);
-        menu1.add(mi1);
+        menu2.add(mi1_2);
     }
 
 	@Override
@@ -64,7 +65,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	System.exit(0); 
         } 
         if (e.getSource()==mi1_2) {
-        	//cargar acerca de
+        	JOptionPane.showMessageDialog(this, "© Ángel Carlos del Pozo Muela, 2013.", "Acerca de", JOptionPane.WARNING_MESSAGE);
         } 
 	}
 

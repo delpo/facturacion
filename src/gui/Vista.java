@@ -1,5 +1,6 @@
 package gui;
 
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -22,10 +23,10 @@ public interface Vista {
 	
 	//SETEAR PESTAÑAS
 	
-	public PanelClientes crearPanelClientes();
+	public JComponent crearPanelClientes();
 	
-	public void crearPanelFacturas();
+	public JComponent crearPanelFacturas();
 	
-	public void crearPanelIncidencias();
+	public JComponent crearPanelIncidencias();
 	
 }

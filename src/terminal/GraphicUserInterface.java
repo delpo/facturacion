@@ -22,13 +22,9 @@ public class GraphicUserInterface implements Serializable{
 		Operador operador = new Operador_telefonia();
 		Datos dato = new Datos();
 		operador = dato.recuperarDatos();
-		
 		//Empiezo a hacer cosas
 		Vista vista = new VistaImpl(operador);
 		vista.crearGUI();
-		
-		//Guardo datos
-		dato.almacenarDatos(operador);
 	}
 
 }
