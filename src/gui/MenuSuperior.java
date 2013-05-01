@@ -30,7 +30,6 @@ public class MenuSuperior extends JFrame implements ActionListener{
     public MenuSuperior(Operador op, int ancho) {
         this.op = op;
         mb=new JMenuBar();
-        mb.setSize(ancho, 50);
         setJMenuBar(mb);
         //ARCHIVO
         menu1=new JMenu("Archivo");
@@ -50,6 +49,8 @@ public class MenuSuperior extends JFrame implements ActionListener{
         mi1_2=new JMenuItem("Acerca de");
         mi1_2.addActionListener(this);
         menu2.add(mi1_2);
+        mb.setSize(ancho, 50);
+        mb.setVisible(true);
     }
 
 	@Override

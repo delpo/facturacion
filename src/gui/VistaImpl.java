@@ -53,9 +53,6 @@ public class VistaImpl implements Vista{
 	@Override
 	public JTabbedPane crearPaneles() {
 		JTabbedPane tabbedPane = new JTabbedPane();
-		//pestanyas.add("Clientes", crearPanelClientes());
-		//pestanyas.add("Facturas", new PanelFacturas());
-		//pestanyas.add("Incidencias", new PanelIncidencias());
 		
 		JComponent panel_clientes = crearPanelClientes();
         tabbedPane.addTab("Clientes", null, panel_clientes,
@@ -77,17 +74,17 @@ public class VistaImpl implements Vista{
 
 	@Override
 	public JComponent crearPanelClientes() {
-		return null;
+		return new PanelClientes(operador);
 	}
 
 	@Override
 	public JComponent crearPanelFacturas() {
-		return null;
+		return new PanelFacturas();
 	}
 
 	@Override
 	public JComponent crearPanelIncidencias() {
-		return null;
+		return new PanelIncidencias();
 	}
 
 	@Override
@@ -99,6 +96,8 @@ public class VistaImpl implements Vista{
 	private void showWindow() {
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.pack();
+        mainWindow.setSize(1024, 600);
+        mainWindow.setVisible(true);
 	}
 
 }
