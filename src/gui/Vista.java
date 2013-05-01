@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 
 public interface Vista {
 	
@@ -13,15 +14,15 @@ public interface Vista {
 	
 	//CREO BARRA MENUS
 	
-	public void cargarBarraMenus();
+	public MenuSuperior cargarBarraMenus();
 	
 	//CREO PESTAÑAS
 	
-	public void crearPaneles();
+	public JTabbedPane crearPaneles();
 	
 	//SETEAR PESTAÑAS
 	
-	public void crearPanelClientes();
+	public PanelClientes crearPanelClientes();
 	
 	public void crearPanelFacturas();
 	

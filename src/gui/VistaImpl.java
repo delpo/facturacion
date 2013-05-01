@@ -27,9 +27,6 @@ public class VistaImpl implements Vista{
 		mainWindow.setVisible(true);
 		mainWindow.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		mainWindow.setResizable(false);
-		
-		@SuppressWarnings("static-access")
-		int ancho = mainWindow.WIDTH;
 
 		Container container = mainWindow.getContentPane();
 
@@ -38,29 +35,31 @@ public class VistaImpl implements Vista{
 
 		JPanel components = cargarComponentes();
 		container.add(components);
-		MenuSuperior menu = new MenuSuperior(operador, ancho);
+		MenuSuperior menu = cargarBarraMenus();
 		mainWindow.add(menu.getMenu());
 		showWindow();
 	}
 
 	@Override
-	public void cargarBarraMenus() {
-		// TODO Auto-generated method stub
-		
+	public MenuSuperior cargarBarraMenus() {
+		@SuppressWarnings("static-access")
+		int ancho = mainWindow.WIDTH;
+		MenuSuperior menu = new MenuSuperior(operador, ancho);
+		return menu;
 	}
 
 	@Override
-	public void crearPaneles() {
-		//JTabbedPane pestanyas = new JTabbedPane();
-		//pestanyas.add("Clientes", new PanelClientes());
-		//pestanyas.add("Facturas", new PanelFacturas());
-		//pestanyas.add("Incidencias", new PanelIncidencias());
+	public JTabbedPane crearPaneles() {
+		JTabbedPane pestanyas = new JTabbedPane();
+		pestanyas.add("Clientes", crearPanelClientes());
+		pestanyas.add("Facturas", new PanelFacturas());
+		pestanyas.add("Incidencias", new PanelIncidencias());
+		return pestanyas;
 	}
 
 	@Override
-	public void crearPanelClientes() {
-		// TODO Auto-generated method stub
-		
+	public PanelClientes crearPanelClientes() {
+		return new PanelClientes();
 	}
 
 	@Override
