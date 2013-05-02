@@ -97,7 +97,7 @@ public class VistaImpl implements Vista{
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.pack();
         mainWindow.setSize(1024, 600);
-        mainWindow.setResizable(false);
+        //mainWindow.setResizable(false);
         mainWindow.setVisible(true);
 	}
 

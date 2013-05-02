@@ -1,64 +1,40 @@
 package gui;
 
 import java.util.Map.Entry;
-import java.util.Vector;
-
-import javax.swing.table.AbstractTableModel;
 
 import facturacion.Cliente;
 import facturacion.NIF;
+import facturacion.Operador;
 
-public class ModeloTablaClientes extends AbstractTableModel{
+public class ModeloTablaClientes{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	private String columnNames[] = {"Nombre", "Apellidos", "NIF", "Población", "Código postal", "Provincia", "Email", "Tarifa"};
-	private Vector<Entry<NIF, Cliente>> data;
 	
 	public ModeloTablaClientes(){
-		data = new Vector<Entry<NIF, Cliente>>();
-	}
-
-	@Override
-	public int getColumnCount() {
-		return columnNames.length;
-	}
-
-	@Override
-	public int getRowCount() {
-		return data.size();
-	}
-
-	@Override
-	public Object getValueAt(int row, int column) {
-		Entry<NIF, Cliente> cliente = (Entry<NIF, Cliente>) data.get(row); 
-		if(column == 0){
-			return cliente.getValue().getNombre();
-		}else if(column == 1){
-			return cliente.getValue().getApellidos();
-		}else if(column == 2){
-			return cliente.getKey().toString();
-		}else if(column == 3){
-			return cliente.getValue().getDireccion().getPoblacion().toString();
-		}else if(column == 4){
-			return cliente.getValue().getDireccion().getCodigo_postal();
-		}else if(column == 5){
-			return cliente.getValue().getDireccion().getProvincia().toString();
-		}else if(column == 6){
-			return cliente.getValue().getEmail().toString();
-		}else if(column == 7){
-			return cliente.getValue().getTarifa().getNombre().toString();
-		}else{
-			return new Object();
-		}
 	}
 	
-	@Override
-	public String getColumnName(int column){
-		return columnNames[column];
+	public String[] getColumnNames(){
+		return columnNames;
 	}
+
+	public Object[][] llenarTabla(Operador op) {
+		int fila = 0;
+		Object[][] rowData = new Object[ op.getClientes().entrySet().size()][columnNames.length];
+		//"Nombre", "Apellidos", "NIF", "Dirección", "Email", "Tarifa"
+		for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
+			System.out.println("Añadiendo a la tabla el cliente: "+cliente.getKey().toString());
+			rowData[fila][0] = cliente.getValue().getNombre();
+			rowData[fila][1] = cliente.getValue().getApellidos();
+			rowData[fila][2] = cliente.getKey().toString();
+			rowData[fila][3] = cliente.getValue().getDireccion().getPoblacion();
+			rowData[fila][4] = cliente.getValue().getDireccion().getCodigo_postal();
+			rowData[fila][5] = cliente.getValue().getDireccion().getProvincia();
+			rowData[fila][6] = cliente.getValue().getEmail();
+			rowData[fila][7] = cliente.getValue().getTarifa().getNombre();
+			fila++;
+		}
+		return rowData;
+	}
+	
 
 }
