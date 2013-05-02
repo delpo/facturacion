@@ -29,7 +29,7 @@ public class ModeloTablaClientes{
 			rowData[fila][3] = cliente.getValue().getDireccion().getPoblacion();
 			rowData[fila][4] = cliente.getValue().getDireccion().getCodigo_postal();
 			rowData[fila][5] = cliente.getValue().getDireccion().getProvincia();
-			rowData[fila][6] = cliente.getValue().getEmail();
+			rowData[fila][6] = cliente.getValue().getEmail().getEmailenString();
 			rowData[fila][7] = cliente.getValue().getTarifa().getNombre();
 			fila++;
 		}
