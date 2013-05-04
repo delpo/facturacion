@@ -1,8 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -83,9 +81,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
         } 
         if (e.getSource()==mi1_2) {
         	JFrame ventana = new JFrame("Añadir cliente");
-        	
-        	//ventana.setLayout(new FlowLayout());
-        	
+        	        	
         	String html = "<html>" +
                     "<b>Paso 1: </b><br/>" +
                     " <i>Seleccionar tipo de cliente.</i><br/>" +
