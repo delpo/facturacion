@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -75,8 +76,12 @@ public class EscuchadorBotonParticular implements ActionListener{
     	ventana.getContentPane().add(etiqueta1, BorderLayout.NORTH);
     	
     	//Botón de aceptar
-    	//TODO poner botón, validar datos, meter datos...
-		
+    	JButton ok = new JButton("Aceptar");
+
+    	//ok.addActionListener(new EscuchadorBotonParticularOK(ventana));//Registro escuchador
+
+    	ventana.getContentPane().add(ok);
+    	
     	ventana.setLocationRelativeTo(null);
 		ventana.pack();
 		ventana.setSize(370, 500);
