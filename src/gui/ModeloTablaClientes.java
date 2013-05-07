@@ -1,14 +1,20 @@
 package gui;
 
+import java.io.Serializable;
 import java.util.Map.Entry;
 
 import facturacion.Cliente;
 import facturacion.NIF;
 import facturacion.Operador;
 
-public class ModeloTablaClientes{
+public class ModeloTablaClientes implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String columnNames[] = {"Nombre", "Apellidos", "NIF", "Población", "Código postal", "Provincia", "Email", "Tarifa"};
+
 	
 	public ModeloTablaClientes(){
 	}

@@ -3,20 +3,34 @@ package gui;
 import java.awt.Canvas;
 import java.awt.Container;
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+//import terminal.GraphicUserInterface;
+
 import facturacion.Operador;
 
-public class VistaImpl implements Vista{
+public class VistaImpl implements Vista, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
 	private Canvas canvas;
 	private JFrame mainWindow;
-	private Operador operador;
+	private Operador operador; //MODELO
+	//private GraphicUserInterface gui; //CONTROLADOR
+	private PanelClientes panel_clientes;
 
+	//public void setGUI(GraphicUserInterface controller) {
+		//this.gui = controller;
+	//}
 	
 	public VistaImpl(Operador op){
 		this.operador = op;
@@ -54,7 +68,7 @@ public class VistaImpl implements Vista{
 	public JTabbedPane crearPaneles() {
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
-		JComponent panel_clientes = crearPanelClientes();
+		panel_clientes = crearPanelClientes();
         tabbedPane.addTab("Clientes", null, panel_clientes,
                 "Abre las opciones para manejar clientes");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
@@ -73,7 +87,7 @@ public class VistaImpl implements Vista{
 	}
 
 	@Override
-	public JComponent crearPanelClientes() {
+	public PanelClientes crearPanelClientes() {
 		return new PanelClientes(operador);
 	}
 
@@ -99,6 +113,11 @@ public class VistaImpl implements Vista{
         mainWindow.setSize(1024, 600);
         //mainWindow.setResizable(false);
         mainWindow.setVisible(true);
+	}
+	
+	public void recargarDatos(){
+		System.out.println("Recargando datos.");
+		panel_clientes.getModelo().fireTableDataChanged();
 	}
 
 }

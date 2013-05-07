@@ -29,4 +29,7 @@ public interface Vista {
 	
 	public JComponent crearPanelIncidencias();
 	
+	//MVC
+	public void recargarDatos();
+	
 }

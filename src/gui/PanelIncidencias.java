@@ -1,8 +1,10 @@
 package gui;
 
+import java.io.Serializable;
+
 import javax.swing.JPanel;
 
-public class PanelIncidencias extends JPanel{
+public class PanelIncidencias extends JPanel implements Serializable{
 
 	/**
 	 * 

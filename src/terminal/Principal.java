@@ -18,7 +18,7 @@ public class Principal implements Serializable{
 
 	private void ejecutar(int i) {
 		if(i == 1){//GUI
-			GraphicUserInterface gui = new GraphicUserInterface();
+			GraphicUserInterface gui = new GraphicUserInterface(); //INICIO CONTROLADOR
 			gui.iniciarGUI();
 		}else{//LÍNEA DE COMANDOS
 			Prompt prompt = new Prompt();

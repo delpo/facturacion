@@ -1,5 +1,7 @@
 package facturacion;
 
+import gui.Vista;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -91,4 +93,5 @@ public interface Operador {
 	
 	public HashMap<NIF, Cliente> getClientes();
 
+	public void setVista(Vista vista);
 }

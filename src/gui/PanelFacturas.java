@@ -1,8 +1,10 @@
 package gui;
 
+import java.io.Serializable;
+
 import javax.swing.JPanel;
 
-public class PanelFacturas extends JPanel{
+public class PanelFacturas extends JPanel implements Serializable{
 
 	/**
 	 * 

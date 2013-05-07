@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -11,11 +12,19 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class EscuchadorBotonParticular implements ActionListener{
+import facturacion.Operador;
+
+public class EscuchadorBotonParticular implements ActionListener, Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JFrame ventana_paso_1;
+	Operador op;
 	
-	public EscuchadorBotonParticular(JFrame ventana_paso_1){
+	public EscuchadorBotonParticular(JFrame ventana_paso_1, Operador op){
 		this.ventana_paso_1 = ventana_paso_1;
+		this.op = op;
 	}
 
 	@Override
@@ -78,7 +87,7 @@ public class EscuchadorBotonParticular implements ActionListener{
     	//Botón de aceptar
     	JButton ok = new JButton("Aceptar");
 
-    	//ok.addActionListener(new EscuchadorBotonParticularOK(ventana));//Registro escuchador
+    	ok.addActionListener(new EscuchadorBotonParticularOK(ventana, op, nombre, apellidos, nif, cp, poblacion, provincia, email));
 
     	ventana.getContentPane().add(ok);
     	

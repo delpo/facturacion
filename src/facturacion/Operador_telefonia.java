@@ -1,5 +1,7 @@
 package facturacion;
 
+import gui.Vista;
+
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -15,6 +17,8 @@ public class Operador_telefonia implements Serializable, Operador{
 	private static final long serialVersionUID = 1L;
 	
 	HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
+	
+	private Vista vista;
 		
 	public Operador_telefonia(){
 		
@@ -29,6 +33,7 @@ public class Operador_telefonia implements Serializable, Operador{
 			System.out.println("El cliente ya existe. No se añadirá.");
 		}else{
 			clientes.put(cliente.getNif(), cliente);
+			vista.recargarDatos();
 		}
 	}
 
@@ -635,5 +640,10 @@ public class Operador_telefonia implements Serializable, Operador{
 	
 	public HashMap<NIF, Cliente> getClientes(){
 		return clientes;
+	}
+
+	@Override
+	public void setVista(Vista vista) {
+		this.vista = vista;
 	}
 }

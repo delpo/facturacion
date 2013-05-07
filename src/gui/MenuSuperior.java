@@ -3,6 +3,7 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +17,7 @@ import facturacion.Operador;
 
 import terminal.Datos;
 
-public class MenuSuperior extends JFrame implements ActionListener{
+public class MenuSuperior extends JFrame implements ActionListener, Serializable{
 
 	/**
 	 * 
@@ -92,7 +93,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	
         	JButton boton_particular = new JButton("Particular");
 
-        	boton_particular.addActionListener(new EscuchadorBotonParticular(ventana));//Registro escuchador
+        	boton_particular.addActionListener(new EscuchadorBotonParticular(ventana, op));//Registro escuchador
 
         	ventana.getContentPane().add(boton_particular, BorderLayout.EAST);
         	

@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.io.Serializable;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -10,14 +11,13 @@ import javax.swing.table.DefaultTableModel;
 
 import facturacion.Operador;
 
-public class PanelClientes extends JPanel{
+public class PanelClientes extends JPanel implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
 	private Operador op;
 	private JTable tabla;
 	private DefaultTableModel modelo;
@@ -34,6 +34,15 @@ public class PanelClientes extends JPanel{
 		JScrollPane scrollPane = new JScrollPane(tabla);
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
+	}
+	
+	public void recargarModelo(DefaultTableModel modelo){
+		ModeloTablaClientes mod = new ModeloTablaClientes();
+		modelo = new DefaultTableModel(mod.llenarTabla(op), columnNames);
+	}
+	
+	public DefaultTableModel getModelo(){
+		return modelo;
 	}
 
 	

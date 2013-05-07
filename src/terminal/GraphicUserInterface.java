@@ -17,13 +17,16 @@ public class GraphicUserInterface implements Serializable{
 	public GraphicUserInterface(){
 	}
 	
+	//SOY EL CONTROLADOR
+	
 	public void iniciarGUI(){
 		//Inicializo datos
-		Operador operador = new Operador_telefonia();
+		Operador operador = new Operador_telefonia(); //INICIO MODELO
 		Datos dato = new Datos();
 		operador = dato.recuperarDatos();
 		//Empiezo a hacer cosas
-		Vista vista = new VistaImpl(operador);
+		Vista vista = new VistaImpl(operador); //INICIO VISTA
+		operador.setVista(vista);
 		vista.crearGUI();
 	}
 
