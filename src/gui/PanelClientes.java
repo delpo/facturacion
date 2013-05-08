@@ -22,7 +22,7 @@ public class PanelClientes extends JPanel implements Serializable{
 	private JTable tabla;
 	private DefaultTableModel modelo;
 	private Object columnNames[] = {"Nombre", "Apellidos", "NIF", "Población", "Código postal", "Provincia", "Email", "Tarifa"};
-
+	private JScrollPane scrollPane;
 	
 	public PanelClientes(Operador op){
 		this.op = op;
@@ -31,7 +31,7 @@ public class PanelClientes extends JPanel implements Serializable{
 		tabla = new JTable(modelo);
 		tabla.setVisible(true);
 		tabla.setPreferredScrollableViewportSize(new Dimension(990, 480));
-		JScrollPane scrollPane = new JScrollPane(tabla);
+		scrollPane = new JScrollPane(tabla);
 		setLayout(new BorderLayout());
 		add(scrollPane, BorderLayout.CENTER);
 	}
@@ -43,6 +43,18 @@ public class PanelClientes extends JPanel implements Serializable{
 	
 	public DefaultTableModel getModelo(){
 		return modelo;
+	}
+	
+	public void regenerarModelo(){
+		remove(scrollPane);
+		ModeloTablaClientes mod = new ModeloTablaClientes();
+		modelo = new DefaultTableModel(mod.llenarTabla(op), columnNames);
+		tabla = new JTable(modelo);
+		tabla.setVisible(true);
+		tabla.setPreferredScrollableViewportSize(new Dimension(990, 480));
+		JScrollPane scrollPane = new JScrollPane(tabla);
+		setLayout(new BorderLayout());
+		add(scrollPane, BorderLayout.CENTER);
 	}
 
 	

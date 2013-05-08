@@ -26,6 +26,7 @@ public class VistaImpl implements Vista, Serializable{
 	private JFrame mainWindow;
 	private Operador operador; //MODELO
 	//private GraphicUserInterface gui; //CONTROLADOR
+	private JTabbedPane tabbedPane;
 	private PanelClientes panel_clientes;
 
 	//public void setGUI(GraphicUserInterface controller) {
@@ -66,7 +67,7 @@ public class VistaImpl implements Vista, Serializable{
 
 	@Override
 	public JTabbedPane crearPaneles() {
-		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane = new JTabbedPane();
 		
 		panel_clientes = crearPanelClientes();
         tabbedPane.addTab("Clientes", null, panel_clientes,
@@ -117,7 +118,7 @@ public class VistaImpl implements Vista, Serializable{
 	
 	public void recargarDatos(){
 		System.out.println("Recargando datos.");
-		panel_clientes.getModelo().fireTableDataChanged();
+		panel_clientes.regenerarModelo();
+		tabbedPane.repaint();
 	}
-
 }
