@@ -16,12 +16,12 @@ public class Operador_telefonia implements Serializable, Operador{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	HashMap<NIF, Cliente> clientes = new HashMap<NIF, Cliente>();
+	HashMap<NIF, Cliente> clientes;
 	
 	private Vista vista;
 		
 	public Operador_telefonia(){
-		
+		clientes = new HashMap<NIF, Cliente>();
 	}
 	
 	/* (non-Javadoc)
