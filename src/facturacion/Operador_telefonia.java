@@ -45,6 +45,7 @@ public class Operador_telefonia implements Serializable, Operador{
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString()) && clientes.remove(entry.getKey())!=null){
 					System.out.println("Borrado completado con éxito.");
+					vista.recargarDatos();
 			}
 		}
 	}

@@ -11,6 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import facturacion.Operador;
 
@@ -122,6 +123,14 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	ventana.setAlwaysOnTop(true);
         	
         	//do stuff
+        	JTextField nif = new JTextField(10);
+    		JLabel nifLabel = new JLabel("NIF: ");
+    		ventana.getContentPane().add(nifLabel);
+    		ventana.getContentPane().add(nif);
+    		JButton boton_eliminar = new JButton("Eliminar");
+        	boton_eliminar.addActionListener(new EscuchadorBotonEliminarCliente(ventana, op, nif));//Registro escuchador
+
+        	ventana.getContentPane().add(boton_eliminar, BorderLayout.EAST);
         	
         	ventana.setSize(500, 500);
         	ventana.setResizable(false);
