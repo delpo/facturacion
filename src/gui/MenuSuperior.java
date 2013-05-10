@@ -98,7 +98,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	
         	JButton boton_empresa = new JButton("Empresa");
 
-        	boton_empresa.addActionListener(new EscuchadorBotonEmpresa(ventana));//Registro escuchador
+        	boton_empresa.addActionListener(new EscuchadorBotonEmpresa(ventana, op));//Registro escuchador
 
         	ventana.getContentPane().add(boton_empresa, BorderLayout.WEST);
         	

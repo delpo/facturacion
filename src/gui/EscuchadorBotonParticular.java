@@ -26,7 +26,6 @@ public class EscuchadorBotonParticular implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		ventana_paso_1.dispose();
-		System.out.println("Seleccionaste cliente particular.");
 		JFrame ventana = new JFrame("Añadir cliente");
 		Container contenedor = ventana.getContentPane();
 		contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
