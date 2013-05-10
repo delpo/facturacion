@@ -49,7 +49,7 @@ public class EscuchadorBotonModificarTarifa implements ActionListener {
 			for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
 				System.out.println(nif_valido.toString());
 				if(cliente.getKey().toString().equals(nif_valido.toString())){
-					tarifa_actual = cliente.getValue().getTarifa().getNombre();
+					tarifa_actual = cliente.getValue().getTarifa().getNombre(); //me lo guardo para mostrar tarifas actuales
 				}
 			}
 			if(tarifa_actual == null){
