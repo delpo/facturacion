@@ -47,6 +47,7 @@ public class PanelClientes extends JPanel{
 		modelo = new DefaultTableModel(mod.llenarTabla(op), columnNames);
 		tabla = new JTable(modelo);
 		tabla.setVisible(true);
+		tabla.setEnabled(false); //no editable
 		tabla.setPreferredScrollableViewportSize(new Dimension(990, 480));
 		scrollPane = new JScrollPane(tabla);
 		setLayout(new BorderLayout());

@@ -87,10 +87,11 @@ public class EscuchadorBotonParticular implements ActionListener{
 
     	ventana.getContentPane().add(ok);
     	
-    	ventana.setLocationRelativeTo(null);
-		ventana.pack();
+    	
 		ventana.setSize(370, 500);
 	    ventana.setResizable(false);
+	    ventana.setLocationRelativeTo(null);
+		ventana.pack();
 		ventana.setVisible(true);
 	}
 }
