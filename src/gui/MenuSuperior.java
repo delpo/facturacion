@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -31,7 +32,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
     private JMenu menu2;
     private JMenuItem mi1_2;
     private JMenu menu3;
-    private JMenuItem mi1_3, mi2_2;
+    private JMenuItem mi1_3, mi2_2, mi3_2;
     
     public MenuSuperior(Operador op, int ancho) {
         this.op = op;
@@ -58,6 +59,9 @@ public class MenuSuperior extends JFrame implements ActionListener{
         mi2_2=new JMenuItem("Eliminar cliente");
         mi2_2.addActionListener(this);
         menu2.add(mi2_2);
+        mi3_2=new JMenuItem("Añadir tarifa a cliente");
+        mi3_2.addActionListener(this);
+        menu2.add(mi3_2);
         //AYUDA
         menu3=new JMenu("Ayuda");
         mb.add(menu3);
@@ -137,7 +141,35 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	ventana.setLocationRelativeTo(null);
         	ventana.pack();
         	ventana.setVisible(true);
-        } 
+        }
+        if(e.getSource()==mi3_2){
+        	System.out.println("Añadir tarifa a cliente");
+        	//do stuff
+        	JFrame ventana = new JFrame("Añadir tarifa a cliente");
+        	
+        	String html = "<html>" +
+                    "<b>Seleccione las tarifas a añadir:</b><br/>" +
+                    " <i>Escribe el NIF/NIE para añadir tarifa.</i><br/>" +
+                    " <i>Las tarifas seleccionadas se complementarán</i><br/>" +
+                    " <i>con la tarifa normal.</i><br/>" +
+                    " ----------------------------------------------<br/>" +
+                    "</html>";
+        	JLabel etiqueta = new JLabel(html);
+        	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
+        	ventana.setAlwaysOnTop(true);
+        	ventana.setSize(500, 500);
+        	JTextField nif = new JTextField(10);
+    		JLabel nifLabel = new JLabel("NIF: ");
+    		ventana.getContentPane().add(nifLabel, BorderLayout.WEST);
+    		ventana.getContentPane().add(nif);
+    		JButton boton_aceptar = new JButton("Aceptar");
+        	boton_aceptar.addActionListener(new EscuchadorBotonModificarTarifa(ventana, op, nif));//Registro escuchador
+        	ventana.getContentPane().add(boton_aceptar, BorderLayout.SOUTH);
+        	ventana.setResizable(false);
+        	ventana.setLocationRelativeTo(null);
+        	ventana.pack();
+        	ventana.setVisible(true);
+        }
         if (e.getSource()==mi1_3) {
         	JOptionPane.showMessageDialog(this, "© Ángel Carlos del Pozo Muela, 2013.", "Acerca de", JOptionPane.WARNING_MESSAGE);
         } 
