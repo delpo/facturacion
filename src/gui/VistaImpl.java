@@ -15,13 +15,12 @@ import javax.swing.JTabbedPane;
 import facturacion.Operador;
 
 public class VistaImpl implements Vista, Serializable{
-
+	
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
 	private Canvas canvas;
 	private JFrame mainWindow;
 	private Operador operador; //MODELO

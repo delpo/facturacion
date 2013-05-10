@@ -2,15 +2,11 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 
 import javax.swing.JFrame;
 
-public class EscuchadorBotonEmpresa implements ActionListener, Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class EscuchadorBotonEmpresa implements ActionListener{
+
 	JFrame ventana_paso_1;
 	
 	public EscuchadorBotonEmpresa(JFrame ventana_paso_1){

@@ -18,7 +18,7 @@ public class Operador_telefonia implements Serializable, Operador{
 	
 	HashMap<NIF, Cliente> clientes;
 	
-	private Vista vista;
+	private transient Vista vista; //no serializar la vista
 		
 	public Operador_telefonia(){
 		clientes = new HashMap<NIF, Cliente>();

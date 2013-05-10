@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,11 +13,8 @@ import javax.swing.JTextField;
 
 import facturacion.Operador;
 
-public class EscuchadorBotonParticular implements ActionListener, Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class EscuchadorBotonParticular implements ActionListener{
+
 	JFrame ventana_paso_1;
 	Operador op;
 	

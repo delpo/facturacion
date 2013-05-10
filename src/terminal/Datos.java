@@ -46,8 +46,6 @@ public class Datos implements Serializable{
 			return op;
 		}catch (FileNotFoundException e){
 			System.out.println("No se encontró archivo de configuración.");
-			System.out.println("Guardando fichero por primera vez.");
-			almacenarDatos(op);
 		}catch (IOException e){
 			System.out.println("Error de acceso a datos.");
 		} catch (ClassNotFoundException e) {

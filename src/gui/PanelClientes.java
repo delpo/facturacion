@@ -2,7 +2,6 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.io.Serializable;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 import facturacion.Operador;
 
-public class PanelClientes extends JPanel implements Serializable{
+public class PanelClientes extends JPanel{
 
 	/**
 	 * 

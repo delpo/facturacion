@@ -3,7 +3,6 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serializable;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -18,13 +17,8 @@ import facturacion.NIF;
 import facturacion.Operador;
 import facturacion.Particular;
 
-public class EscuchadorBotonParticularOK implements ActionListener, Serializable{
+public class EscuchadorBotonParticularOK implements ActionListener{
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	
 	JFrame ventana_paso_2;
 	JTextField nombre;
