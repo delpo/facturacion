@@ -111,6 +111,23 @@ public class MenuSuperior extends JFrame implements ActionListener{
         } 
         if (e.getSource()==mi2_2) {
         	System.out.println("Eliminar cliente.");
+        	JFrame ventana = new JFrame("Eliminar cliente");
+        	
+        	String html = "<html>" +
+                    "<b>Eliminar cliente: </b><br/>" +
+                    " <i>Escribe el NIF/NIE para eliminar cliente.</i><br/>" +
+                    "</html>";
+        	JLabel etiqueta = new JLabel(html);
+        	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
+        	ventana.setAlwaysOnTop(true);
+        	
+        	//do stuff
+        	
+        	ventana.setSize(500, 500);
+        	ventana.setResizable(false);
+        	ventana.setLocationRelativeTo(null);
+        	ventana.pack();
+        	ventana.setVisible(true);
         } 
         if (e.getSource()==mi1_3) {
         	JOptionPane.showMessageDialog(this, "© Ángel Carlos del Pozo Muela, 2013.", "Acerca de", JOptionPane.WARNING_MESSAGE);
