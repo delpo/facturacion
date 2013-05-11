@@ -27,6 +27,9 @@ public class Tarifa_tarde extends TarifaconOfertas {
 
 	@Override
 	public String getNombre() {
-		return tarifa.getNombre() + " + Tarifa de tarde";
+		if(!tarifa.getNombre().contains("Tarifa de tarde"))
+			return tarifa.getNombre() + " + Tarifa de tarde";
+		else
+			return tarifa.getNombre();
 	}
 }

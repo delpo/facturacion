@@ -26,6 +26,9 @@ public class Tarifa_domingo extends TarifaconOfertas{
 
 	@Override
 	public String getNombre() {
-		return tarifa.getNombre() + " + Tarifa de domingo";
+		if(!tarifa.getNombre().contains("Tarifa de domingo"))
+			return tarifa.getNombre() + " + Tarifa de domingo";
+		else
+			return tarifa.getNombre();
 	}
 }
