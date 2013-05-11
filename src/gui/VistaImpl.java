@@ -111,7 +111,6 @@ public class VistaImpl implements Vista, Serializable{
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.pack();
         mainWindow.setSize(1024, 600);
-        //mainWindow.setResizable(false);
         mainWindow.setVisible(true);
 	}
 	

@@ -55,9 +55,12 @@ public class Operador_telefonia implements Serializable, Operador{
 	 */
 	@Override
 	public void anyadirTarifa(NIF nif, int tarifa) {
+		System.out.println("Voy a añadir tarifa.");
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				entry.getValue().setTarifa(tarifa);
+				System.out.println("Tarifa actualizada.");
+				vista.recargarDatos();
 			}
 		}
 	}
