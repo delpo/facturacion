@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import facturacion.Cliente;
 import facturacion.ExcepcionNIFnoValido;
@@ -21,21 +22,21 @@ import facturacion.NIF;
 import facturacion.Operador;
 
 public class EscuchadorBotonModificarTarifa implements ActionListener {
-	JFrame ventana;
+	JFrame ventana_anterior;
 	Operador op;
 	JTextField nif;
 	boolean tarde_activado;
 	boolean domingo_activado;
 
-	public EscuchadorBotonModificarTarifa(JFrame ventana, Operador op, JTextField nif) {
-		this.ventana = ventana;
+	public EscuchadorBotonModificarTarifa(JFrame ventana_anterior, Operador op, JTextField nif) {
+		this.ventana_anterior = ventana_anterior;
 		this.op = op;
 		this.nif = nif;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		ventana.dispose();
+		ventana_anterior.dispose();
 		boolean todo_ok = true;
 		NIF nif_valido = null;
 		try {
@@ -55,43 +56,45 @@ public class EscuchadorBotonModificarTarifa implements ActionListener {
 			if(tarifa_actual == null){
 				JOptionPane.showMessageDialog(null, "No se encontró cliente con el NIF/NIE introducido.");
 			}else{
-				JFrame ventana = new JFrame("Añadir tarifa");
-				Container contenedor = ventana.getContentPane();
+				JFrame ventana_selector = new JFrame("Añadir tarifa");
+				Container contenedor = ventana_selector.getContentPane();
 				contenedor.setLayout(new BoxLayout(contenedor, BoxLayout.PAGE_AXIS));
 				String html = "<html>" +
 		                "<b>Paso 2: </b><br/>" +
 		                " <i>Seleccionar tarifa.</i><br/>--------------------------" +
 		                "</html>";
 		    	JLabel etiqueta = new JLabel(html);
-		    	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
-		    	ventana.setAlwaysOnTop(true);
-				
+		    	ventana_selector.getContentPane().add(etiqueta, BorderLayout.NORTH);
+		    	ventana_selector.setAlwaysOnTop(true);
+		    	JLabel tarifas_actuales = new JLabel("<html>"+"Tarifas actuales: "+tarifa_actual+"<br/>--------------------------"+"</html>",
+		    	        SwingConstants.CENTER);
+		    	ventana_selector.getContentPane().add(tarifas_actuales);
 		    	//do stuff
 		    	JCheckBox tarde = new JCheckBox("Tarifa de tarde");
 		    	JCheckBox domingo = new JCheckBox("Tarifa de domingo");
+		    	ManejadorEventosTarifas manejador= new ManejadorEventosTarifas(tarde, domingo, tarde_activado, domingo_activado);
+		    	tarde.addItemListener(manejador);
+		    	domingo.addItemListener(manejador);
 		    	JPanel tarifas = new JPanel();
 		    	tarifas.setLayout(new BoxLayout(tarifas, BoxLayout.PAGE_AXIS));
 		    	contenedor.add(tarifas);//Cambiamos el panel contenedor
 		    	tarifas.add(new JLabel("Elije tarifas a añadir:"));
 		    	tarifas.add(tarde);
 		    	tarifas.add(domingo);
-		    	ventana.pack();
-		    	ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		    	ventana.setVisible(true);
 		    	
 		    	//Botón de aceptar
 		    	JButton ok = new JButton("Aceptar");
 
-		    	//ok.addActionListener(new EscuchadorBotonModificarTarifaOK(ventana, op, nif));
+		    	ok.addActionListener(new EscuchadorBotonModificarTarifaOK(ventana_selector, op, nif_valido,tarde_activado, domingo_activado));
 
-		    	ventana.getContentPane().add(ok);
+		    	ventana_selector.getContentPane().add(ok);
 		    	
 		    	
-				ventana.setSize(370, 500);
-			    ventana.setResizable(false);
-			    ventana.setLocationRelativeTo(null);
-				ventana.pack();
-				ventana.setVisible(true);
+		    	ventana_selector.setSize(370, 500);
+		    	ventana_selector.setResizable(false);
+		    	ventana_selector.setLocationRelativeTo(null);
+		    	ventana_selector.pack();
+		    	ventana_selector.setVisible(true);
 			}
 		}else{
 			JOptionPane.showMessageDialog(null, "ERROR: DNI NO VÁLIDO.");
