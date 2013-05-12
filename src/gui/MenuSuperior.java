@@ -185,11 +185,9 @@ public class MenuSuperior extends JFrame implements ActionListener{
         } 
         
         if(e.getSource() == mi1_4){
-        	System.out.println("Emitir factura.");
-        	//do stuff
         	System.out.println("Emitir factura");
         	//do stuff
-        	JFrame ventana = new JFrame("Emitir factura");
+        	JFrame ventana = new JFrame("Emitir factura (paso 1 de 4)");
         	
         	String html = "<html>" +
                     "<b>Seleccione las tarifas a añadir:</b><br/>" +
@@ -212,7 +210,6 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	ventana.pack();
         	ventana.setVisible(true);
         	ventana.setSize(300, 145);
-
         }
 	}
 
