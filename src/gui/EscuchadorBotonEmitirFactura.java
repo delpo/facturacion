@@ -38,6 +38,7 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
 		}
 		if(todo_ok){
 			//TODO Do stuff
+			
 		}else{
 			JOptionPane.showMessageDialog(null, "El NIF/NIE no es de un cliente existente o no es válido.");
 		}
