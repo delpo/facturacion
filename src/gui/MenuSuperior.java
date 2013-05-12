@@ -183,6 +183,37 @@ public class MenuSuperior extends JFrame implements ActionListener{
         if (e.getSource()==mi1_3) {
         	JOptionPane.showMessageDialog(this, "© Ángel Carlos del Pozo Muela, 2013.", "Acerca de", JOptionPane.WARNING_MESSAGE);
         } 
+        
+        if(e.getSource() == mi1_4){
+        	System.out.println("Emitir factura.");
+        	//do stuff
+        	System.out.println("Emitir factura");
+        	//do stuff
+        	JFrame ventana = new JFrame("Emitir factura");
+        	
+        	String html = "<html>" +
+                    "<b>Seleccione las tarifas a añadir:</b><br/>" +
+                    " <i>Escribe el NIF/NIE del cliente al que</i><br/>" +
+                    " <i>se va a emitir factura.</i><br/>" +
+                    " ----------------------------------------------<br/>" +
+                    "</html>";
+        	JLabel etiqueta = new JLabel(html);
+        	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
+        	ventana.setAlwaysOnTop(true);
+        	JTextField nif = new JTextField(10);
+    		JLabel nifLabel = new JLabel("NIF: ");
+    		ventana.getContentPane().add(nifLabel, BorderLayout.WEST);
+    		ventana.getContentPane().add(nif);
+    		JButton boton_aceptar = new JButton("Aceptar");
+        	boton_aceptar.addActionListener(new EscuchadorBotonEmitirFactura(ventana, op, nif));//Registro escuchador
+        	ventana.getContentPane().add(boton_aceptar, BorderLayout.SOUTH);
+        	ventana.setResizable(false);
+        	ventana.setLocationRelativeTo(null);
+        	ventana.pack();
+        	ventana.setVisible(true);
+        	ventana.setSize(300, 145);
+
+        }
 	}
 
 	public JMenuBar getMenu(){
