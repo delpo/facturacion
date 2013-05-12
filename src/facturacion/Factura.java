@@ -100,4 +100,8 @@ public class Factura  extends Info implements Serializable{
 		llamadas.put(cod.crearCodigoLlamada(), llamada);
 	}
 	
+	public String getPeriodoFacturacionTexto(){
+		return periodo.getFecha_inicio()+ " - "+periodo.getFecha_fin();
+	}
+	
 }

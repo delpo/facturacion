@@ -54,7 +54,7 @@ public class Particular extends Cliente implements Serializable{
 		while(!op.claveValida(codigo)){
 			codigo = CodigoFactura.crearCodigoFactura();
 		}
-		facturas.put(codigo, factura);
+		getFacturas().put(codigo, factura);
 		new EnvioCorreo().envia(getEmail(), factura);
 		return codigo;
 	}

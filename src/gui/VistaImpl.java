@@ -27,6 +27,7 @@ public class VistaImpl implements Vista, Serializable{
 	//private GraphicUserInterface gui; //CONTROLADOR
 	private JTabbedPane tabbedPane;
 	private PanelClientes panel_clientes;
+	private PanelFacturas panel_facturas;
 
 	//public void setGUI(GraphicUserInterface controller) {
 		//this.gui = controller;
@@ -73,8 +74,8 @@ public class VistaImpl implements Vista, Serializable{
                 "Abre las opciones para manejar clientes");
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
          
-        JComponent panel2 = crearPanelFacturas();
-        tabbedPane.addTab("Facturas", null, panel2,
+        panel_facturas = crearPanelFacturas();
+        tabbedPane.addTab("Facturas", null, panel_facturas,
                 "Abre las opciones para manejar facturas");
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
          
@@ -92,8 +93,8 @@ public class VistaImpl implements Vista, Serializable{
 	}
 
 	@Override
-	public JComponent crearPanelFacturas() {
-		return new PanelFacturas();
+	public PanelFacturas crearPanelFacturas() {
+		return new PanelFacturas(operador);
 	}
 
 	@Override

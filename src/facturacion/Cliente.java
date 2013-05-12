@@ -13,8 +13,8 @@ public abstract class Cliente implements Serializable{
 	private Direccion direccion;
 	private Email email;
 	private Tarifa tarifa;
-	HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
-	HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();	
+	private HashMap<CodigoFactura, Factura> facturas = new HashMap<CodigoFactura, Factura>();
+	private HashMap<CodigoIncidencia, Incidencia> incidencias = new HashMap<CodigoIncidencia, Incidencia>();	
 	
 	//GETTERS Y SETTERS
 	public String getNombre() {
@@ -79,5 +79,18 @@ public abstract class Cliente implements Serializable{
 	
 	public void reportarIncidencia(Incidencia incidencia){
 		incidencias.put(CodigoIncidencia.crearCodigoIncidencia(), incidencia);
+	}
+	public HashMap<CodigoFactura, Factura> getFacturas() {
+		return facturas;
+	}
+	public void setFacturas(HashMap<CodigoFactura, Factura> facturas) {
+		this.facturas = facturas;
+	}
+	
+	public HashMap<CodigoIncidencia, Incidencia> getIncidencias() {
+		return incidencias;
+	}
+	public void setIncidencias(HashMap<CodigoIncidencia, Incidencia> incidencias) {
+		this.incidencias = incidencias;
 	}
 }
