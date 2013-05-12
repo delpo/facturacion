@@ -32,6 +32,8 @@ public class MenuSuperior extends JFrame implements ActionListener{
     private JMenuItem mi1_2;
     private JMenu menu3;
     private JMenuItem mi1_3, mi2_2, mi3_2;
+    private JMenu menu4;
+    private JMenuItem mi1_4, mi2_4;
     
     public MenuSuperior(Operador op, int ancho) {
         this.op = op;
@@ -49,7 +51,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
         mi3=new JMenuItem("Salir");
         mi3.addActionListener(this);
         menu1.add(mi3);
-        //EDICIÓN
+        //CLIENTES
         menu2=new JMenu("Clientes");
         mb.add(menu2);
         mi1_2=new JMenuItem("Añadir cliente");
@@ -61,6 +63,15 @@ public class MenuSuperior extends JFrame implements ActionListener{
         mi3_2=new JMenuItem("Añadir tarifa a cliente");
         mi3_2.addActionListener(this);
         menu2.add(mi3_2);
+        //FACTURAS
+        menu4=new JMenu("Facturas");
+        mb.add(menu4);
+        mi1_4=new JMenuItem("Emitir factura");
+        mi1_4.addActionListener(this);
+        menu4.add(mi1_4);
+        mi2_4=new JMenuItem("Eliminar factura");
+        mi2_4.addActionListener(this);
+        menu4.add(mi2_4);
         //AYUDA
         menu3=new JMenu("Ayuda");
         mb.add(menu3);
