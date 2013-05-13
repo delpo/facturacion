@@ -55,7 +55,6 @@ public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		ventana.dispose();
 		JFrame ventana = new JFrame("Emitir factura (paso 3 de 4)");
-
 		String html = "<html>" +
 				"<b>Añadir llamadas:</b><br/>" +
 				" <i>Introduzca las llamadas a facturar. Cuando</i><br/>" +
@@ -110,8 +109,7 @@ public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 		panel.add(panel0);
 		ventana.getContentPane().add(panel);
 		JButton boton_aceptar = new JButton("Aceptar");
-		//boton_aceptar.addActionListener(new EscuchadorBotonEmitirFacturaFechas(ventana, op, nif_valido, picker,
-				//picker1, picker2));//Registro escuchador
+		boton_aceptar.addActionListener(new EscuchadorBotonEmitirFacturaOK(ventana, op, nif, factura)); //Registro escuchador
 		ventana.getContentPane().add(boton_aceptar, BorderLayout.SOUTH);
 		ventana.setResizable(false);
 		ventana.setLocationRelativeTo(null);

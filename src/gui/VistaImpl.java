@@ -118,6 +118,7 @@ public class VistaImpl implements Vista, Serializable{
 	public void recargarDatos(){
 		System.out.println("Recargando datos.");
 		panel_clientes.regenerarModelo();
+		panel_facturas.regenerarModelo();
 		tabbedPane.repaint();
 	}
 }

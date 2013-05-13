@@ -184,15 +184,20 @@ public class Operador_telefonia implements Serializable, Operador{
 	 */
 	@Override
 	public CodigoFactura emitirFactura(NIF nif, Factura factura){
+		CodigoFactura cod = null;
 		boolean ok = false;
 		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
 			if(entry.getKey().toString().equals(nif.toString())){
 				ok = true;
-				return entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
+				cod = entry.getValue().emitirFactura(factura); //emplea el método de la clase Cliente
 			}
 		}
-		if(!ok) System.out.println("Cliente no encontrado.");
-		return null;
+		if(!ok){
+			System.out.println("Cliente no encontrado.");
+			return null;
+		}
+		vista.recargarDatos();
+		return cod;
 	}
 	
 

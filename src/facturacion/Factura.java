@@ -101,7 +101,13 @@ public class Factura  extends Info implements Serializable{
 	}
 	
 	public String getPeriodoFacturacionTexto(){
-		return periodo.getFecha_inicio()+ " - "+periodo.getFecha_fin();
+		return periodo.getFecha_inicio().get(Calendar.DAY_OF_MONTH)+"/"+(periodo.getFecha_inicio().get(Calendar.MONTH)+1)
+				+"/"+periodo.getFecha_inicio().get(Calendar.YEAR)+" - "+periodo.getFecha_fin().get(Calendar.DAY_OF_MONTH)
+				+"/"+(periodo.getFecha_fin().get(Calendar.MONTH)+1)+"/"+periodo.getFecha_fin().get(Calendar.YEAR);
+	}
+	
+	public int getSegundos(){
+		return totalSegundosLlamadas();
 	}
 	
 }
