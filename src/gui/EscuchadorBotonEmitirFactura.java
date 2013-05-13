@@ -3,13 +3,18 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import org.jdesktop.swingx.JXDatePicker;
 
 import facturacion.Cliente;
 import facturacion.ExcepcionNIFnoValido;
@@ -59,7 +64,26 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
         	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
         	ventana.setAlwaysOnTop(true);
         	//TODO fechas
-        	
+        	 JPanel panel = new JPanel();
+        	 JLabel fecha_emision = new JLabel("Fecha de emisión: ");
+        	 panel.add(fecha_emision, BorderLayout.WEST);
+        	 JXDatePicker picker = new JXDatePicker();
+             picker.setDate(Calendar.getInstance().getTime());
+             picker.setFormats(new SimpleDateFormat("dd.MM.yyyy"));
+             panel.add(picker, BorderLayout.EAST);
+             JLabel fecha_inicio = new JLabel("Fecha de inicio: ");
+        	 panel.add(fecha_inicio, BorderLayout.WEST);
+        	 JXDatePicker picker1 = new JXDatePicker();
+             picker1.setDate(Calendar.getInstance().getTime());
+             picker1.setFormats(new SimpleDateFormat("dd.MM.yyyy"));
+             panel.add(picker1, BorderLayout.EAST);
+             JLabel fecha_fin = new JLabel("Fecha final: ");
+        	 panel.add(fecha_fin, BorderLayout.WEST);
+        	 JXDatePicker picker2 = new JXDatePicker();
+             picker2.setDate(Calendar.getInstance().getTime());
+             picker2.setFormats(new SimpleDateFormat("dd.MM.yyyy"));
+             panel.add(picker2, BorderLayout.EAST);
+             ventana.getContentPane().add(panel);
     		JButton boton_aceptar = new JButton("Aceptar");
         	//boton_aceptar.addActionListener(new EscuchadorBotonEmitirFactura(ventana, op, nif));//Registro escuchador
         	ventana.getContentPane().add(boton_aceptar, BorderLayout.SOUTH);
@@ -67,7 +91,7 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
         	ventana.setLocationRelativeTo(null);
         	ventana.pack();
         	ventana.setVisible(true);
-        	ventana.setSize(400, 600);
+        	ventana.setSize(300, 230);
 		}else{
 			JOptionPane.showMessageDialog(null, "El NIF/NIE no es de un cliente existente o no es válido.");
 		}
