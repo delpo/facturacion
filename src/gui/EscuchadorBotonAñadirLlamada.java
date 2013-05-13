@@ -2,17 +2,55 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import facturacion.Factura;
+import facturacion.Llamada;
 
 public class EscuchadorBotonAñadirLlamada implements ActionListener {
+	Factura factura;
+	Calendar picker;
+	Calendar picker1;
+	Calendar picker2;
+	Calendar llamada;
+	JTextField telefono;
+	JTextField duracion;
+	int telefono_integer;
+	int duracion_integer;
+	boolean todo_ok;
+	
+	public EscuchadorBotonAñadirLlamada(Factura factura, Calendar picker, Calendar picker1, Calendar picker2, Calendar llamada, JTextField telefono, JTextField duracion) {
 
-	public EscuchadorBotonAñadirLlamada() {
-		// TODO Auto-generated constructor stub
+			this.factura = factura;
+			this.picker = picker;
+			this.picker1 = picker1;
+			this.picker2 = picker2;
+			this.llamada = llamada;
+			this.telefono = telefono;
+			this.duracion = duracion;
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
+		todo_ok = true;
+		try{
+			System.out.println("parseando telefono: "+telefono.getText());
+			telefono_integer = Integer.parseInt(telefono.getText());
+			System.out.println("parseando duracion");
+			duracion_integer = Integer.parseInt(duracion.getText());
+		}catch (NumberFormatException e) {
+			todo_ok = false;
+		}
+		if(todo_ok){
+			factura.anyadirLlamada(new Llamada(telefono_integer, llamada, duracion_integer));
+			System.out.println("Llamada añadida.");
+		}else{
+			JOptionPane.showMessageDialog(null, "ERROR: CAMPOS TELÉFONO Y/O DURACIÓN NO VÁLIDOS.");
+		}
 	}
 
 }

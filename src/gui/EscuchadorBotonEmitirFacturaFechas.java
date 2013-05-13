@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -18,8 +20,14 @@ import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.event.ChangeEvent;
 
+import facturacion.Cliente;
+import facturacion.CodigoLlamada;
+import facturacion.Factura;
+import facturacion.Llamada;
 import facturacion.NIF;
 import facturacion.Operador;
+import facturacion.Periodo_facturacion;
+import facturacion.Tarifa;
 
 public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 
@@ -36,6 +44,7 @@ public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 			Calendar picker1, Calendar picker2) {
 		this.ventana = ventana;
 		this.op = op;
+		this.nif = nif;
 		this.picker = picker;
 		this.picker1 = picker1;
 		this.picker2 = picker2;
@@ -84,8 +93,16 @@ public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 		JPanel panel0 = new JPanel();
 		panel0.setLayout(new BoxLayout(panel0, BoxLayout.PAGE_AXIS));
 		JButton boton_llamar = new JButton("Llamar");
-		boton_llamar.addActionListener(new EscuchadorBotonAñadirLlamada(ventana, op, nif, picker,
-				picker1, picker2, llamada, telf.getText(), duracion.getText()));//Registro escuchador
+		Tarifa tarifa = null;
+		for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
+			if(cliente.getKey().toString().equals(nif.toString())){
+				tarifa = cliente.getValue().getTarifa();
+			}
+		}
+		HashMap<CodigoLlamada, Llamada> llamadas = new HashMap<CodigoLlamada, Llamada>();
+		Factura factura = new Factura(picker, tarifa, new Periodo_facturacion(picker1, picker2), llamadas);
+		boton_llamar.addActionListener(new EscuchadorBotonAñadirLlamada(factura, picker,
+				picker1, picker2, llamada, telf, duracion));//Registro escuchador
 		panel0.add(boton_llamar);
 		panel.add(panel1);
 		panel.add(panel2);
