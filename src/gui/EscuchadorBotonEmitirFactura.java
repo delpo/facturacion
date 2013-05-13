@@ -85,7 +85,11 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
              panel.add(picker2, BorderLayout.EAST);
              ventana.getContentPane().add(panel);
     		JButton boton_aceptar = new JButton("Aceptar");
-        	//boton_aceptar.addActionListener(new EscuchadorBotonEmitirFactura(ventana, op, nif));//Registro escuchador
+    		Calendar calendar_fecha_emision = picker.getMonthView().getCalendar();
+    		Calendar calendar_fecha_inicio = picker.getMonthView().getCalendar();
+    		Calendar calendar_fecha_fin = picker.getMonthView().getCalendar();
+        	boton_aceptar.addActionListener(new EscuchadorBotonEmitirFacturaFechas(ventana, op, nif_valido, calendar_fecha_emision,
+        			calendar_fecha_inicio, calendar_fecha_fin));//Registro escuchador
         	ventana.getContentPane().add(boton_aceptar, BorderLayout.SOUTH);
         	ventana.setResizable(false);
         	ventana.setLocationRelativeTo(null);
