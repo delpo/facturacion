@@ -52,7 +52,7 @@ public class ModeloTablaFacturas {
 				if(fila_contada == fila){
 					return factura.getKey().getCodigo();
 				}else{
-					fila++;					
+					fila_contada++;					
 				}
 			}
 		}
@@ -67,7 +67,7 @@ public class ModeloTablaFacturas {
 				if(fila_contada == fila){
 					return factura.getKey();
 				}else{
-					fila++;					
+					fila_contada++;					
 				}
 			}
 		}
