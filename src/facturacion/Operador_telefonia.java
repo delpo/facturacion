@@ -213,6 +213,7 @@ public class Operador_telefonia implements Serializable, Operador{
 				if(factura.getKey().getCodigo().equals(codigo_factura.getCodigo())){
 					encontrado = true;
 					cliente.getValue().getFacturas().entrySet().remove(factura);
+					vista.recargarDatos();
 				}
 				if(encontrado) break;
 			}

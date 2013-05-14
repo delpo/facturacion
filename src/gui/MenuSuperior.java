@@ -1,8 +1,13 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -11,6 +16,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.JTextField;
 
 import facturacion.Operador;
@@ -179,7 +185,7 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	ventana.setVisible(true);
         }
         if (e.getSource()==mi1_3) {
-        	JOptionPane.showMessageDialog(this, "© Ángel Carlos del Pozo Muela, 2013.", "Acerca de", JOptionPane.WARNING_MESSAGE);
+        	JOptionPane.showMessageDialog(this, "© Ángel Carlos del Pozo Muela, 2013.", "Acerca de", JOptionPane.INFORMATION_MESSAGE);
         } 
         
         if(e.getSource() == mi1_4){
@@ -212,27 +218,59 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	JFrame ventana = new JFrame("Eliminar factura");
         	
         	String html = "<html>" +
-                    "<b>Eliminar cliente: </b><br/>" +
+                    "<b>Eliminar factura: </b><br/>" +
                     " <i>Escribe el código de la factura para eliminarla.</i><br/>" +
+                    " <i>Con click derecho en el cuadro, puedes pegar el código si lo</i><br/>" +
+                    " <i>has copiado. Puedes emplear click derecho en la tabla de facturas.</i><br/>" +
+                    " <i>-----------------------------------------------------------------</i><br/>" +
                     "</html>";
         	JLabel etiqueta = new JLabel(html);
         	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
         	ventana.setAlwaysOnTop(true);
         	
         	//do stuff
-        	JTextField cod = new JTextField(10);
+        	final JTextField cod = new JTextField(10);
+        	JPopupMenu popup = new JPopupMenu();
+        	cod.add(popup);
+        	cod.setComponentPopupMenu(popup);
+        	JMenuItem pegar = new JMenuItem("Pegar");
+        	popup.add(pegar);
+        	pegar.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				Clipboard clipboard = getToolkit ().getSystemClipboard ();
+    				Transferable clipData = clipboard.getContents(clipboard);
+    	            if (clipData != null) {
+    	              try {
+    	                if 
+    	                  (clipData.isDataFlavorSupported
+    					    (DataFlavor.stringFlavor)) {
+    	                      String s = (String)(clipData.getTransferData(
+    	                        DataFlavor.stringFlavor));
+    	                  cod.setText(s);
+    	                }
+    	              } catch (UnsupportedFlavorException ufe) {
+    	                System.err.println("Flavor unsupported: " + ufe);
+    	              } catch (IOException ioe) {
+    	                System.err.println("Data not available: " + ioe);
+    	              }
+    	            }
+    	          }
+        	}
+    		);
     		JLabel nifLabel = new JLabel("Código de factura: ");
-    		ventana.getContentPane().add(nifLabel, BorderLayout.NORTH);
+    		ventana.getContentPane().add(nifLabel);
     		ventana.getContentPane().add(cod);
     		JButton boton_eliminar = new JButton("Eliminar");
         	boton_eliminar.addActionListener(new EscuchadorBotonEliminarFactura(ventana, op, cod));//Registro escuchador
 
         	ventana.getContentPane().add(boton_eliminar, BorderLayout.EAST);
         	
-        	ventana.setSize(500, 500);
         	ventana.setResizable(false);
         	ventana.setLocationRelativeTo(null);
         	ventana.pack();
+        	ventana.setSize(500, 140);
         	ventana.setVisible(true);
         }
 	}
