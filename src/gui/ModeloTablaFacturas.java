@@ -42,8 +42,37 @@ public class ModeloTablaFacturas {
 			}
 		}
 
-
-
 		return rowData;
 	}
+	
+	public String obtenerCodigo(Operador op, int fila){
+		int fila_contada = 0;
+		for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
+			for(Entry<CodigoFactura, Factura> factura : cliente.getValue().getFacturas().entrySet()){
+				if(fila_contada == fila){
+					return factura.getKey().getCodigo();
+				}else{
+					fila++;					
+				}
+			}
+		}
+		return null;
+		
+	}
+	
+	public CodigoFactura obtenerCodigoCompleto(Operador op, int fila){
+		int fila_contada = 0;
+		for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
+			for(Entry<CodigoFactura, Factura> factura : cliente.getValue().getFacturas().entrySet()){
+				if(fila_contada == fila){
+					return factura.getKey();
+				}else{
+					fila++;					
+				}
+			}
+		}
+		return null;
+		
+	}
+	
 }

@@ -24,7 +24,6 @@ public class ModeloTablaClientes{
 		//"Nombre", "Apellidos", "NIF", "Dirección", "Email", "Tarifa"
 		rowData = new Object[ op.getClientes().entrySet().size()][columnNames.length];
 			for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
-				System.out.println("Añadiendo a la tabla el cliente: "+cliente.getKey().toString());
 				rowData[fila][0] = cliente.getValue().getNombre();
 				rowData[fila][1] = cliente.getValue().getApellidos();
 				rowData[fila][2] = cliente.getKey().toString();

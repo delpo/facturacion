@@ -28,7 +28,6 @@ public class EscuchadorBotonEmitirFacturaOK implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		ventana.dispose();
-		System.out.println(factura.getPeriodoFacturacionTexto());
 		op.emitirFactura(nif, factura);
 		JFrame ventana = new JFrame("Emitir factura (paso 4 de 4)");
 		String html = "<html>" +

@@ -38,16 +38,13 @@ public class EscuchadorBotonAñadirLlamada implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		todo_ok = true;
 		try{
-			System.out.println("parseando telefono: "+telefono.getText());
 			telefono_integer = Integer.parseInt(telefono.getText());
-			System.out.println("parseando duracion");
 			duracion_integer = Integer.parseInt(duracion.getText());
 		}catch (NumberFormatException e) {
 			todo_ok = false;
 		}
 		if(todo_ok){
 			factura.anyadirLlamada(new Llamada(telefono_integer, llamada, duracion_integer));
-			System.out.println("Llamada añadida.");
 		}else{
 			JOptionPane.showMessageDialog(null, "ERROR: CAMPOS TELÉFONO Y/O DURACIÓN NO VÁLIDOS.");
 		}

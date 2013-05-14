@@ -125,7 +125,6 @@ public class MenuSuperior extends JFrame implements ActionListener{
 
         } 
         if (e.getSource()==mi2_2) {
-        	System.out.println("Eliminar cliente.");
         	JFrame ventana = new JFrame("Eliminar cliente");
         	
         	String html = "<html>" +
@@ -153,7 +152,6 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	ventana.setVisible(true);
         }
         if(e.getSource()==mi3_2){
-        	System.out.println("Añadir tarifa a cliente");
         	//do stuff
         	JFrame ventana = new JFrame("Añadir tarifa a cliente");
         	
@@ -185,7 +183,6 @@ public class MenuSuperior extends JFrame implements ActionListener{
         } 
         
         if(e.getSource() == mi1_4){
-        	System.out.println("Emitir factura");
         	//do stuff
         	JFrame ventana = new JFrame("Emitir factura (paso 1 de 4)");
         	
@@ -210,6 +207,33 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	ventana.pack();
         	ventana.setVisible(true);
         	ventana.setSize(300, 145);
+        }
+        if(e.getSource() == mi2_4){
+        	JFrame ventana = new JFrame("Eliminar factura");
+        	
+        	String html = "<html>" +
+                    "<b>Eliminar cliente: </b><br/>" +
+                    " <i>Escribe el código de la factura para eliminarla.</i><br/>" +
+                    "</html>";
+        	JLabel etiqueta = new JLabel(html);
+        	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
+        	ventana.setAlwaysOnTop(true);
+        	
+        	//do stuff
+        	JTextField cod = new JTextField(10);
+    		JLabel nifLabel = new JLabel("Código de factura: ");
+    		ventana.getContentPane().add(nifLabel, BorderLayout.NORTH);
+    		ventana.getContentPane().add(cod);
+    		JButton boton_eliminar = new JButton("Eliminar");
+        	boton_eliminar.addActionListener(new EscuchadorBotonEliminarFactura(ventana, op, cod));//Registro escuchador
+
+        	ventana.getContentPane().add(boton_eliminar, BorderLayout.EAST);
+        	
+        	ventana.setSize(500, 500);
+        	ventana.setResizable(false);
+        	ventana.setLocationRelativeTo(null);
+        	ventana.pack();
+        	ventana.setVisible(true);
         }
 	}
 
