@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 import java.util.Map.Entry;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.DefaultFormatter;
 
 import facturacion.Cliente;
 import facturacion.ExcepcionNIFnoValido;
@@ -78,29 +82,68 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
 			JLabel fecha_emision = new JLabel("Fecha de emisión: ");
 			panel.add(fecha_emision, BorderLayout.WEST);
 			
-			JSpinner picker = new JSpinner( new SpinnerDateModel() );
+			final JSpinner picker = new JSpinner( new SpinnerDateModel() );
 			JSpinner.DateEditor timeEditor = new JSpinner.DateEditor(picker, "dd-MM-yyyy");
 			picker.setEditor(timeEditor);
 			picker.setValue(new Date()); // will only show the current time
-			picker.addChangeListener(timeEditor);
+			JComponent comp = picker.getEditor();
+		    JFormattedTextField field = (JFormattedTextField) comp.getComponent(0);
+		    DefaultFormatter formatter = (DefaultFormatter) field.getFormatter();
+		    formatter.setCommitsOnValidEdit(true);
+		    picker.addChangeListener(new ChangeListener() {
+
+		        @Override
+		        public void stateChanged(ChangeEvent e) {
+		           System.out.println("value changed: " + picker.getValue());
+		           SpinnerModel dateModel = picker.getModel();
+		           emision.setTime(((SpinnerDateModel)dateModel).getDate());
+		           System.out.println("emision: "+emision.get(Calendar.DAY_OF_MONTH));
+		        }
+		    });
 			panel.add(picker, BorderLayout.EAST);
 			
 			JLabel fecha_inicio = new JLabel("Fecha de inicio: ");
 			panel.add(fecha_inicio, BorderLayout.WEST);
-			JSpinner picker1 = new JSpinner( new SpinnerDateModel() );
+			final JSpinner picker1 = new JSpinner( new SpinnerDateModel() );
 			JSpinner.DateEditor timeEditor1 = new JSpinner.DateEditor(picker1, "dd-MM-yyyy");
 			picker1.setEditor(timeEditor1);
 			picker1.setValue(new Date()); // will only show the current time
-			picker1.addChangeListener(timeEditor1);
+			JComponent comp1 = picker1.getEditor();
+		    JFormattedTextField field1 = (JFormattedTextField) comp1.getComponent(0);
+		    DefaultFormatter formatter1 = (DefaultFormatter) field1.getFormatter();
+		    formatter1.setCommitsOnValidEdit(true);
+		    picker1.addChangeListener(new ChangeListener() {
+
+		        @Override
+		        public void stateChanged(ChangeEvent f) {
+		           System.out.println("value changed: " + picker1.getValue());
+		           SpinnerModel dateModel1 = picker1.getModel();
+		           inicio.setTime(((SpinnerDateModel)dateModel1).getDate());
+		           System.out.println("inicio: "+inicio.get(Calendar.DAY_OF_MONTH));
+		        }
+		    });
 			panel.add(picker1, BorderLayout.EAST);
 			
 			JLabel fecha_fin = new JLabel("Fecha final: ");
 			panel.add(fecha_fin, BorderLayout.WEST);
-			JSpinner picker2 = new JSpinner( new SpinnerDateModel() );
+			final JSpinner picker2 = new JSpinner( new SpinnerDateModel() );
 			JSpinner.DateEditor timeEditor2 = new JSpinner.DateEditor(picker2, "dd-MM-yyyy");
 			picker2.setEditor(timeEditor2);
 			picker2.setValue(new Date()); // will only show the current time
-			picker2.addChangeListener(timeEditor2);
+			JComponent comp2 = picker1.getEditor();
+		    JFormattedTextField field2 = (JFormattedTextField) comp2.getComponent(0);
+		    DefaultFormatter formatter2 = (DefaultFormatter) field2.getFormatter();
+		    formatter2.setCommitsOnValidEdit(true);
+		    picker2.addChangeListener(new ChangeListener() {
+
+		        @Override
+		        public void stateChanged(ChangeEvent g) {
+		           System.out.println("value changed: " + picker2.getValue());
+		           SpinnerModel dateModel2 = picker2.getModel();
+		           fin.setTime(((SpinnerDateModel)dateModel2).getDate());
+		           System.out.println("fin: "+fin.get(Calendar.DAY_OF_MONTH));
+		        }
+		    });
 			panel.add(picker2, BorderLayout.EAST);
 			ventana.getContentPane().add(panel);
 			JButton boton_aceptar = new JButton("Aceptar");
@@ -116,16 +159,4 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
 			JOptionPane.showMessageDialog(null, "El NIF/NIE no es de un cliente existente o no es válido.");
 		}
 	}
-	
-	public void stateChanged(ChangeEvent e) {
-        SpinnerModel dateModel = picker.getModel();
-        SpinnerModel dateModel1 = picker1.getModel();
-        SpinnerModel dateModel2 = picker2.getModel();
-        if (dateModel instanceof SpinnerDateModel) {
-        	emision.setTime(((SpinnerDateModel)dateModel).getDate());
-        	inicio.setTime(((SpinnerDateModel)dateModel1).getDate());
-        	fin.setTime(((SpinnerDateModel)dateModel2).getDate());
-        }
-    }
-
 }

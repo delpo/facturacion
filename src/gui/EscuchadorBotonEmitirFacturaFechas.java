@@ -11,6 +11,8 @@ import java.util.Map.Entry;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,6 +21,8 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerModel;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.DefaultFormatter;
 
 import facturacion.Cliente;
 import facturacion.CodigoLlamada;
@@ -80,7 +84,20 @@ public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 		JSpinner.DateEditor timeEditor1 = new JSpinner.DateEditor(picker_llamada, "dd-MM-yyyy HH:mm");
 		picker_llamada.setEditor(timeEditor1);
 		picker_llamada.setValue(new Date()); // will only show the current time
-		picker_llamada.addChangeListener(timeEditor1);
+		JComponent comp1 = picker_llamada.getEditor();
+	    JFormattedTextField field1 = (JFormattedTextField) comp1.getComponent(0);
+	    DefaultFormatter formatter1 = (DefaultFormatter) field1.getFormatter();
+	    formatter1.setCommitsOnValidEdit(true);
+	    picker_llamada.addChangeListener(new ChangeListener() {
+
+	        @Override
+	        public void stateChanged(ChangeEvent e) {
+	           System.out.println("value changed: " + picker_llamada.getValue());
+	           SpinnerModel dateModel = picker_llamada.getModel();
+	           llamada.setTime(((SpinnerDateModel)dateModel).getDate());
+	           System.out.println(llamada.get(Calendar.DAY_OF_MONTH));
+	        }
+	    });
 		panel2.add(etiqueta2);
 		panel2.add(timeEditor1);
 		JPanel panel3 = new JPanel();
@@ -117,12 +134,5 @@ public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 		ventana.setVisible(true);
 		ventana.setSize(600, 180);
 	}
-	
-	public void stateChanged(ChangeEvent e) {
-        SpinnerModel dateModel = picker_llamada.getModel();
-        if (dateModel instanceof SpinnerDateModel) {
-        	llamada.setTime(((SpinnerDateModel)dateModel).getDate());
-        }
-    }
 
 }
