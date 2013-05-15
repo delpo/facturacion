@@ -297,6 +297,7 @@ public class Operador_telefonia implements Serializable, Operador{
 			if(ok) break;
 		}
 		if(!ok) System.out.println("Cliente no encontrado.");
+		vista.recargarDatos();
 	}
 	
 	//Genericidad

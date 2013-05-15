@@ -5,7 +5,6 @@ import java.awt.Container;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -28,6 +27,7 @@ public class VistaImpl implements Vista, Serializable{
 	private JTabbedPane tabbedPane;
 	private PanelClientes panel_clientes;
 	private PanelFacturas panel_facturas;
+	private PanelIncidencias panel_incidencias;
 
 	//public void setGUI(GraphicUserInterface controller) {
 		//this.gui = controller;
@@ -79,8 +79,8 @@ public class VistaImpl implements Vista, Serializable{
                 "Abre las opciones para manejar facturas");
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
          
-        JComponent panel3 = crearPanelIncidencias();
-        tabbedPane.addTab("Incidencias", null, panel3,
+        panel_incidencias = crearPanelIncidencias();
+        tabbedPane.addTab("Incidencias", null, panel_incidencias,
                 "Abre las opciones para manejar incidencias");
         tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
         
@@ -98,8 +98,8 @@ public class VistaImpl implements Vista, Serializable{
 	}
 
 	@Override
-	public JComponent crearPanelIncidencias() {
-		return new PanelIncidencias();
+	public PanelIncidencias crearPanelIncidencias() {
+		return new PanelIncidencias(operador);
 	}
 
 	@Override
@@ -119,6 +119,7 @@ public class VistaImpl implements Vista, Serializable{
 		System.out.println("Recargando datos.");
 		panel_clientes.regenerarModelo();
 		panel_facturas.regenerarModelo();
+		panel_incidencias.regenerarModelo();
 		tabbedPane.repaint();
 	}
 }
