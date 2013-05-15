@@ -316,7 +316,63 @@ public class MenuSuperior extends JFrame implements ActionListener{
         }
         if(e.getSource() == mi2_5){
         	//eliminar incidencia
+JFrame ventana = new JFrame("Eliminar factura");
         	
+        	String html = "<html>" +
+                    "<b>Eliminar incidencia: </b><br/>" +
+                    " <i>Escribe el código de la incidencia para eliminarla.</i><br/>" +
+                    " <i>Con click derecho en el cuadro, puedes pegar el código si lo</i><br/>" +
+                    " <i>has copiado. Puedes emplear click derecho en la tabla de incidencias.</i><br/>" +
+                    " <i>-----------------------------------------------------------------</i><br/>" +
+                    "</html>";
+        	JLabel etiqueta = new JLabel(html);
+        	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
+        	ventana.setAlwaysOnTop(true);
+        	
+        	//do stuff
+        	final JTextField cod = new JTextField(10);
+        	JPopupMenu popup = new JPopupMenu();
+        	cod.add(popup);
+        	cod.setComponentPopupMenu(popup);
+        	JMenuItem pegar = new JMenuItem("Pegar");
+        	popup.add(pegar);
+        	pegar.addActionListener(new ActionListener() {
+    			
+    			@Override
+    			public void actionPerformed(ActionEvent arg0) {
+    				Clipboard clipboard = getToolkit ().getSystemClipboard ();
+    				Transferable clipData = clipboard.getContents(clipboard);
+    	            if (clipData != null) {
+    	              try {
+    	                if 
+    	                  (clipData.isDataFlavorSupported
+    					    (DataFlavor.stringFlavor)) {
+    	                      String s = (String)(clipData.getTransferData(
+    	                        DataFlavor.stringFlavor));
+    	                  cod.setText(s);
+    	                }
+    	              } catch (UnsupportedFlavorException ufe) {
+    	                System.err.println("Flavor unsupported: " + ufe);
+    	              } catch (IOException ioe) {
+    	                System.err.println("Data not available: " + ioe);
+    	              }
+    	            }
+    	          }
+        	}
+    		);
+    		JLabel nifLabel = new JLabel("Código de incidencia: ");
+    		ventana.getContentPane().add(nifLabel);
+    		ventana.getContentPane().add(cod);
+    		JButton boton_eliminar = new JButton("Eliminar");
+        	boton_eliminar.addActionListener(new EscuchadorBotonEliminarIncidencia(ventana, op, cod));//Registro escuchador
+
+        	ventana.getContentPane().add(boton_eliminar, BorderLayout.EAST);
+        	
+        	ventana.setResizable(false);
+        	ventana.setLocationRelativeTo(null);
+        	ventana.pack();
+        	ventana.setSize(500, 140);
+        	ventana.setVisible(true);
         }
 	}
 
