@@ -40,6 +40,12 @@ public class MenuSuperior extends JFrame implements ActionListener{
     private JMenuItem mi1_3, mi2_2, mi3_2;
     private JMenu menu4;
     private JMenuItem mi1_4, mi2_4;
+
+	private JMenu menu5;
+
+	private JMenuItem mi1_5;
+
+	private JMenuItem mi2_5;
     
     public MenuSuperior(Operador op, int ancho) {
         this.op = op;
@@ -78,6 +84,15 @@ public class MenuSuperior extends JFrame implements ActionListener{
         mi2_4=new JMenuItem("Eliminar factura");
         mi2_4.addActionListener(this);
         menu4.add(mi2_4);
+        //INCIDENCIAS
+        menu5=new JMenu("Incidencias");
+        mb.add(menu5);
+        mi1_5=new JMenuItem("Añadir incidencia");
+        mi1_5.addActionListener(this);
+        menu5.add(mi1_5);
+        mi2_5=new JMenuItem("Eliminar incidencia");
+        mi2_5.addActionListener(this);
+        menu5.add(mi2_5);
         //AYUDA
         menu3=new JMenu("Ayuda");
         mb.add(menu3);
@@ -272,6 +287,36 @@ public class MenuSuperior extends JFrame implements ActionListener{
         	ventana.pack();
         	ventana.setSize(500, 140);
         	ventana.setVisible(true);
+        }
+        if(e.getSource() == mi1_5){
+        	//añadir incidencia a cliente
+        	JFrame ventana = new JFrame("Añadir incidencia a cliente (paso 1 de 2)");
+        	
+        	String html = "<html>" +
+                    "<b>Añadir incidencia a cliente.</b><br/>" +
+                    " <i>Escribe el NIF/NIE del cliente al que</i><br/>" +
+                    " <i>se le va a añadir incidencia.</i><br/>" +
+                    " ----------------------------------------------<br/>" +
+                    "</html>";
+        	JLabel etiqueta = new JLabel(html);
+        	ventana.getContentPane().add(etiqueta, BorderLayout.NORTH);
+        	ventana.setAlwaysOnTop(true);
+        	JTextField nif = new JTextField(10);
+    		JLabel nifLabel = new JLabel("NIF: ");
+    		ventana.getContentPane().add(nifLabel, BorderLayout.WEST);
+    		ventana.getContentPane().add(nif);
+    		JButton boton_aceptar = new JButton("Aceptar");
+        	boton_aceptar.addActionListener(new EscuchadorBotonIncidencia(ventana, op, nif));//Registro escuchador
+        	ventana.getContentPane().add(boton_aceptar, BorderLayout.SOUTH);
+        	ventana.setResizable(false);
+        	ventana.setLocationRelativeTo(null);
+        	ventana.pack();
+        	ventana.setVisible(true);
+        	ventana.setSize(300, 145);
+        }
+        if(e.getSource() == mi2_5){
+        	//eliminar incidencia
+        	
         }
 	}
 

@@ -94,10 +94,8 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
 
 		        @Override
 		        public void stateChanged(ChangeEvent e) {
-		           System.out.println("value changed: " + picker.getValue());
 		           SpinnerModel dateModel = picker.getModel();
 		           emision.setTime(((SpinnerDateModel)dateModel).getDate());
-		           System.out.println("emision: "+emision.get(Calendar.DAY_OF_MONTH));
 		        }
 		    });
 			panel.add(picker, BorderLayout.EAST);
@@ -116,10 +114,8 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
 
 		        @Override
 		        public void stateChanged(ChangeEvent f) {
-		           System.out.println("value changed: " + picker1.getValue());
 		           SpinnerModel dateModel1 = picker1.getModel();
 		           inicio.setTime(((SpinnerDateModel)dateModel1).getDate());
-		           System.out.println("inicio: "+inicio.get(Calendar.DAY_OF_MONTH));
 		        }
 		    });
 			panel.add(picker1, BorderLayout.EAST);
@@ -138,10 +134,8 @@ public class EscuchadorBotonEmitirFactura implements ActionListener {
 
 		        @Override
 		        public void stateChanged(ChangeEvent g) {
-		           System.out.println("value changed: " + picker2.getValue());
 		           SpinnerModel dateModel2 = picker2.getModel();
 		           fin.setTime(((SpinnerDateModel)dateModel2).getDate());
-		           System.out.println("fin: "+fin.get(Calendar.DAY_OF_MONTH));
 		        }
 		    });
 			panel.add(picker2, BorderLayout.EAST);
