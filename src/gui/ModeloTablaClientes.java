@@ -37,5 +37,28 @@ public class ModeloTablaClientes{
 		return rowData;
 	}
 	
-
+	public String obtenerDNI(Operador op, int fila){
+		int fila_contada = 0;
+		for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
+			if(fila_contada == fila){
+					return cliente.getKey().toString();
+				}else{
+					fila_contada++;					
+				}
+		}
+		return null;
+		
+	}
+	
+	public NIF obtenerDNICompleto(Operador op, int fila){
+		int fila_contada = 0;
+		for(Entry<NIF, Cliente> cliente : op.getClientes().entrySet()){
+			if(fila_contada == fila){
+					return cliente.getKey();
+				}else{
+					fila_contada++;					
+				}
+		}
+		return null;
+	}
 }
