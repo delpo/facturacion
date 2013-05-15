@@ -34,9 +34,10 @@ public class EscuchadorBotonIncidencia implements ActionListener {
 	JFrame ventana;
 	Operador op;
 	JTextField nif;
-	int eleccion = 0;
+	int  eleccion = 0;
 	JSpinner picker;
 	Calendar fecha = new GregorianCalendar();
+	SelectorRadioButton sel = new SelectorRadioButton();
 
 	public EscuchadorBotonIncidencia(JFrame ventana, Operador op, JTextField nif) {
 		this.ventana = ventana;
@@ -90,16 +91,17 @@ public class EscuchadorBotonIncidencia implements ActionListener {
 			
 			ActionListener action = new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
-	            	System.out.println("Valor antes: "+eleccion);
 	                JRadioButton button = (JRadioButton) e.getSource();
 	                if(button.getText().equals("Impago")){
 	                	eleccion = 1;
+	                	sel.setSelectorRadioButton(1);
 	                }else if(button.getText().equals("Avería")){
 	                	eleccion = 2;
+	                	sel.setSelectorRadioButton(2);
 	                }else{
 	                	eleccion = 3;
+	                	sel.setSelectorRadioButton(3);
 	                }
-	            	System.out.println("Valor despues: "+eleccion);
 	            }
 	        };
 	        aButton.addActionListener(action);
@@ -130,7 +132,7 @@ public class EscuchadorBotonIncidencia implements ActionListener {
 		    });
 			ventana.add(picker, BorderLayout.EAST);
 			JButton boton_aceptar = new JButton("Aceptar");
-			boton_aceptar.addActionListener(new EscuchadorBotonIncidenciaOK(ventana, op, nif_valido, eleccion, fecha));//Registro escuchador
+			boton_aceptar.addActionListener(new EscuchadorBotonIncidenciaOK(ventana, op, nif_valido, sel, fecha));//Registro escuchador
 			ventana.getContentPane().add(boton_aceptar, BorderLayout.SOUTH);
 			ventana.setResizable(false);
 			ventana.setLocationRelativeTo(null);
