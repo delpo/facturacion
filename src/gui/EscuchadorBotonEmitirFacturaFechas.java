@@ -117,7 +117,7 @@ public class EscuchadorBotonEmitirFacturaFechas implements ActionListener {
 		}
 		HashMap<CodigoLlamada, Llamada> llamadas = new HashMap<CodigoLlamada, Llamada>();
 		Factura factura = new Factura(picker, tarifa, new Periodo_facturacion(picker1, picker2), llamadas);
-		boton_llamar.addActionListener(new EscuchadorBotonAñadirLlamada(factura, picker,
+		boton_llamar.addActionListener(new EscuchadorBotonAnyadirLlamada(factura, picker,
 				picker1, picker2, llamada, telf, duracion));//Registro escuchador
 		panel0.add(boton_llamar);
 		panel.add(panel1);

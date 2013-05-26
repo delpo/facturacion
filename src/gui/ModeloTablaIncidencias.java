@@ -35,7 +35,11 @@ public class ModeloTablaIncidencias {
 				rowData[fila][1] = cliente.getValue().getNombre();
 				rowData[fila][2] = cliente.getValue().getApellidos();
 				rowData[fila][3] = incidencia.getValue().getNombreIncidencia();
-				rowData[fila][4] = incidencia.getValue().estaResuelta();
+				if(incidencia.getValue().estaResuelta()){
+					rowData[fila][4] = "Incidencia resuelta";
+				}else{
+					rowData[fila][4] = "Incidencia sin resolver";
+				}
 				fila++;
 			}
 		}

@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import facturacion.Factura;
 import facturacion.Llamada;
 
-public class EscuchadorBotonAñadirLlamada implements ActionListener {
+public class EscuchadorBotonAnyadirLlamada implements ActionListener {
 	Factura factura;
 	Calendar picker;
 	Calendar picker1;
@@ -22,7 +22,7 @@ public class EscuchadorBotonAñadirLlamada implements ActionListener {
 	int duracion_integer;
 	boolean todo_ok;
 	
-	public EscuchadorBotonAñadirLlamada(Factura factura, Calendar picker, Calendar picker1, Calendar picker2, Calendar llamada, JTextField telefono, JTextField duracion) {
+	public EscuchadorBotonAnyadirLlamada(Factura factura, Calendar picker, Calendar picker1, Calendar picker2, Calendar llamada, JTextField telefono, JTextField duracion) {
 
 			this.factura = factura;
 			this.picker = picker;
