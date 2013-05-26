@@ -232,8 +232,12 @@ public class MenuSuperior extends JFrame implements ActionListener{
         }
         if (e.getSource()==mi1_3) {
         	String html = "<html>" +
-                    "<b>FactuTel versión 0.75</b><br/>" +
+                    "<b>FactuTel versión 0.78 RC</b><br/>" +
                     " <i>© Ángel Carlos del Pozo Muela, 2013.</i><br/>" +
+                    " <br/>" +
+                    " <i>&#171;Siempre que te pregunten si puedes hacer un trabajo,</i><br/>" +
+                    " <i>contesta que sí y ponte enseguida a aprender como se hace&#187;.</i><br/>" +
+                    "<i>                                             - Franklin D. Roosevelt</i><br/>"+
                     "</html>";
         	JOptionPane.showMessageDialog(this, html, "Acerca de", JOptionPane.INFORMATION_MESSAGE);
         } 
