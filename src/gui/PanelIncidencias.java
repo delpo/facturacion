@@ -69,7 +69,6 @@ public class PanelIncidencias extends JPanel{
         JMenuItem eliminar = new JMenuItem("Eliminar incidencia");
         popup.add(eliminar);
         copiar.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 		        int row = tabla.rowAtPoint(p);
@@ -82,17 +81,27 @@ public class PanelIncidencias extends JPanel{
 			}
 		});
         eliminar.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int row = tabla.rowAtPoint(p);
 		        //int col = tabla.columnAtPoint(p);
 		        //elimino incidencia
 				CodigoIncidencia codigo = mod.obtenerCodigoCompleto(op, row);
-
-					op.borrarIncidencia(codigo);
-					JOptionPane.showMessageDialog(null, "Operación realizada sin errores.");
-		        
+				op.borrarIncidencia(codigo);
+				JOptionPane.showMessageDialog(null, "Operación realizada sin errores."); 
+			}
+		});
+        JMenuItem resolver = new JMenuItem("Resolver incidencia");
+        popup.add(resolver);
+        resolver.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int row = tabla.rowAtPoint(p);
+		        //int col = tabla.columnAtPoint(p);
+		        //elimino incidencia
+				CodigoIncidencia codigo = mod.obtenerCodigoCompleto(op, row);
+				op.resolverIncidencia(codigo);
+				JOptionPane.showMessageDialog(null, "Operación realizada sin errores."); 
 			}
 		});
         tabla.addMouseListener(new PopupListener());

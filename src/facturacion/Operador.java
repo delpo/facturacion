@@ -94,4 +94,6 @@ public interface Operador {
 	public HashMap<NIF, Cliente> getClientes();
 
 	public void setVista(Vista vista);
+
+	public void resolverIncidencia(CodigoIncidencia codigo);
 }

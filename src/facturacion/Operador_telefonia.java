@@ -300,6 +300,29 @@ public class Operador_telefonia implements Serializable, Operador{
 		vista.recargarDatos();
 	}
 	
+	@Override
+	public void resolverIncidencia(CodigoIncidencia codigo) {
+		boolean ok = false;
+		for (Entry<NIF, Cliente> entry : clientes.entrySet()) {
+				//recorrer incidencias en entry.getValue().incidencias
+				for(Entry<CodigoIncidencia, Incidencia> entry2 : entry.getValue().getIncidencias().entrySet()){
+					if(entry2.getKey().getCodigo().equals(codigo.getCodigo())){
+						for(Entry<CodigoIncidencia, Incidencia> incidencia: entry.getValue().getIncidencias().entrySet()){
+							if(incidencia.getKey().equals(codigo)){
+								incidencia.getValue().resolverIncidencia();
+								ok = true;
+							}
+							if(ok) break;
+						}
+					}
+					if(ok) break;
+				}
+			if(ok) break;
+		}
+		if(!ok) System.out.println("Cliente no encontrado.");
+		vista.recargarDatos();
+	}
+	
 	//Genericidad
 	
 	//LISTADO ENTRE DOS FECHAS DE INCIDENCIAS O FACTURAS
